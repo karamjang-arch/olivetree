@@ -1,0 +1,471 @@
+<!doctype html>
+<html lang="ko"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="color-scheme" content="light dark">
+<title>가스펠 스토리 네 편의 이야기</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700&family=Noto+Serif+KR:wght@400;600;700&display=swap" rel="stylesheet">
+<style>:root{
+  --ink:#2a2521; --ink-2:#5c534b; --ink-3:#8a8077;
+  --accent:#8c3b2a; --accent-soft:#f3e7e1;
+  --paper:#ffffff; --tint:#f7f3ec; --rule:#d9d0c4; --line:#cfc6ba;
+  --note:#2f4a5a; --note-bg:#eef3f5; --note-rule:#9fb4bf;
+  --serif:"Noto Serif KR","Apple SD Gothic Neo","Malgun Gothic",serif;
+  --sans:"Noto Sans KR","Apple SD Gothic Neo","Malgun Gothic",-apple-system,sans-serif;
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --ink:#ece6df; --ink-2:#c4bab0; --ink-3:#958a80;
+    --accent:#e0957f; --accent-soft:#3a2a25;
+    --paper:#1c1a18; --tint:#25221f; --rule:#4a433d; --line:#4a433d;
+    --note:#b9d2de; --note-bg:#1f2a30; --note-rule:#4f6a77;
+  }
+}
+:root[data-theme="dark"]{
+  --ink:#ece6df; --ink-2:#c4bab0; --ink-3:#958a80;
+  --accent:#e0957f; --accent-soft:#3a2a25;
+  --paper:#1c1a18; --tint:#25221f; --rule:#4a433d; --line:#4a433d;
+  --note:#b9d2de; --note-bg:#1f2a30; --note-rule:#4f6a77;
+}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{margin:0;background:var(--paper);color:var(--ink);font-family:var(--serif);
+  font-size:17px;line-height:1.9;word-break:keep-all;overflow-wrap:break-word;-webkit-font-smoothing:antialiased}
+main{max-width:40rem;margin:0 auto;padding:0 max(18px,env(safe-area-inset-left)) 90px}
+p{margin:0 0 .9em}
+strong{font-weight:700}
+em{font-style:normal;color:var(--ink-2)}
+
+/* cover */
+.cover{min-height:88vh;display:flex;flex-direction:column;justify-content:center;
+  padding:64px 0;border-bottom:1px solid var(--rule)}
+.cover-series{font-family:var(--sans);font-weight:500;letter-spacing:.2em;
+  font-size:14px;color:var(--accent);margin-bottom:18px}
+.cover-title{font-size:36px;line-height:1.25;font-weight:700;margin:0 0 14px;letter-spacing:-.01em}
+.cover-edition{font-family:var(--sans);font-size:17px;color:var(--ink-2);margin-bottom:28px}
+.cover-tag{font-size:17px;color:var(--ink-2);padding-top:22px;border-top:2px solid var(--accent);
+  width:fit-content}
+
+/* openers */
+.opener,.part{padding:72px 0 20px;margin-bottom:8px}
+.opener .eyebrow{font-family:var(--sans);font-weight:500;font-size:14px;letter-spacing:.12em;color:var(--accent)}
+.opener .eyebrow span{color:var(--ink-3)}
+.opener h1{font-size:28px;line-height:1.3;margin:10px 0 0;font-weight:700}
+.opener::after{content:"";display:block;width:48px;height:2px;background:var(--accent);margin-top:22px}
+.part{text-align:left}
+.part-num{font-family:var(--sans);font-size:14px;letter-spacing:.2em;color:var(--accent)}
+.part h1{font-size:30px;margin:8px 0 0}
+
+/* section seats */
+h2.sec{font-family:var(--sans);font-size:15px;font-weight:700;letter-spacing:.06em;color:var(--ink);
+  margin:44px 0 16px;padding-bottom:8px;border-bottom:1px solid var(--rule);display:flex;align-items:center;gap:10px}
+h2.sec.seat::before{content:"";width:8px;height:8px;border-radius:50%;background:var(--accent);flex:none}
+h3{font-family:var(--serif);font-size:19px;font-weight:700;margin:34px 0 12px;line-height:1.45}
+h4{font-family:var(--sans);font-size:14px;font-weight:700;color:var(--accent);margin:26px 0 8px;letter-spacing:.03em}
+
+/* scripture */
+figure.verse{margin:18px 0 22px;padding:14px 18px 12px;background:var(--tint);border-left:3px solid var(--accent);border-radius:0 6px 6px 0}
+figure.verse blockquote{margin:0;font-size:15.5px;line-height:1.85}
+figure.verse figcaption{font-family:var(--sans);font-size:12.5px;color:var(--ink-2);text-align:right;margin-top:6px}
+blockquote.prayer{margin:20px 0;padding:22px 26px;border:1px solid var(--rule);border-radius:8px;font-size:16px;line-height:2.05;background:var(--paper)}
+blockquote.q-quote{margin:10px 0;font-size:15.5px}
+
+/* questions */
+p.q{margin:22px 0 6px;padding-left:0}
+.q-label{display:inline-block;font-family:var(--sans);font-size:12.5px;font-weight:700;color:#fff;background:var(--accent);
+  padding:1px 9px;border-radius:3px;margin-right:9px;vertical-align:2px;letter-spacing:.02em}
+p.q.center{padding:14px 16px;background:var(--accent-soft);border-radius:6px}
+.lines{margin:2px 0 16px}
+.ln{height:30px;border-bottom:1px solid var(--line)}
+
+/* boxes */
+.box{margin:22px 0;padding:14px 18px;border-radius:6px;break-inside:avoid}
+.box-label{font-family:var(--sans);font-size:12.5px;font-weight:700;letter-spacing:.06em;margin-bottom:6px}
+.glossary{background:var(--tint);border:1px solid var(--rule)}
+.glossary .box-label{color:var(--accent)}
+.glossary ul{margin:0;padding:0;list-style:none}
+.glossary li{font-family:var(--sans);font-size:13.5px;line-height:1.7;margin:4px 0;color:var(--ink-2)}
+.glossary li strong{color:var(--ink)}
+.duo{border:1.5px dashed var(--rule);background:transparent}
+.duo .box-label{color:var(--ink)}
+.duo .box-label span{font-weight:500;color:var(--ink-3);margin-left:6px}
+.duo p{font-size:15px}
+.note,.memo,.glance{font-family:var(--sans);font-size:13.5px;line-height:1.75;background:var(--note-bg);
+  border-left:3px solid var(--note-rule);border-radius:0 6px 6px 0;color:var(--ink)}
+.note .box-label,.memo .box-label,.glance .box-label{color:var(--note)}
+.note p,.memo p,.glance p{margin:0 0 .5em}
+.memo{background:transparent;border:1px solid var(--note-rule);border-left-width:3px}
+.glance table{width:100%;border-collapse:collapse;margin:6px 0 10px;font-size:13px}
+.glance th,.glance td{text-align:left;padding:4px 8px;border-bottom:1px solid var(--note-rule);vertical-align:top}
+.glance th{font-weight:700}
+.glance ul{margin:0;padding-left:1.1em}
+
+/* lists */
+ul,ol{padding-left:1.3em;margin:0 0 1em}
+li{margin:.25em 0}
+ul.dash{list-style:none;padding:0;margin:6px 0 12px}
+ul.dash li{position:relative;padding-left:1.2em}
+ul.dash li::before{content:"—";position:absolute;left:0;color:var(--accent)}
+.aside-line{color:var(--ink-2);font-size:14.5px}
+p.further{font-family:var(--sans);font-size:13.5px;color:var(--ink-2);margin-top:26px;padding-top:12px;border-top:1px solid var(--rule)}
+table{border-collapse:collapse;width:100%;margin:12px 0 18px;font-family:var(--sans);font-size:14px}
+th,td{border:1px solid var(--rule);padding:8px 10px;text-align:left;vertical-align:top}
+th{background:var(--tint)}
+td:empty::after{content:"\00a0"}
+hr{border:0;border-top:1px solid var(--rule);margin:32px 0}
+
+/* leader body sans for 1부 */
+body.leader h2.sec:not(.seat),body.church h2.sec:not(.seat){font-size:17px;color:var(--ink)}
+
+
+.cover{min-height:80vh;align-items:flex-start;padding-top:40px}
+.cover .church{font-family:var(--sans);font-size:13px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-2);margin-bottom:46px;padding-bottom:12px;border-bottom:1px solid var(--rule)}
+.cover-series{letter-spacing:.3em}
+.cover-title{font-size:clamp(34px,10vw,52px)}
+.cover-tag{font-style:italic}
+.cover-hint{font-family:var(--sans);font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:var(--ink-3);margin-top:40px}
+.toc{margin:28px 0 8px;padding:20px 18px;background:var(--tint);border-radius:10px}
+.toc-label{font-family:var(--sans);font-size:12px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:var(--accent);margin-bottom:8px}
+.toc ol{list-style:none;margin:0;padding:0}
+.toc li{margin:0;border-top:1px solid var(--rule)}
+.toc li:first-child{border-top:0}
+.toc a{display:block;padding:12px 2px;text-decoration:none;color:var(--ink)}
+.toc .t1{display:block;font-family:var(--sans);font-size:12px;letter-spacing:.06em;color:var(--accent)}
+.toc .t2{display:block;font-size:18px;font-weight:600;line-height:1.3}
+.opener{padding:56px 0 12px;scroll-margin-top:8px}
+.opener h1{font-size:clamp(28px,8vw,36px)}
+h2.sec{font-size:13px;letter-spacing:.1em;text-transform:uppercase;margin-top:42px}
+figure.verse{margin:20px 0 24px}
+figure.verse blockquote{font-size:17px;line-height:1.7}
+figure.verse figcaption{font-size:13px}
+.q-label{font-size:12px}
+p.q{margin-top:24px}
+.lines{margin:6px 0 20px}
+.lines textarea{width:100%;display:block;border:0;border-radius:6px;background:var(--tint);color:var(--ink);font:inherit;font-size:17px;line-height:30px;padding:6px 12px;resize:vertical;min-height:62px;
+  background-image:repeating-linear-gradient(transparent,transparent 29px,var(--line) 29px,var(--line) 30px);background-attachment:local}
+.lines textarea:focus{outline:2px solid var(--accent);outline-offset:1px}
+.lines textarea::placeholder{color:var(--ink-3);font-size:15px}
+blockquote.prayer{font-size:17px;line-height:1.9;padding:20px 18px}
+.glossary li{font-size:14.5px}
+.further{font-size:14px}
+table{font-size:14.5px;display:block;overflow-x:auto}
+a{color:var(--accent)}
+@media print{
+  @page{size:A5;margin:16mm 14mm}
+  body{font-size:10pt}
+  main{max-width:none;padding:0}
+  .cover{min-height:150mm;break-after:page}
+  .opener{break-before:page}
+  .lines textarea{border-bottom:0;resize:none}
+  .toc a{color:inherit}
+  .cover-hint{display:none}
+}
+</style></head>
+<body class="wb"><main><section class="cover"><div class="church">퍼듀한인장로교회</div><div class="cover-series">GOSPEL STORY</div><h1 class="cover-title">네 편의 이야기</h1><div class="cover-tag">예수님의 이야기가 나의 이야기가 되기를</div><div class="cover-hint">아래로 스크롤</div></section><nav class="toc" aria-label="차례"><div class="toc-label">차례</div><ol><li><a href="#story1"><span class="t1">첫 번째 이야기 · 창조</span><span class="t2">기다리던 손님</span></a></li><li><a href="#story2"><span class="t1">두 번째 이야기 · 타락</span><span class="t2">번호가 된 사람들</span></a></li><li><a href="#story3"><span class="t1">세 번째 이야기 · 구속</span><span class="t2">은촛대</span></a></li><li><a href="#story4"><span class="t1">네 번째 이야기 · 성화</span><span class="t2">되찾은 이름</span></a></li></ol></nav>
+<h4>이야기마다 다섯 자리를 지납니다.</h4>
+<ul>
+<li><strong>하나님 말씀</strong> — 그날의 성경 한 구절</li>
+<li><strong>나의 이야기</strong> — 오늘 내가 사는 장면</li>
+<li><strong>한 사람의 이야기</strong> — 소설 『레미제라블』의 한 장면</li>
+<li><strong>그분의 이야기</strong> — 성경이 들려주는 대답</li>
+<li><strong>우리의 이야기</strong> — 오늘의 이야기를 삶으로 이어 갈 말씀, 실천, 질문</li>
+</ul>
+<header class="opener" id="story1"><div class="eyebrow">첫 번째 이야기 <span>· 창조</span></div><h1>기다리던 손님</h1></header>
+<h2 class="sec seat">하나님 말씀</h2>
+<figure class="verse"><blockquote>하나님이 지으신 그 모든 것을 보시니 보시기에 심히 좋았더라</blockquote><figcaption>창세기 1장 31절</figcaption></figure>
+<h2 class="sec seat">나의 이야기</h2>
+<p>해가 지면 세상은 스위치를 끄듯 어두워지는 것으로 충분했을 것입니다. 생존이 목표라면 세상은 흑백이어도 아무 문제가 없기 때문입니다. 하지만 매일 저녁, 서쪽 하늘에는 오렌지빛과 보랏빛이 아낌없이 부어집니다. 과학은 노을을 대기가 햇빛을 흩어 놓는 현상으로, 과일의 단맛을 씨앗을 퍼뜨리려는 식물의 전략으로 설명합니다. 다 맞는 설명입니다. 다만 그 설명 어디에도, 그 빛깔이 퇴근길의 발걸음을 멈추게 하고 가슴 한쪽을 저리게 해야 할 까닭은 나오지 않습니다. 첫눈 내리는 날 어른들이 아이 같은 얼굴로 창가에 모여드는 일도 그렇습니다. 우리가 그 앞에서 느끼는 벅참은 생존의 목록에 잡히지 않습니다. 누군가에게 이것은 우연히 남은 부산물이고, 누군가에게는 이 세계가 필요 이상으로 정성 들여 만들어졌다는 실마리입니다.</p>
+<p>그런데 우리는 정반대의 문법 속에서 하루를 삽니다. 밤 열한 시, 전기 주전자 하나를 사려고 최저가와 별점과 리뷰를 오가는 손가락. 같은 밤 다른 방에서 자기소개서를 고치며 몇 장의 서류 위에 자신의 쓸모를 증명하는 청년. 물건을 달던 저울 위에 어느새 사람이 올라와 있고, 밤이 되면 그 저울은 거울 앞에 섭니다. 오늘 하루의 나는 얼마짜리였나.</p>
+<p>아낌없이 부어진 세상과, 한 푼까지 셈하는 우리. 이 어긋남은 무엇을 말하고 있을까요.</p>
+<p>그리고 질문이 하나 더 있습니다. 이 세계가 정말 이토록 아낌없이 꾸며진 곳이라면, 여기 사는 일은 왜 이렇게 자주 아픈가. 이 질문은 오늘 답하지 않겠습니다. 네 번째 이야기까지 들고 갑니다.</p>
+<p class="q"><span class="q-label">여는 질문</span>내 일상이 흑백 영화였다면, 색깔로 기억될 만한 평범하지만 생생한 순간은 언제였나요? (사랑하는 사람의 웃음, 노을 앞에 멈춘 발걸음, 정성이 담긴 밥상 등)</p>
+<div class="lines"><textarea rows="4" data-k="ta1" aria-label="메모" placeholder="여기에 적어 보세요 (이 기기에 저장됩니다)"></textarea></div>
+<h2 class="sec seat">한 사람의 이야기</h2>
+<p>아낌없이 주는 사랑이 어떤 것인지, 백육십여 년 전 프랑스 소설 『레미제라블』의 첫머리에 그 실물이 하나 나옵니다.</p>
+<p>디뉴라는 작은 도시에, 밤에도 잠기지 않는 문이 있었습니다. 미리엘 주교의 집입니다. 저녁이면 그 집 식탁에는 자주 낯선 얼굴이 앉았습니다. 어디에서도 받아 주지 않은 나그네들이었습니다. 그 식탁은 아무런 증명을 요구하지 않았습니다. 수프뿐인 저녁에도 은촛대 두 개에 다 불을 켰고, 손님 앞에는 주인과 똑같은 은수저가 놓였습니다. 그 식탁이 건네는 말을 알아듣지 못할 만큼 무딘 사람은 없습니다. 당신은 얻어먹으러 온 사람이 아니라, 기다리던 손님이라는 말입니다.</p>
+<p>이 노인은 어디서 이런 환대를 배웠을까요. 그 식탁을 성경 곁에 놓고 읽으면, 창세기 첫 장이 떠오릅니다. 손님이 오든 오지 않든 은으로 차려지던 그 식탁은, 우주의 첫 아침에 차려진 어떤 식탁의 먼 메아리처럼 보입니다.</p>
+<h2 class="sec seat">그분의 이야기</h2>
+<aside class="box glossary"><div class="box-label">낯선 낱말</div><ul><li><strong>형상</strong> — 하나님을 닮게 지어졌다는 말. 옛 왕의 석상이 왕을 대신 보여 주었듯, 사람은 하나님의 성품을 세상에 비추도록 지어졌습니다.</li><li><strong>영광</strong> — 성경에서 이 낱말의 첫 뜻은 &lsquo;무게&rsquo;입니다. 누군가를 영화롭게 한다는 것은 그를 무겁게, 귀하게 여긴다는 말입니다.</li><li><strong>인자</strong> — 시편 8편에서는 &lsquo;사람&rsquo;을 달리 부르는 말입니다. 인자함과는 다른 말입니다.</li><li><strong>복</strong> — 행운이 아니라, 하나님이 베푸시는 좋은 것과 그분과 맺는 좋은 관계를 함께 가리키는 말입니다.</li></ul></aside>
+<p>성경에도 그런 집을 발견한 사람이 있습니다. 형을 속이고 도망치던 야곱이, 돌 하나를 베개 삼아 들판에서 잠든 밤이었습니다. 그 밤 하늘이 열렸고, 깨어난 그가 외쳤습니다. &ldquo;이것은 다름 아닌 하나님의 집이요 이는 하늘의 문이로다&rdquo;(창 28:17). 그 집은 자격을 갖춘 사람이 찾아낸 곳이 아니라, 도망치던 사람이 발견한 곳이었습니다. 예수님은 훗날 그 밤의 하늘을 당신에게로 가져오셨습니다(요 1:51). 하늘과 땅을 잇는 그 길이, 한 사람이라는 말입니다.</p>
+<h3><ol>
+<li>먼저 차려진 방</li>
+</ol></h3>
+<p>세상은 우리를 노동력을 제공하는 인적 자원이나 물건을 소비하는 구매자로 봅니다. 공장에서 찍어 낸 물건이 기능이 다하면 폐기되듯, 우리도 성과가 없으면 존재 가치를 위협받습니다. 하지만 창세기가 그리는 창조는 공장의 생산이 아니라 방의 준비였습니다.</p>
+<p>창세기 1장을 보면 순서가 눈에 들어옵니다. 빛이 먼저고 눈은 나중입니다. 공기가 먼저고 허파는 나중입니다. 필요한 것이, 필요로 하는 존재보다 언제나 앞서 옵니다. 그리고 그 맨 끝에 사람이 옵니다. 아이를 기다리는 부부가 벽지를 고르고, 침대를 조립하고, 이름을 미리 지어 두고 — 그다음에야 아이가 오는 순서 그대로입니다. 공장은 보이는 곳만 마감하지만, 이 세계는 사람의 눈이 닿은 적 없는 동굴 속 수정조차 정연한 결을 갖추고 있습니다. 보는 사람이 없는 곳까지 공들인 듯한 세계 — 원가를 아끼는 공장이라면 굳이 하지 않았을 일입니다. 우주의 첫 사람은 손님으로 인생을 시작했습니다. 일하기 전에 받았고, 갚기 전에 누렸습니다.</p>
+<figure class="verse"><blockquote>하나님이 자기 형상 곧 하나님의 형상대로 사람을 창조하시되 남자와 여자를 창조하시고 하나님이 그들에게 복을 주시며 하나님이 그들에게 이르시되 생육하고 번성하여 땅에 충만하라, 땅을 정복하라, 바다의 물고기와 하늘의 새와 땅에 움직이는 모든 생물을 다스리라 하시니라</blockquote><figcaption>창세기 1장 27–28절</figcaption></figure>
+<p class="q"><span class="q-label">살피는 질문 1</span>28절에서 하나님은 사람에게 일을 맡기시기 전에 먼저 복을 주셨습니다. 오늘 내가 아무것도 하기 전에 이미 받아 둔 것 하나는 무엇인가요? (밤사이의 잠, 아침 햇빛, 누군가의 인사, 따뜻한 밥, 잘 모르겠음 등)</p>
+<div class="lines"><textarea rows="4" data-k="ta2" aria-label="메모" placeholder="여기에 적어 보세요 (이 기기에 저장됩니다)"></textarea></div>
+<h3><ol>
+<li>서명이 정하는 값</li>
+</ol></h3>
+<p>우리는 살면서 끊임없이 자신의 가치를 증명하려 애씁니다. 연봉, 성적, 성취 같은 세상의 기준은 상품에 붙은 가격표와 같습니다. 하지만 값이라는 것이 늘 물건 자체에서 나오지는 않습니다. 어느 집 냉장고에나 아이가 그린 그림이 한 장쯤 붙어 있습니다. 삐뚤어진 해, 다리가 다섯인 강아지. 그리고 귀퉁이에는 아직 획이 서툰 아이의 이름. 그 종이를 시장에 내놓으면 아무도 사지 않지만, 그 집에서는 무엇과도 바꾸지 않습니다. 종이가 귀해서가 아닙니다. 값을 정한 것은 그 그림의 쓸모가 아니라, 귀퉁이에 적힌 그 이름 — 그것이 누구의 손에서 나왔는가였습니다.</p>
+<p>시편의 시인은 사람에게 영화와 존귀의 관이 씌워졌다고 노래합니다. 여기서 영화로 번역된 히브리 낱말의 원래 뜻이 뜻밖입니다. 무겁다. 히브리 사람들에게 영광은 반짝임이기 전에 무게였습니다. 가벼운 것은 바람에 날려 가고, 무거운 것은 자리를 지킵니다. 값진 것일수록 사람은 두 손으로 듭니다. 하나님이 당신을 영화롭게 하셨다는 말은, 하나님이 당신을 무겁게 여기신다는 말 — 두 손으로 드신다는 말입니다.</p>
+<p>에베소서는 여기서 한 발 더 나아가 우리를 하나님이 만드신 바, 곧 그분의 작품이라 부릅니다. 상품의 값은 가격표가 정하고, 작품의 값은 서명이 정합니다.</p>
+<figure class="verse"><blockquote>사람이 무엇이기에 주께서 그를 생각하시며 인자가 무엇이기에 주께서 그를 돌보시나이까 그를 하나님보다 조금 못하게 하시고 영화와 존귀로 관을 씌우셨나이다</blockquote><figcaption>시편 8편 4–5절</figcaption></figure>
+<figure class="verse"><blockquote>우리는 그가 만드신 바라 그리스도 예수 안에서 선한 일을 위하여 지으심을 받은 자니 이 일은 하나님이 전에 예비하사 우리로 그 가운데서 행하게 하려 하심이니라</blockquote><figcaption>에베소서 2장 10절</figcaption></figure>
+<p class="q"><span class="q-label">중심 질문</span>세상의 저울은 우리를 늘 가볍게 답니다. 요즘 나를 가장 가볍게 만드는 저울은 무엇인가요? (성적, 실적, 남의 시선, 비교, 나이, 딱히 떠오르지 않음 등)</p>
+<div class="lines"><textarea rows="6" data-k="ta3" aria-label="메모" placeholder="여기에 적어 보세요 (이 기기에 저장됩니다)"></textarea></div>
+<h3><ol>
+<li>지으신 분의 기쁨</li>
+</ol></h3>
+<p>그렇다면 이렇게 소중히 지어진 우리의 사명은 무엇일까요. 하나님은 우리를 고된 노동에 동원하려고 부르신 고용주가 아닙니다. 부모에게 가장 큰 기쁨은 자녀가 무언가를 해다 주는 것이 아니라, 자녀가 깊은 신뢰 안에서 건강하게 자라며 제 삶을 마음껏 누리는 모습을 지켜보는 것입니다.</p>
+<p>성경 깊숙한 곳, 스바냐라는 세 장짜리 작은 예언서의 맨 끝에 놀라운 문장이 박혀 있습니다. 우주를 말씀 한마디로 지으신 분이, 당신의 백성을 두고 기쁨을 못 이겨 노래를 부르신다는 것입니다. 하나님이 당신의 백성을 두고 부르시는 이 노래가, 오늘 이 자리의 우리에게도 초대로 건네집니다. 기쁨과 노래 사이에 끼인 한 구절은 결이 다릅니다. 너를 잠잠히 사랑하시며. 잠든 아기를 들여다보는 부모의 그 오랜 침묵 — 하나님이 당신 앞에서 짓는 표정이 그 표정입니다.</p>
+<p>그래서 바울은 먹고 마시는 가장 평범한 일조차 하나님의 영광을 위하여 하라고 말합니다. 여기서 영광은 실적이 아닙니다. 자녀가 구김살 없이 제 하루를 살아 내는 것을 지켜보는 부모의 기쁨과 닮았습니다. 부모는 자녀가 대단한 일을 해다 줄 때가 아니라, 밥을 잘 먹고 잘 웃을 때 세상을 다 얻은 듯 행복해합니다.</p>
+<figure class="verse"><blockquote>너의 하나님 여호와가 너의 가운데에 계시니 그는 구원을 베푸실 전능자이시라 그가 너로 말미암아 기쁨을 이기지 못하시며 너를 잠잠히 사랑하시며 너로 말미암아 즐거이 부르며 기뻐하시리라 하리라</blockquote><figcaption>스바냐 3장 17절</figcaption></figure>
+<figure class="verse"><blockquote>그런즉 너희가 먹든지 마시든지 무엇을 하든지 다 하나님의 영광을 위하여 하라</blockquote><figcaption>고린도전서 10장 31절</figcaption></figure>
+<p class="q"><span class="q-label">살피는 질문 2</span>스바냐 3장 17절에서 하나님이 우리를 향해 품으신 마음을 나타내는 표현에 밑줄을 그어 봅시다. 그중 내게 가장 크게 들리는 한마디는 무엇인가요? (기쁨을 이기지 못하시며, 잠잠히 사랑하시며, 즐거이 부르며 등)</p>
+<div class="lines"><textarea rows="4" data-k="ta4" aria-label="메모" placeholder="여기에 적어 보세요 (이 기기에 저장됩니다)"></textarea></div>
+<p class="q"><span class="q-label">되새기는 질문</span>&ldquo;하나님은 나를 무겁게 여기신다&rdquo;는 말이 지금 어떻게 들리나요? (따뜻함, 낯섦, 의심, 믿고 싶음 등)</p>
+<div class="lines"><textarea rows="3" data-k="ta5" aria-label="메모" placeholder="여기에 적어 보세요 (이 기기에 저장됩니다)"></textarea></div>
+<h2 class="sec seat">우리의 이야기</h2>
+<p>오늘 우리는 두 개의 식탁을 보았습니다. 증명을 요구하지 않던 은촛대의 식탁, 그리고 그 원본인 창조의 식탁. 이 세계는 원가를 아끼는 공장이 아니라, 누군가 당신을 기다리며 아낌없이 꾸민 방입니다. 하나님은 당신을 무겁게 여기시고, 그 노래로 당신을 부르십니다.</p>
+<h4>묵상 구절</h4>
+<p>나를 향한 하나님의 노래를 마음에 새깁니다.</p>
+<figure class="verse"><blockquote>그가 너로 말미암아 기쁨을 이기지 못하시며 너를 잠잠히 사랑하시며 너로 말미암아 즐거이 부르며 기뻐하시리라</blockquote><figcaption>스바냐 3장 17절</figcaption></figure>
+<h4>실천: 5분 멈추기</h4>
+<p>하나님은 당신을 위해 노을과 바람과 꽃향기를 아낌없이 부어 두셨습니다. 이 이야기를 덮은 뒤 며칠 사이, 그 사랑을 지나치지 말고 온전히 누려 보십시오.</p>
+<ul class="dash"><li>해 보기: 바쁜 일상 중 딱 5분을 떼어, 화면 속 세상이 아니라 하나님이 나를 위해 꾸미신 진짜 세상을 바라보십시오. (하늘 보기, 계절의 냄새 맡기, 차 한 잔의 온기 느끼기)</li><li>한마디: 멈춘 그 자리에서 마음속으로 &ldquo;감사합니다&rdquo; 한마디를 건네 보십시오. 누구에게 건네는 감사인지는 천천히 생각해 보십시오.</li></ul>
+<p class="q"><span class="q-label">가져갈 질문</span>이렇게 아낌없이 꾸며진 세계라면, 여기 사는 일은 왜 이렇게 자주 아픈가요. 오늘은 답하지 마십시오. 다음 이야기를 펼 때까지 이 질문을 들고 계십시오. 그사이 떠오른 순간이 있다면 기억해 두십시오. 다음 이야기는 거기서 시작합니다.</p>
+<p class="further"><strong>더 깊이 읽기</strong> — 『레미제라블에서 읽는 가스펠 스토리』 첫 번째 이야기: 주교가 자기 집과 병원을 맞바꾼 이야기, 그리고 쓸모없는 꽃을 심은 정원</p>
+<header class="opener" id="story2"><div class="eyebrow">두 번째 이야기 <span>· 타락</span></div><h1>번호가 된 사람들</h1></header>
+<h2 class="sec seat">하나님 말씀</h2>
+<figure class="verse"><blockquote>내 백성이 두 가지 악을 행하였나니 곧 그들이 생수의 근원 되는 나를 버린 것과 스스로 웅덩이를 판 것인데 그것은 물을 가두지 못할 터진 웅덩이들이니라</blockquote><figcaption>예레미야 2장 13절</figcaption></figure>
+<h2 class="sec seat">나의 이야기</h2>
+<p><strong>그사이 한마디.</strong> 지난 이야기 뒤로 실천(5분 멈추기)을 해 보셨거나, 들고 간 질문(왜 이렇게 자주 아픈가)이 떠오른 순간이 있었다면 한 낱말로 적어 보십시오.</p>
+<div class="lines"><textarea rows="2" data-k="ta6" aria-label="메모" placeholder="여기에 적어 보세요 (이 기기에 저장됩니다)"></textarea></div>
+<p>일요일 밤 열한 시. 한 주가 끝나 가는 그 시간, 많은 사람이 잠들지 못하고 휴대폰을 들여다봅니다. 화면에는 다음 주의 일정이 줄지어 있고, 손가락은 무심코 다른 사람들의 소식으로 넘어갑니다. 누군가는 상을 받았고, 누군가는 자리를 옮겼고, 누군가는 여행 사진을 올렸습니다. 그것들을 넘겨보는 동안 마음 한구석이 조용히 무거워집니다. 나는 지금 어디쯤 와 있는가. 이 속도로 괜찮은가.</p>
+<p>우리는 번호를 여럿 가지고 삽니다. 학번과 사번, 등수와 점수, 연차와 직급. 그 숫자들은 편리합니다. 나를 한눈에 알아보게 해 주니까요. 다만 편리한 것에는 대가가 따릅니다. 숫자로 자주 불리다 보면, 어느새 나도 나를 숫자로 생각하기 시작합니다. 숫자가 좋을 때는 어깨가 펴지고, 나쁠 때는 사람 앞에 서기가 싫어집니다. 숫자가 기분을 정하고, 기분이 하루를 정합니다. 그쯤 되면 이름은 뒤로 물러나고 번호가 앞에 섭니다.</p>
+<p>지난 이야기에서 우리는 들었습니다. 하나님은 당신을 무겁게 여기신다고. 그런데 그토록 무겁게 지어진 존재가, 어쩌다 자기를 이렇게 가볍게 여기게 되었을까요. 지난 이야기에서 들고 간 질문도 여기서 다시 꺼냅니다. 이토록 아낌없이 꾸며진 세계에서, 왜 이렇게 자주 아픈가. 오늘 그 답의 첫 조각이 옵니다.</p>
+<p class="q"><span class="q-label">여는 질문</span>꿈꾸던 것을 마침내 가졌는데 이상하게 마음이 허전했던 장면 하나를 떠올린다면 무엇인가요? (입학·취업 뒤의 허무함, 새 물건의 태그를 떼던 순간, 승진 다음 날, 딱히 떠오르지 않음 등)</p>
+<div class="lines"><textarea rows="4" data-k="ta7" aria-label="메모" placeholder="여기에 적어 보세요 (이 기기에 저장됩니다)"></textarea></div>
+<h2 class="sec seat">한 사람의 이야기</h2>
+<p>지난 이야기의 그 집, 잠기지 않는 문으로 어느 밤 한 사람이 들어왔습니다.</p>
+<p>1815년 10월의 저녁, 디뉴에 배낭을 멘 떠돌이가 나타났습니다. 열아홉 해 만에 감옥에서 나온 사람이었습니다. 스물다섯 살 겨울, 굶고 있는 조카들을 위해 빵 한 덩이를 훔친 값이 오 년이었고, 갇힌 채 바깥 아이들이 걱정되어 담을 넘으려 할 때마다 형기가 늘어 열아홉 해가 되었습니다. 감옥은 그의 이름을 가져가고 번호를 주었습니다. 24601. 처음에는 억울해서 이를 갈았고, 다음에는 세상을 미워했고, 나중에는 그냥 번호가 되었습니다.</p>
+<p>이제 그는 자유입니다. 그런데 이상합니다. 문은 열렸는데 갈 곳이 없습니다. 전과자에게 발급되는 노란 통행증을 본 여관들은 방금 전까지 비어 있던 방이 다 찼다고 했습니다. 사람들은 그 종이를 보았지, 그 종이를 든 사람을 보지 않았습니다. 지친 몸을 뉘려던 개집에서는 개가 사납게 짖으며 그를 밀어냈습니다. 개에게도 제 집이 있는데, 나에게는 개집 한 칸도 없구나. 그 밤, 그는 세상 어디에도 자기를 위한 자리가 없다는 것을 알았습니다.</p>
+<p>그리고 마지막이라는 심정으로, 지나가던 여인이 일러 준 집 — 잠기지 않는 그 문을 두드렸습니다. 문이 열렸고, 그가 채 입을 열기도 전에 안에서 늙은 목소리가 먼저 말했습니다. 들어오세요.</p>
+<p>그날 밤 주교는 그에게 이렇게 말했습니다. &ldquo;여기는 내 집이 아니라 예수 그리스도의 집입니다. 이 문은 들어오는 사람에게 이름이 있는지 묻지 않고, 아픔이 있는지 묻습니다.&rdquo;</p>
+<p>그날 밤 그 집에서 무슨 일이 있었는지는 세 번째 이야기에서 만나게 됩니다. 오늘은 그 전에, 물어야 할 것이 있습니다. 한 사람이 어쩌다 번호가 되는가. 감옥 밖의 우리는 왜 스스로 번호가 되어 가는가.</p>
+<h2 class="sec seat">그분의 이야기</h2>
+<aside class="box glossary"><div class="box-label">낯선 낱말</div><ul><li><strong>죄</strong> — 하나님의 법을 어기는 일. 그 뿌리에는 생명의 샘이신 하나님을 떠나 과녁이 어긋난 상태가 있습니다.</li><li><strong>타락</strong> — 처음 좋게 지어진 사람과 세상이 함께 무너져 내린 일입니다.</li><li><strong>삯 / 은사</strong> — 삯은 일한 대가로 받는 품삯, 은사는 값없이 받는 선물입니다(롬 6:23).</li><li><strong>죽음(영적 죽음)</strong> — 숨이 멎는 것이 아니라, 생명의 근원에서 끊어진 상태를 성경은 죽음이라 부릅니다.</li></ul></aside>
+<h3><ol>
+<li>샘을 떠난 목마름</li>
+</ol></h3>
+<p>세상은 죄를 살인이나 도둑질 같은 범죄 행위로 정의합니다. 성경도 죄를 하나님의 법을 어기는 일이라 말합니다. 다만 그 뿌리는 훨씬 깊은 곳에 있습니다. 예언자 예레미야는 그것을 두 장의 그림으로 전했습니다. 생수의 근원을 버린 것, 그리고 스스로 웅덩이를 판 것 — 그것도 물이 새는 터진 웅덩이를.</p>
+<p>죄로 번역된 성경의 본래 말에는 뜻밖의 그림이 담겨 있습니다. 활을 쏘았는데 과녁을 빗맞혔다는 뜻입니다. 죄는 나쁜 짓의 목록이기 전에, 겨냥이 어긋난 상태를 가리키는 말이기도 했습니다. 달을 향해 로켓을 쏠 때 발사 각도가 단 일 도만 틀어져도 로켓은 달에서 수천 킬로미터 떨어진 허공을 지나갑니다. 우리의 문제도 몇 가지 잘못한 행동이 아니라, 겨냥 자체가 틀어져 있다는 데 있습니다.</p>
+<p>샘을 떠난 사람은 목이 마르고, 목마른 사람은 아무 웅덩이나 팝니다. 한 저술가는 우리가 세 가지 거짓말을 진리로 믿으며 산다고 했습니다. 나는 내가 가진 것이다. 나는 내가 해낸 것이다. 나는 남들이 나에 대해 말하는 것이다. 통장, 성취, 평판 — 우리가 파는 웅덩이의 이름들입니다. 좋은 성적을 받으면 잠시 목이 축여지는 듯하다가 다음 시험 앞에서 다시 마르고, 인정을 받으면 이내 더 큰 인정을 갈망하게 됩니다. 물이 새기 때문입니다.</p>
+<p>이 떠남에는 시작이 있습니다. 성경의 첫 책은 첫 사람이 샘을 떠난 날을 적어 둡니다(창세기 3장). 모든 것이 선물로 주어져 있었는데, 먹으면 하나님처럼 되리라는 말 한마디에 그들은 주신 분을 믿는 대신 스스로 주인이 되는 길을 골랐습니다. 그 선택은 한 사람의 일로 끝나지 않았습니다.</p>
+<figure class="verse"><blockquote>내 백성이 두 가지 악을 행하였나니 곧 그들이 생수의 근원 되는 나를 버린 것과 스스로 웅덩이를 판 것인데 그것은 물을 가두지 못할 터진 웅덩이들이니라</blockquote><figcaption>예레미야 2장 13절</figcaption></figure>
+<figure class="verse"><blockquote>그러므로 한 사람으로 말미암아 죄가 세상에 들어오고 죄로 말미암아 사망이 들어왔나니 이와 같이 모든 사람이 죄를 지었으므로 사망이 모든 사람에게 이르렀느니라</blockquote><figcaption>로마서 5장 12절</figcaption></figure>
+<p class="q"><span class="q-label">살피는 질문 1</span>본문의 세 가지 거짓말 — 나는 내가 가진 것이다, 나는 내가 해낸 것이다, 나는 남들이 나에 대해 말하는 것이다 — 가운데 나를 가장 오래 붙들어 온 문장은 무엇인가요? (첫째, 둘째, 셋째, 셋 다, 잘 모르겠음)</p>
+<div class="lines"><textarea rows="4" data-k="ta8" aria-label="메모" placeholder="여기에 적어 보세요 (이 기기에 저장됩니다)"></textarea></div>
+<h3><ol>
+<li>당신이 그 사람이라</li>
+</ol></h3>
+<p>이 진단이 남의 이야기로 들린다면, 삼천 년 전의 한 왕과 같은 자리에 앉아 있는 것인지도 모릅니다.</p>
+<p>이스라엘의 왕 다윗이 인생의 정점에서 무너졌습니다. 부하 장수의 아내를 빼앗고, 일을 덮으려 그 남편을 전쟁터의 가장 위험한 자리로 보내 죽게 했습니다. 왕이니까 가능했고, 아무도 왕을 고발할 수 없었습니다. 그때 예언자 나단이 찾아와 이야기 하나를 들려줍니다. 양과 소가 심히 많은 부자가, 가난한 이웃의 하나뿐인 어린 암양 — 자식처럼 품에 안고 기르던 그 양을 빼앗아 제 손님상에 올렸다는 사연이었습니다. 다윗은 크게 노하여 소리쳤습니다. 그런 짓을 한 사람은 마땅히 죽어야 한다. 그 순간 나단이 왕을 향해 손을 들었습니다. 당신이 바로 그 사람입니다.</p>
+<p>수용소에서 팔 년을 보낸 러시아의 작가 솔제니친은 훗날 이렇게 썼습니다. 선과 악을 가르는 경계선은 나라와 나라 사이가 아니라, 모든 인간의 심장 한복판을 지나간다고. 다윗이 그은 경계선은 처음에 자기 바깥에 있었습니다. 나쁜 사람은 저쪽, 심판하는 나는 이쪽. 나단은 그 경계선을 왕의 심장 한복판으로 옮겨 놓았습니다. 남의 죄에 그토록 밝던 눈이, 거울이 돌아오자 제 얼굴을 처음 보았습니다. 그때 다윗의 입에서 나온 첫마디는 변명이 아니었습니다. &ldquo;내가 여호와께 죄를 범하였노라&rdquo;(삼하 12:13). 죄는 사람을 상하게 하기 전에, 먼저 하나님께 등을 돌린 일입니다. 그래서 거룩하신 하나님 앞에서 이 일은 가볍게 덮이지 않습니다.</p>
+<figure class="verse"><blockquote>우리는 다 양 같아서 그릇 행하여 각기 제 길로 갔거늘 여호와께서는 우리 모두의 죄악을 그에게 담당시키셨도다</blockquote><figcaption>이사야 53장 6절</figcaption></figure>
+<figure class="verse"><blockquote>모든 사람이 죄를 범하였으매 하나님의 영광에 이르지 못하더니</blockquote><figcaption>로마서 3장 23절</figcaption></figure>
+<p class="q"><span class="q-label">살피는 질문 2</span>이사야 53장 6절의 &ldquo;우리는 다 양 같아서&rdquo;라는 말을 들으면 어떤 마음이 드나요? (억울함, 안도, 찔림, 공감, 잘 모르겠음 등)</p>
+<div class="lines"><textarea rows="4" data-k="ta9" aria-label="메모" placeholder="여기에 적어 보세요 (이 기기에 저장됩니다)"></textarea></div>
+<h3><ol>
+<li>안에서 열리지 않는 문</li>
+</ol></h3>
+<p>그렇다면 정신 차리고 노력하면 될까요. 여기서 우리는 정직해질 필요가 있습니다.</p>
+<p>성경에서 &lsquo;죄&rsquo;라는 낱말이 처음 나오는 자리는 창세기 4장입니다. 하나님은 가인에게, 죄가 문에 엎드려 있으니 다스리라고 하셨습니다(창 4:7). 그런데 이 말씀을 들은 가인은 바로 다음 장면에서 동생을 죽입니다. 명령은 옳았고, 다스릴 힘은 그의 안에 없었습니다.</p>
+<p>꽃병에 꽂힌 꽃은 잠시 아름다워 보이지만, 뿌리에서 잘려 나간 순간 이미 죽은 것입니다. 시드는 것은 시간문제일 뿐입니다. 성경이 말하는 죽음이 이것입니다 — 생명의 근원에서 끊어진 상태. 그리고 한 가지 비유를 더 들겠습니다. 맑은 물 한 컵에 독이 단 일 퍼센트만 섞여도 그 물은 마실 수 없습니다. 구십구 퍼센트가 깨끗하다는 사실은 위로가 되지 못합니다. 남보다 덜 망가졌다는 안도가 우리를 구해 주지 못하는 까닭이 여기 있습니다.</p>
+<p>더 정직해지면, 우리는 생명의 가장 기초적인 영역조차 스스로 결정하지 못하는 존재입니다. 오늘 밤 내 키를 일 센티미터 키울 수 있습니까. 심장의 박동을 잠시 멈췄다가 다시 뛰게 할 수 있습니까. 살아 있다는 것부터가 내 실력이 아닙니다. 생명은 처음부터 받은 것이었습니다. 그렇다면 그 생명을 준 샘에서 끊어진 사람이, 끊어진 자리를 제 힘으로 다시 이을 수 있을까요. 성경의 진단은 여기서 더 무거워집니다 — 하나님을 떠난 인간은 아픈 것이 아니라 영적으로 죽은 상태라는 것입니다. 죽은 것은 스스로 살아나지 못합니다.</p>
+<p>스스로 지은 감옥이기에, 스스로의 힘은 이미 그 벽의 일부입니다. 문이 안에서 열리지 않는다면, 밖에서 열려야 합니다. 세상 모든 문이 닫힌 한 사람 앞에서 잠기지 않은 문 하나가 열리는 밤을, 우리는 방금 소설 속에서 보았습니다. 그리고 그 밤이 가리키는 진짜 문이 있습니다. 예수님은 &ldquo;내가 문이니&rdquo;(요 10:9)라고 말씀하셨습니다.</p>
+<figure class="verse"><blockquote>그는 허물과 죄로 죽었던 너희를 살리셨도다</blockquote><figcaption>에베소서 2장 1절</figcaption></figure>
+<figure class="verse"><blockquote>죄의 삯은 사망이요 하나님의 은사는 그리스도 예수 우리 주 안에 있는 영생이니라</blockquote><figcaption>로마서 6장 23절</figcaption></figure>
+<p class="q"><span class="q-label">중심 질문</span>아무리 애써도 결국 제자리인 것 같아, &ldquo;이건 내 힘으로는 안 되겠다&rdquo; 싶었던 영역은 어디인가요? (일, 관계, 건강, 마음의 습관, 앞날에 대한 걱정 등)</p>
+<div class="lines"><textarea rows="6" data-k="ta10" aria-label="메모" placeholder="여기에 적어 보세요 (이 기기에 저장됩니다)"></textarea></div>
+<p class="q"><span class="q-label">되새기는 질문</span>오늘 이야기 가운데 나와 가장 닮았다고 느낀 사람은 누구인가요? (번호로 불리던 떠돌이, 남을 심판하던 다윗, 웅덩이를 파는 사람, 잘 모르겠음 등)</p>
+<div class="lines"><textarea rows="3" data-k="ta11" aria-label="메모" placeholder="여기에 적어 보세요 (이 기기에 저장됩니다)"></textarea></div>
+<h2 class="sec seat">우리의 이야기</h2>
+<p>오늘 우리는 아픈 진단서를 함께 읽었습니다. 우리가 번호가 된 것은 몇 가지 나쁜 짓 때문이기 전에, 샘을 떠나 스스로 웅덩이를 팠기 때문입니다. 그리고 이 문은 안에서 열리지 않습니다. 하지만 진단이 무거운 것은 절망시키기 위해서가 아닙니다. 내 힘으로 고칠 수 없음을 인정한 사람만이, 밖에서 들려오는 목소리를 듣습니다.</p>
+<p>첫 번째 이야기에서 들고 온 질문 — 이토록 아낌없이 꾸며진 세계에서 왜 이렇게 자주 아픈가 — 의 첫 조각이 오늘 왔습니다. 먼저, 내 아픔이 곧 내 잘못의 값은 아닙니다. 아픔은 죄 없는 이들에게도 닿습니다. 다만 성경은 그 아픔이 어디서 들어왔는지를 말합니다. 세계가 잘못 지어져서가 아니라, 첫 사람이 샘을 떠난 자리에서 시작되었습니다. 세상 전체가 샘을 잃은 뒤로, 아픔은 가리지 않고 모두에게 닿게 되었습니다. 다음 조각은 다음 이야기에서, 그 문이 열리는 아침에 옵니다.</p>
+<h4>묵상 구절</h4>
+<p>우리의 실존을 정직하게 고백하는 말씀을 마음에 새깁니다.</p>
+<figure class="verse"><blockquote>우리는 다 양 같아서 그릇 행하여 각기 제 길로 갔거늘 여호와께서는 우리 모두의 죄악을 그에게 담당시키셨도다</blockquote><figcaption>이사야 53장 6절</figcaption></figure>
+<h4>실천: 멈춰 서서 듣기</h4>
+<ul class="dash"><li>하나 떠올리기: 요즘 내 힘으로 어떻게 해 보려다 지친 일 하나를 떠올려 보십시오. (일, 관계, 건강, 자녀, 마음의 습관 무엇이든)</li><li>멈추기: 그 일 앞에서 더 애쓰기 전에 잠시 멈추고, 속으로 이렇게 말해 보십시오. &ldquo;이건 제 힘으로는 안 됩니다.&rdquo;</li><li>적어 두기: 그 말을 한 뒤 마음에 무엇이 남았는지 한 줄 적어 두십시오.</li></ul>
+<p class="q"><span class="q-label">가져갈 질문</span>안에서 열리지 않는 문 앞에서, &ldquo;내 힘으로는 안 됩니다&rdquo;라고 인정한 그 자리에 서 보십시오. 오늘은 답하지 마십시오. 다음 이야기를 펼 때까지, 그 말을 할 때마다 마음에 무엇이 남는지만 지켜보십시오. 다음 이야기는 거기서 시작합니다.</p>
+<p class="further"><strong>더 깊이 읽기</strong> — 『레미제라블에서 읽는 가스펠 스토리』 두 번째 이야기: 장발장이 그 집 문을 두드리기까지의 하루, 그리고 나단 앞의 다윗</p>
+<header class="opener" id="story3"><div class="eyebrow">세 번째 이야기 <span>· 구속</span></div><h1>은촛대</h1></header>
+<h2 class="sec seat">하나님 말씀</h2>
+<figure class="verse"><blockquote>그가 찔림은 우리의 허물 때문이요 그가 상함은 우리의 죄악 때문이라 그가 징계를 받으므로 우리는 평화를 누리고 그가 채찍에 맞으므로 우리는 나음을 받았도다</blockquote><figcaption>이사야 53장 5절</figcaption></figure>
+<h2 class="sec seat">나의 이야기</h2>
+<p><strong>그사이 한마디.</strong> 지난번에 들고 간 실천이나 질문(&ldquo;내 힘으로는 안 됩니다&rdquo; 등) 가운데 마음에 남은 것이 있다면 한 낱말로 적어 보십시오.</p>
+<div class="lines"><textarea rows="2" data-k="ta12" aria-label="메모" placeholder="여기에 적어 보세요 (이 기기에 저장됩니다)"></textarea></div>
+<p>첫 직장에 서류를 내던 날을 기억하는 사람은 압니다. 합격 통지를 받고 서류를 챙기는데, 한 칸이 비어 있습니다. 신원보증인. 내가 회사에 손해를 끼치면 대신 책임지겠다는 사람의 이름을 적는 칸입니다. 첫 전셋집을 얻으며 대출 서류 앞에 앉았을 때도 비슷한 칸을 만납니다. 그 서류 위에서 나는 아직 아무것도 증명하지 못한 사람입니다. 그때 누군가 자기 이름을 적어 줍니다. 부모이거나, 먼저 자리 잡은 선배이거나, 나를 오래 지켜본 어른입니다. 그 서명의 뜻은 하나입니다. 이 사람이 갚지 않으면, 내가 갚겠다.</p>
+<p>그래서 보증은 가벼운 서명이 아닙니다. 남의 빚 옆에 이름을 적는다는 것은, 그 사람이 넘어지면 내가 대신 넘어지겠다는 약속이기 때문입니다. 그런 서명은 아무에게나 해 주지 않습니다. 정말로 아끼는 사람에게만 합니다.</p>
+<p>지난 이야기에서 우리는 안에서 열리지 않는 문 앞에 섰습니다. 스스로 지은 감옥, 스스로 갚을 수 없는 빚. 그렇다면 남은 질문은 하나입니다. 이 빚 옆에 이름을 적을 사람이 있는가. 그리고 그 사람은 정말로 갚을 수 있는 사람인가.</p>
+<p class="q"><span class="q-label">여는 질문</span>누군가의 도움이 필요할 때 나는 보통 어떤 편인가요? (쉽게 부탁함, 끝까지 혼자 해 봄, 미안해서 망설임, 그때그때 다름 등)</p>
+<div class="lines"><textarea rows="4" data-k="ta13" aria-label="메모" placeholder="여기에 적어 보세요 (이 기기에 저장됩니다)"></textarea></div>
+<h2 class="sec seat">한 사람의 이야기</h2>
+<p>지난 이야기에서 헤어진 그 밤, 문 안에서 그는 생애 처음 사람 대접을 받았습니다. 은수저가 놓인 식탁, 형제여라는 부름, 시트가 깔린 침대. 그런데 그 환대가 그를 아프게 했습니다.</p>
+<p>오래 언 손을 갑자기 불 가까이 대면 어떻게 됩니까. 따뜻한 것이 아니라 아픕니다. 손이 얼어 있는 동안에는 아무것도 느끼지 못했다가, 온기가 닿는 순간에야 통증이 옵니다. 열아홉 해 얼어 있던 마음에 닿은 온기는 그에게 통증이었습니다. 그는 이 온기를 어떻게 받아야 하는지 몰랐습니다. 받는 법을 잊은 사람에게 선물은 위협입니다. 그 밤, 그는 은식기를 훔쳐 담을 넘어 달아났습니다.</p>
+<p>이튿날 아침, 헌병들이 그를 붙잡았습니다. 배낭에서 은식기가 쏟아졌고, 그는 헌병들에게 멱살을 잡힌 채 그 집 문 앞으로 다시 끌려왔습니다. 헌병이 문을 두드렸습니다. 주교의 한마디면 남은 평생이 감옥이었습니다. 그리고 그 한마디는 거짓말도 아니었습니다. 이 사람이 훔쳤습니다. 사실이었고, 그 한 문장이면 끝이었습니다.</p>
+<p>문이 열렸습니다.</p>
+<h2 class="sec seat">그분의 이야기</h2>
+<aside class="box glossary"><div class="box-label">낯선 낱말</div><ul><li><strong>은혜</strong> — 받을 자격이 없는 사람에게 값없이 주어지는 하나님의 사랑과 선물입니다.</li><li><strong>믿음</strong> — 내 확신의 크기가 아니라, 믿을 만한 분을 의지해 빈손을 내미는 일입니다.</li><li><strong>언약</strong> — 하나님이 사람과 맺으시는 약속. 하나님이 먼저 붙드시는 약속입니다.</li><li><strong>구속</strong> — 값을 치르고 되찾아 온다는 말. 맡겨 둔 물건을 값을 내고 찾아오는 일과 같은 그림입니다.</li><li><strong>의</strong> — 하나님 앞에서 &lsquo;올바르다&rsquo;고 인정받는 상태. 내가 쌓아 올리는 것이 아니라 그리스도께서 입혀 주시는 옷입니다.</li><li><strong>정죄</strong> — 유죄 판결. &ldquo;정죄함이 없다&rdquo;는 말은 판결이 이미 무죄로 끝났다는 뜻입니다.</li><li><strong>회개</strong> — 잘못을 뉘우치는 데서 그치지 않고, 가던 길에서 돌이켜 하나님께로 방향을 바꾸는 일입니다.</li><li><strong>영접</strong> — 받아들인다는 말(요 1:12). 예수님을 믿고 내 삶의 주인으로 맞아들이는 일입니다.</li><li><strong>성령</strong> — 삼위 하나님 가운데 한 분. 사람의 마음을 열어 복음을 믿게 하시고, 새 생명을 주시며, 그 안에 머무십니다.</li></ul></aside>
+<h3><ol>
+<li>값은 누가 치렀는가</li>
+</ol></h3>
+<p>주교는 끌려온 그를 보자마자 말했습니다. &ldquo;아, 오셨군요. 다시 뵙게 되어 반갑습니다. 그런데 촛대는 왜 두고 가셨습니까. 은식기와 함께 그것도 드렸는데요. 그것도 은이라, 그것만으로도 이백 프랑은 받으실 텐데, 왜 식기만 가져가셨습니까.&rdquo; 헌병들이 어리둥절한 채 그의 멱살을 놓았습니다. 주교는 벽난로 위의 은촛대 두 개를 내려 그의 손에 쥐여 주었고, 그제야 헌병들을 돌려보냈습니다. 그리고 엄숙한 목소리로 말했습니다. &ldquo;장발장, 내 형제여. 당신은 이제 악이 아니라 선에 속한 사람입니다. 나는 당신의 영혼을 값을 치르고 샀습니다.&rdquo;</p>
+<p>그 이름이 경멸이 아니라 &lsquo;형제&rsquo;라는 말과 함께 불린 것은, 열아홉 해 만에 처음이었습니다. 훔친 사람이, 훔친 그 집 문 앞에서.</p>
+<p>여기서 정직하게 물을 것이 있습니다. 도둑은 값을 치르지 않고 풀려났습니다. 그렇다면 값은 사라졌습니까. 아닙니다. 은식기의 값은 주교가 치렀습니다. 자기 재산으로, 자기 손해로. 앞에서 이야기한 보증인이 하는 일이 바로 이것입니다. 빚이 없어지는 것이 아니라, 빚의 주인이 바뀌는 것입니다. 받는 사람에게 공짜였을 뿐, 주는 사람에게는 전 재산이었습니다. 물론 예화는 거기까지입니다. 주교는 손해를 감수했을 뿐 형벌을 대신 받지는 않았고, 헌병 앞에서 한 말도 사실이 아니었습니다. 그 아침은 원본을 가리키는 그림자입니다.</p>
+<p>십자가에서 일어난 일이 이것입니다. 판사가 유죄인 사람을 아무 대가 없이 풀어 준다면 우리는 그것을 자비라 부르지 않고 불의라 부릅니다. 하나님은 우리의 죄를 눈감아 주신 것이 아닙니다. 사랑하는 것을 망가뜨리는 악 앞에서 아무렇지 않은 사랑은 사랑이 아닙니다. 성경이 하나님의 진노라고 부르는 것이 그 거룩한 반대입니다. 하나님은 그 진노를 없던 일로 하지 않으시고, 아들을 보내셨습니다. 아들이 우리의 빚 옆에 자기 이름을 적으시고, 자기 목숨으로 갚으셨습니다. 이사야는 이 장면을 두 낱말이 자리를 바꾸는 그림으로 그렸습니다. &lsquo;그&rsquo;와 &lsquo;우리&rsquo;. 찔림과 상함과 징계와 채찍은 그에게로 갔고, 평화와 나음은 우리에게로 왔습니다.</p>
+<p>그 서명란에 이름을 적을 수 있는 이는 세 가지를 다 갖추어야 했습니다. 사람의 빚이니 사람이어야 했고, 하나님께 진 빚이니 하나님이셔야 했으며, 갚을 제 빚이 없어야 했습니다. 예수님은 참 하나님이시자 참 사람이시고, 죄를 알지도 못하신 분이셨습니다. 성경이 예수를 &ldquo;더 좋은 언약의 보증&rdquo;(히 7:22)이라 부르는 까닭이 여기 있습니다.</p>
+<figure class="verse"><blockquote>그가 찔림은 우리의 허물 때문이요 그가 상함은 우리의 죄악 때문이라 그가 징계를 받으므로 우리는 평화를 누리고 그가 채찍에 맞으므로 우리는 나음을 받았도다 우리는 다 양 같아서 그릇 행하여 각기 제 길로 갔거늘 여호와께서는 우리 모두의 죄악을 그에게 담당시키셨도다</blockquote><figcaption>이사야 53장 5–6절</figcaption></figure>
+<figure class="verse"><blockquote>하나님이 죄를 알지도 못하신 이를 우리를 대신하여 죄로 삼으신 것은 우리로 하여금 그 안에서 하나님의 의가 되게 하려 하심이라</blockquote><figcaption>고린도후서 5장 21절</figcaption></figure>
+<figure class="verse"><blockquote>그러면 이제 우리가 그의 피로 말미암아 의롭다 하심을 받았으니 더욱 그로 말미암아 진노하심에서 구원을 받을 것이니</blockquote><figcaption>로마서 5장 9절</figcaption></figure>
+<p>그런데 미리엘의 일에는 이상한 구석이 하나 더 있습니다. 그는 도둑질을 덮어 주기만 한 것이 아닙니다. 촛대를 더 얹었습니다. 훔친 것을 없던 일로 하는 데서 그치지 않고, 훔치지 않은 것까지 손에 쥐여 주었습니다. 잃은 만큼 돌려받는 것이 회복이라면, 잃은 것보다 크게 받는 것이 은혜입니다. 하나님도 우리의 죄를 가져가기만 하신 것이 아닙니다. 빈자리에 그분의 의를 입히셨습니다. 빚만 없어진 사람이 아니라, 아들의 것을 상속받는 사람으로 세우셨습니다.</p>
+<figure class="verse"><blockquote>죄가 더한 곳에 은혜가 더욱 넘쳤나니</blockquote><figcaption>로마서 5장 20절</figcaption></figure>
+<p class="q"><span class="q-label">살피는 질문 1</span>이사야 53장 5–6절을 소리 내어 읽어 보십시오. &lsquo;그&rsquo;에게로 간 것과 &lsquo;우리&rsquo;에게로 온 것 가운데, 내게 가장 크게 들리는 한 낱말은 무엇인가요? (찔림, 상함, 징계, 채찍 / 평화, 나음 등)</p>
+<div class="lines"><textarea rows="4" data-k="ta14" aria-label="메모" placeholder="여기에 적어 보세요 (이 기기에 저장됩니다)"></textarea></div>
+<h3><ol>
+<li>빈손</li>
+</ol></h3>
+<p>값이 다 치러졌다면, 남은 질문은 하나입니다. 그 값은 어떻게 내 것이 됩니까.</p>
+<p>세상은 노력한 만큼 얻는다고 가르칩니다. 그래서 우리는 구원조차 착한 성품이나 종교적 열심으로 벌어야 한다고 무의식중에 생각합니다. 여기서 두 단어가 갈라집니다. 월급과 선물. 월급은 일한 대가여서, 월급날에 우리는 고개를 숙이지 않습니다. 선물은 받을 자격을 내가 만든 것이 아니라 주는 사람의 마음이 만든 것이어서, 선물 앞에서는 고개가 숙여집니다. 그리고 바로 그래서 어렵습니다. 언 손에 온기가 아픈 것처럼, 갚을 수 없는 선물은 자존심을 아프게 합니다. 장발장이 달아난 이유도 그것이었습니다. 받는 법을 잊었기 때문입니다. 우리가 복음 앞에서 머뭇거리는 까닭에도, 어쩌면 그런 마음이 섞여 있는지 모릅니다.</p>
+<p class="q"><span class="q-label">중심 질문</span>갚을 수 없는 선물을 받을 때, 내 마음에서 먼저 올라오는 것은 무엇인가요? (고마움, 미안함, 부담, 뭔가 갚고 싶음, 의아함 등)</p>
+<div class="lines"><textarea rows="6" data-k="ta15" aria-label="메모" placeholder="여기에 적어 보세요 (이 기기에 저장됩니다)"></textarea></div>
+<figure class="verse"><blockquote>너희는 그 은혜에 의하여 믿음으로 말미암아 구원을 받았으니 이것은 너희에게서 난 것이 아니요 하나님의 선물이라 행위에서 난 것이 아니니 이는 누구든지 자랑하지 못하게 함이라</blockquote><figcaption>에베소서 2장 8–9절</figcaption></figure>
+<p>그런데 여기서 많은 사람이 한 번 더 걸려 넘어집니다. 믿음이라는 말을 듣는 순간, 그것을 또 하나의 과제로 받기 때문입니다. 내 믿음이 이렇게 약한데, 이렇게 자주 흔들리는데, 될까.</p>
+<p>깊은 협곡 위에 다리가 하나 놓여 있다고 해 봅시다. 한 사람은 성큼성큼 걸어서 건너고, 한 사람은 무릎을 떨며 기어서 건넙니다. 누가 더 안전합니까. 다리가 강철이라면 둘 다 똑같이 안전합니다. 다리가 썩은 나무라면 아무리 담대한 사람도 떨어집니다. 우리를 건너게 하는 것은 무릎의 떨림이 아니라 발이 딛고 있는 것의 견고함입니다. 믿음은 공로가 아니라 빈손입니다. 선물을 받으려고 내민 손이 선물의 값을 벌지는 않습니다. 다만 빈손이 된다는 것은 쥐고 있던 것을 내려놓는다는 뜻이기도 합니다. 웅덩이를 파던 삽, 나를 증명하려 붙들던 것들, 그리고 하나님 없이도 살 수 있다던 그 방향 자체를 내려놓는 것입니다. 성경은 믿음과 함께 오는 이 돌이킴을 회개라고 부릅니다. 회개는 용서를 얻어 내려는 값이 아니라, 이미 달려오고 있는 아버지를 향해 몸을 돌리는 일입니다.</p>
+<figure class="verse"><blockquote>영접하는 자 곧 그 이름을 믿는 자들에게는 하나님의 자녀가 되는 권세를 주셨으니</blockquote><figcaption>요한복음 1장 12절</figcaption></figure>
+<p>이 빈손조차 내가 짜내는 것이 아닙니다. 예수님은 사람이 성령으로 새로 나야 한다고 하시며, 그 일을 바람에 빗대셨습니다. 지난 이야기에서 본 대로 이 문은 안에서 열리지 않습니다. 내 쪽이 아니라 저쪽에서 먼저 열립니다. 오늘 이 이야기 앞에서 마음 어딘가가 움직인다면, 그것이 그 바람의 소리일지도 모릅니다.</p>
+<figure class="verse"><blockquote>바람이 임의로 불매 네가 그 소리는 들어도 어디서 와서 어디로 가는지 알지 못하나니 성령으로 난 사람도 다 그러하니라</blockquote><figcaption>요한복음 3장 8절</figcaption></figure>
+<p>그래서 마지막으로 물을 것은 내 믿음의 온도가 아니라, 그 다리가 얼마나 견고한가입니다. 십자가에서 예수님이 남기신 마지막 말이 그 답입니다. 다 이루었다. 이 말의 원어는 당시 영수증에 값이 다 치러졌다는 표시로도 쓰였다고 알려져 있습니다. 그리고 사흘 뒤 새벽, 무덤이 비었습니다. 바울은 부활하신 예수를 만난 사람들을 차례로 꼽으면서, 한번은 오백여 명이 한꺼번에 보았고 그 가운데 대다수가 아직 살아 있다고 적었습니다(고전 15:5–6). 찾아가 물어볼 수 있던 증인 명단입니다. 무덤 앞에서 뿔뿔이 흩어졌던 제자들이 몇 주 뒤 목숨을 걸고 이 소식을 전하는 사람들로 바뀐 까닭도 거기 있습니다. 죽은 사람의 약속은 그와 함께 묻히지만, 살아 계신 분의 약속은 오늘도 유효합니다. 부활하신 그 손에는 지금도 못 자국이 있습니다. 보증인의 서명은 지워지지 않았습니다.</p>
+<figure class="verse"><blockquote>예수께서 신 포도주를 받으신 후에 이르시되 다 이루었다 하시고 머리를 숙이니 영혼이 떠나가시니라</blockquote><figcaption>요한복음 19장 30절</figcaption></figure>
+<figure class="verse"><blockquote>그러므로 이제 그리스도 예수 안에 있는 자에게는 결코 정죄함이 없나니</blockquote><figcaption>로마서 8장 1절</figcaption></figure>
+<p class="q"><span class="q-label">살피는 질문 2</span>에베소서 2장 8–9절이 구원을 설명하는 낱말들 — 은혜, 믿음, 선물 — 가운데 지금 내 귀에 가장 안 들어오는 낱말은 무엇인가요?</p>
+<div class="lines"><textarea rows="4" data-k="ta16" aria-label="메모" placeholder="여기에 적어 보세요 (이 기기에 저장됩니다)"></textarea></div>
+<p class="q"><span class="q-label">되새기는 질문</span>&ldquo;받는 법을 잊은 사람에게 선물은 위협입니다&rdquo;라는 말은 어떻게 들리나요? (내 이야기 같음, 잘 모르겠음, 공감이 안 됨, 찔림 등)</p>
+<div class="lines"><textarea rows="3" data-k="ta17" aria-label="메모" placeholder="여기에 적어 보세요 (이 기기에 저장됩니다)"></textarea></div>
+<h2 class="sec seat">초대에 답하는 기도</h2>
+<p>값은 이미 치러졌습니다. 그 선물은 빈손을 내미는 사람의 것입니다. 은촛대를 받아 든 그 사람처럼, 오늘 이 선물 앞에 서 있는 분이 있을 것입니다. 그리고 이 자리로 부르는 목소리는 사람의 것이 아닙니다. 두 번째 이야기에서 우리는 스스로 판 웅덩이 곁의 목마른 사람들이었습니다 — 그 목마름을 향해 예수님이 친히 외치십니다.</p>
+<figure class="verse"><blockquote>누구든지 목마르거든 내게로 와서 마시라</blockquote><figcaption>요한복음 7장 37절</figcaption></figure>
+<p>예수님이 물으시는 자격은 목마름뿐입니다. 무릎이 떨려도 다리는 강철입니다. 손이 시린 것은 온기가 닿았다는 뜻입니다. 마음이 준비되었다면, 아래 기도를 눈으로 따라가며 속으로 조용히 고백해 보십시오. 오래 믿어 온 분이라면, 처음 믿던 날의 고백으로 다시 드려도 좋습니다.</p>
+<blockquote class="q-quote">하나님,<br />
+목마른 채로 여기까지 왔습니다.<br />
+저는 하나님을 떠나 제 힘으로 웅덩이를 파며 살아왔습니다.<br />
+그것이 하나님께 지은 죄였음을 고백합니다.<br />
+저를 용서해 주십시오.<br />
+예수님이 저를 대신해 십자가에서 죽으시고<br />
+제 죄의 값을 다 치르셨음을 믿습니다.<br />
+사흘 만에 다시 살아나셨음을 믿습니다.<br />
+이 선물을 빈손으로 받습니다.<br />
+이제 돌이켜 예수님을 제 삶의 주인으로 모십니다.<br />
+이제 저는 제 것이 아니라 주님의 것입니다.<br />
+예수님의 이름으로 기도합니다. 아멘.</blockquote>
+<h4>이 기도를 드렸다면</h4>
+<ul class="dash"><li>붙들 것은 내 기도의 크기가 아니라, 그 기도를 받으신 그리스도와 그분의 약속입니다. 그리스도 안에서 당신은 값이 치러진 사람입니다. 요한복음 1장 12절을 천천히 한 번 더 읽어 보십시오.</li></ul>
+<figure class="verse"><blockquote>영접하는 자 곧 그 이름을 믿는 자들에게는 하나님의 자녀가 되는 권세를 주셨으니</blockquote><figcaption>요한복음 1장 12절</figcaption></figure>
+<figure class="verse"><blockquote>아버지께서 내게 주시는 자는 다 내게로 올 것이요 내게 오는 자는 내가 결코 내쫓지 아니하리라</blockquote><figcaption>요한복음 6장 37절</figcaption></figure>
+<ul class="dash"><li>교회는 세례로 이 고백을 함께 확인하고 기뻐합니다. 원하시면 인도자나 교회의 목회자에게 조용히 이야기해 주십시오. 첫 고백을 함께 기뻐해 줄 사람이 곁에 있다는 것은 큰 선물입니다.</li><li>이 문은 내일도, 그다음 날도 잠겨 있지 않습니다.</li></ul>
+<h2 class="sec seat">우리의 이야기</h2>
+<p>오늘 우리는 문간의 아침을 보았습니다. 죽어 마땅한 자리에 선고 대신 선물이 임하는 아침. 주교의 은이 한 사람의 남은 생을 샀다면, 그리스도의 피는 우리의 영원을 샀습니다. 첫 번째 이야기에서 답하지 않고 들고 온 질문 — 이토록 아낌없이 꾸며진 세계라면, 여기 사는 일은 왜 이렇게 자주 아픈가 — 그 답의 두 번째 조각이 오늘 왔습니다. 아픔이 시작된 자리, 곧 우리 죄의 값이 치러졌습니다. 그리고 그분은 우리의 질고와 슬픔까지 몸으로 지셨습니다(사 53:4). 남은 조각은 다음 이야기에서 옵니다. 값이 치러진 사람이 그다음에 무엇으로 자라는지를 볼 때입니다.</p>
+<h4>묵상 구절</h4>
+<figure class="verse"><blockquote>그러므로 이제 그리스도 예수 안에 있는 자에게는 결코 정죄함이 없나니</blockquote><figcaption>로마서 8장 1절</figcaption></figure>
+<h4>실천: 먼지 닦기</h4>
+<p>은혜를 받은 사람도 여전히 실수하고 넘어집니다. 예수님은 이미 목욕한 사람은 발밖에 씻을 필요가 없다고, 온몸이 깨끗하다고 말씀하셨습니다(요 13:10). 발에 흙이 묻었다고 목욕한 사실이 취소되지는 않습니다.</p>
+<ul class="dash"><li>청소하기: 이 이야기를 덮은 뒤 며칠 사이에 시간을 내어 내 방이나 책상을 한 번 정돈하십시오. 먼지를 닦아 내는 물리적 행위에 집중해 봅니다.</li><li>되새기기: 청소하며 묵상하십시오. 방에 먼지가 쌓였다고 이 집이 내 집이 아니게 되는 것은 아닙니다.</li><li>적어 보기: 청소를 마친 뒤, 요즘 마음에 묻은 먼지 하나를 한 줄 적어 보십시오. 「초대에 답하는 기도」를 드린 분이라면, &ldquo;그래도 저는 주님의 자녀입니다&rdquo;를 덧붙여 보십시오.</li></ul>
+<p class="q"><span class="q-label">가져갈 질문</span>값이 다 치러졌다는 말이 사실이라면, 내 삶에서 무엇이 달라질까요. 오늘은 답하지 마십시오. 다음 이야기를 펼 때까지 이 질문을 들고 다니며, 그 생각이 떠오를 때 내 마음에 어떤 표정이 떠오르는지만 지켜보십시오. 다음 이야기는 그 표정에서 시작합니다.</p>
+<p class="further"><strong>더 깊이 읽기</strong> — 『레미제라블에서 읽는 가스펠 스토리』 세 번째 이야기: 탕자를 향해 달려온 아버지, 그리고 백억과 십만 원</p>
+<header class="opener" id="story4"><div class="eyebrow">네 번째 이야기 <span>· 성화</span></div><h1>되찾은 이름</h1></header>
+<h2 class="sec seat">하나님 말씀</h2>
+<figure class="verse"><blockquote>내가 네 행위를 아노니 네가 작은 능력을 가지고서도 내 말을 지키며 내 이름을 배반하지 아니하였도다</blockquote><figcaption>요한계시록 3장 8절</figcaption></figure>
+<h2 class="sec seat">나의 이야기</h2>
+<p>새 자리로 옮겨 짐을 풀던 첫날을 기억하십니까. 전학이든 이직이든 결혼이든, 아예 나라를 옮긴 이주든 — 그날 몸은 새 자리에 도착했습니다. 그런데 마음은 그날 도착하지 않았습니다. 몇 해가 지나도록 꿈은 여전히 옛 골목에서 꾸고, 정작 슬픈 날에는 새 자리의 누구에게도 전화를 걸지 못했습니다. 그렇게 살아 본 사람은 압니다. 도착과 정착은 다른 일입니다. 도착은 하루에 끝나고, 정착은 언제 끝났는지 아무도 모릅니다.</p>
+<p>세 번째 이야기에서 우리는 값이 치러진 선물 앞에 섰습니다. 그 선물을 받은 분에게, 그 선언은 새집의 열쇠를 건네받은 것과 같았을 것입니다. 그리고 우리는 질문 하나를 들고 돌아갔습니다. 그 말이 사실이라면 내 삶에서 무엇이 달라질까. 그런데 선물을 받은 다음 날 아침에도, 우리는 대개 같은 사람으로 눈을 뜹니다. 같은 조급함, 같은 비교, 같은 새벽 두 시의 휴대폰. 새집의 열쇠를 받았는데, 나는 왜 아직 옛집의 습관으로 사는가.</p>
+<p>아직 그 선언을 자기 것으로 받지 않은 분에게도 이 질문은 낯설지 않을 것입니다. 무언가를 굳게 결심한 다음 날 아침, 어제와 똑같은 자기를 만난 경험은 누구에게나 있으니까요. 그래서 마지막 이야기의 질문은 이것입니다. 도착한 사람은 어떻게 정착하는가.</p>
+<p class="q"><span class="q-label">여는 질문</span>&ldquo;무엇이 달라질까&rdquo; 하는 생각을 떠올리면, 지금 내 마음의 표정은 어떤가요? (부담, 피로, 기대, 무덤덤함, 잘 모르겠음 등)</p>
+<div class="lines"><textarea rows="4" data-k="ta18" aria-label="메모" placeholder="여기에 적어 보세요 (이 기기에 저장됩니다)"></textarea></div>
+<h2 class="sec seat">한 사람의 이야기</h2>
+<p>은촛대를 안고 디뉴를 떠난 그 사람의 이야기를 마저 해야겠습니다.</p>
+<p>그날 저녁, 그는 들판에서 지나가던 소년이 떨어뜨린 은화 한 닢을 발로 밟고 서서 돌려주지 않았습니다. 이백 프랑짜리 촛대를 품에 안은 채, 굴뚝 청소 아이의 며칠 벌이인 은화 한 닢을 밟고 선 발. 소년이 울며 사라진 뒤에야 그는 자기가 한 일을 알았고, 소년을 부르며 들판을 헤매다 무너져 울었습니다. 열아홉 해 만의 눈물이었습니다. 그 밤 늦게, 그는 들판에 엎드려 울었습니다. 주교의 문간에서 받은 것이 그 밤 비로소 그의 것이 되었습니다.</p>
+<p>여덟 해가 흘렀습니다. 그는 마들렌이라는 새 이름으로 북쪽의 한 도시에 정착해, 공장을 세워 수백 명을 먹이고, 시장이 되었습니다. 벽난로 위에는 은촛대 두 개가 여전히 놓여 있었습니다. 훌륭한 삶이었습니다. 다만 빌린 이름이었습니다. 누군가 진짜 이름을 부르면 무너질 자리가 언제나 발밑에 있었습니다.</p>
+<p>그러던 어느 날 소식이 왔습니다. 장발장이 잡혔다는 것입니다. 샹마티외라는 늙은 일꾼가 그로 오인되어 내일 법정에서 선고를 받는다고 했습니다. 침묵하면 됩니다. 그러면 장발장이라는 이름은 영영 남의 것이 되고, 그는 죽는 날까지 존경받는 마들렌으로 살 수 있습니다. 공장에 생계를 기댄 수백 가구를 생각하면 침묵이 오히려 모두를 살리는 길인지도 모릅니다. 침묵에는 언제나 그럴듯한 이유가 붙어 있는 법이니까요. 그는 밤새 방 안을 서성였습니다. 벽난로 위의 촛대 두 개가 그를 지켜보고 있었습니다.</p>
+<p>이튿날 저녁, 아라스 법정에서 영문도 모른 채 울먹이는 노인 — &ldquo;저는 샹마티외입니다. 정말입니다&rdquo; — 그 목소리가 울렸을 때, 판사석 뒤 상석에 앉아 있던 한 사람이 일어섰습니다.</p>
+<h2 class="sec seat">그분의 이야기</h2>
+<aside class="box glossary"><div class="box-label">낯선 낱말</div><ul><li><strong>성화</strong> — 하나님의 자녀가 된 사람이 그 이름에 걸맞게 자라 가는 평생의 과정입니다.</li><li><strong>거하다</strong> — 머무르다, 붙어 있다. 노력에 관한 말이기보다 자리에 관한 말입니다.</li><li><strong>장막</strong> — 하나님이 사람들 가운데 머무시는 자리를 가리키는 말입니다(계 21:3).</li><li><strong>새 하늘과 새 땅</strong> — 하나님이 이 세상을 버리지 않고 새롭게 하시는 마지막 날의 약속입니다.</li></ul></aside>
+<h3><ol>
+<li>취소되지 않는 이름</li>
+</ol></h3>
+<p>&ldquo;제가 장발장입니다.&rdquo;</p>
+<p>열아홉 해 동안 세상이 그에게서 이름을 빼앗았고, 여덟 해 동안 그는 스스로 이름을 감추었습니다. 그 이름을 그는 방금, 세상에서 가장 위험한 자리에서, 자기 입으로 되찾았습니다. 그날 그 법정에서 가장 자유로운 사람은, 방금 제 입으로 제 형벌을 선고한 남자였습니다.</p>
+<p>훌륭한 가짜 이름을 버리고 위험한 진짜 이름을 밝힐 수 있었던 힘은 어디서 왔을까요. 의지가 강해서가 아닙니다. 그 이름을 다른 목소리로 이미 들었기 때문입니다. 세상이 24601이라 부를 때, 형제여라 불러 준 목소리. 성경에 그 목소리를 들은 또 한 사람이 있습니다.</p>
+<p>갈릴리의 어부 시몬은 예수님께 새 이름을 받았습니다. 베드로 — 반석이라는 뜻입니다. 말이 앞서고 겁이 많던 사람에게, 흔들리지 않는 것의 이름이 주어졌습니다. 세상의 직함은 실적을 정산한 다음에 발급되지만, 이 이름은 아무 실적 없는 사람에게 약속으로 먼저 왔습니다.</p>
+<p>그리고 그 이름이 가장 멀어 보이는 밤이 옵니다. 예수님이 붙잡혀 가시던 밤, 시몬은 대제사장 집 뜰의 숯불 곁에 앉아 불을 쬐고 있었습니다. 문 지키는 여종이 먼저 물었고, 불가에 둘러선 사람들이 이어 물었습니다. 그는 세 번 부인했습니다. 나는 그 사람을 모른다. 칼을 든 병사 앞이 아니었습니다. 그를 무너뜨린 것은 고문이 아니라 정체가 들키는 것의 공포였습니다. 닭이 울었고, 그는 밖에 나가서 심히 통곡했습니다. 받은 이름과 살아 낸 현실의 간격이 이보다 벌어질 수는 없습니다.</p>
+<p>부활하신 주님은 갈릴리 바닷가에 숯불을 피워 놓고 그를 기다리셨습니다. 시몬이 마지막으로 숯불 곁에 섰던 곳은 제 이름을 세 번 버린 그 뜰이었습니다. 부끄러운 자리를 에둘러 가게 해 주는 것이 위로라면, 부끄러운 자리로 함께 돌아가 그 위에 새 기억을 덮어 주는 것은 회복입니다. 예수님은 세 번 물으셨습니다. 네가 나를 사랑하느냐. 뜰에서 세 번 부인한 사람에게, 사랑을 고백할 자리가 세 번 마련된 것입니다. 그리고 대답마다 돌아온 말씀은 정산이 아니라 위탁이었습니다. 내 양을 먹이라.</p>
+<p>이 아침이 확정한 것을 한 문장으로 줄이면 이렇습니다. 받은 신분은 실패로 취소되지 않고, 살아 내는 수준은 그 신분 위에서 자랍니다. 자라서 자녀가 되는 것이 아니라, 자녀이기 때문에 자랍니다. 「나의 이야기」에서 던진 질문 — 새집의 열쇠를 받았는데 왜 아직 옛집의 습관으로 사는가 — 에 대한 첫 번째 답이 여기 있습니다. 그대로인 것처럼 보이는 그 시간에도, 이름은 취소된 적이 없습니다.</p>
+<p>오늘 하나님 말씀으로 읽은 요한계시록 3장 8절은, 부활하신 주님이 빌라델비아라는 작은 교회에 보내신 편지의 한 대목입니다. 열린 문을 두었다는 약속 바로 뒤에, 이런 칭찬이 붙어 있습니다. 작은 능력을 가지고서도, 내 이름을 배반하지 않았다. 스승의 이름을 세 번 모른다 하던 베드로를 떠올리면 이 칭찬이 얼마나 무거운지 알 수 있습니다. 큰 능력이 아니라 작은 능력으로, 그 이름에서 떠나지 않는 것 — 받은 이름대로 산다는 것이 이것입니다. 그리고 같은 편지는 흔들리던 사람을 기둥으로 세우고 그 위에 새 이름을 적겠다는 약속으로 닫힙니다.</p>
+<figure class="verse"><blockquote>볼지어다 내가 네 앞에 열린 문을 두었으되 능히 닫을 사람이 없으리라 내가 네 행위를 아노니 네가 작은 능력을 가지고서도 내 말을 지키며 내 이름을 배반하지 아니하였도다</blockquote><figcaption>요한계시록 3장 8절</figcaption></figure>
+<figure class="verse"><blockquote>이기는 자는 내 하나님 성전에 기둥이 되게 하리니 그가 결코 다시 나가지 아니하리라 내가 하나님의 이름과 하나님의 성 곧 하늘에서 내 하나님께로부터 내려오는 새 예루살렘의 이름과 나의 새 이름을 그이 위에 기록하리라</blockquote><figcaption>요한계시록 3장 12절</figcaption></figure>
+<figure class="verse"><blockquote>세 번째 이르시되 요한의 아들 시몬아 네가 나를 사랑하느냐 하시니 주께서 세 번째 네가 나를 사랑하느냐 하시므로 베드로가 근심하여 이르되 주님 모든 것을 아시오매 내가 주님을 사랑하는 줄을 주님께서 아시나이다 예수께서 이르시되 내 양을 먹이라</blockquote><figcaption>요한복음 21장 17절</figcaption></figure>
+<p class="q"><span class="q-label">살피는 질문 1</span>17절에서 예수님은 그를 &lsquo;베드로&rsquo;가 아니라 &lsquo;요한의 아들 시몬&rsquo; — 처음 만난 날의 이름으로 부르십니다. 이 부름이 어떻게 들리나요? (다정함, 의아함, 아픔, 다시 시작 등)</p>
+<div class="lines"><textarea rows="4" data-k="ta19" aria-label="메모" placeholder="여기에 적어 보세요 (이 기기에 저장됩니다)"></textarea></div>
+<p class="q"><span class="q-label">중심 질문</span>&ldquo;받은 신분은 실패로 취소되지 않는다&rdquo;는 문장이 지금 내게 어떻게 들리나요? (위로, 의아함, 믿기 어려움, 내 이야기 같음, 아직 내 이야기 같지 않음 등)</p>
+<div class="lines"><textarea rows="6" data-k="ta20" aria-label="메모" placeholder="여기에 적어 보세요 (이 기기에 저장됩니다)"></textarea></div>
+<h3><ol>
+<li>자고 깨는 사이에</li>
+</ol></h3>
+<p>그렇다면 그 신분 위에서 자라는 힘은 어디서 옵니까. 근육은 운동하는 동안이 아니라 쉬고 자는 동안 자란다고 합니다. 운동이 근섬유에 낸 미세한 상처를, 몸이 쉬는 사이에 전보다 조금 굵게 메우기 때문입니다. 애쓰는 순간과 자라는 순간은 같지 않습니다.</p>
+<p>예수님이 들려주신 성장의 비유에 바로 이 이상한 구석이 있습니다. 농부가 씨를 뿌립니다. 그다음 농부가 하는 일은 — 자고 깨는 것입니다. 그가 밤낮 자고 깨는 사이에 씨가 나서 자라는데, 어떻게 그리 되는지 농부 자신도 모릅니다. 자라게 하는 것은 농부의 근면이 아니라 씨앗 속의 생명입니다. 이 비유는 먼저 하나님 나라가 어떻게 자라는지를 말하지만, 그 나라에 심긴 한 사람의 삶에도 같은 이치가 흐릅니다.</p>
+<figure class="verse"><blockquote>또 이르시되 하나님의 나라는 사람이 씨를 땅에 뿌림과 같으니 그가 밤낮 자고 깨고 하는 중에 씨가 나서 자라되 그가 어떻게 그리 되는지를 알지 못하느니라 땅이 스스로 열매를 맺되 처음에는 싹이요 다음에는 이삭이요 그 다음에는 이삭에 충실한 곡식이라</blockquote><figcaption>마가복음 4장 26–28절</figcaption></figure>
+<p>옮겨 심은 나무도 그렇습니다. 처음 몇 주는 오히려 시들어 보입니다. 뿌리가 새 땅을 잡는 데 온 힘을 쓰느라 위로 보낼 힘이 없기 때문입니다. 도착했는데 정착하지 못한 것 같던 그 시간이, 나무에게는 뿌리가 땅을 잡는 시간입니다. 위에서는 아무것도 달라지지 않은 듯한데, 아래에서는 모든 것이 달라지고 있는 시간.</p>
+<p>에스겔을 통해 하나님은, 굳은 마음을 꺼내고 부드러운 마음을 주시겠다고, 그리고 당신의 영을 사람 안에 두시겠다고 약속하셨습니다(겔 36:26–27). 지난 이야기에서 바람처럼 불어와 문을 여신 성령께서, 이제 안에 머무시며 마음을 바꾸어 가십니다.</p>
+<figure class="verse"><blockquote>또 새 영을 너희 속에 두고 새 마음을 너희에게 주되 너희 육신에서 굳은 마음을 제거하고 부드러운 마음을 줄 것이며</blockquote><figcaption>에스겔 36장 26절</figcaption></figure>
+<p>그래서 예수님은 성장을 노력의 언어가 아니라 붙어 있음의 언어로 말씀하셨습니다. 가지는 열매를 쥐어짜지 않습니다. 나무에 붙어 있고, 열매는 그 연합의 결과로 맺힙니다. 뿌리가 마음껏 뻗을 땅 — 말씀과 기도, 세례와 성찬이 있는 예배, 그리고 공동체 — 에 심긴 생명은, 우리가 자고 깨는 사이에도 자랍니다.</p>
+<figure class="verse"><blockquote>나는 포도나무요 너희는 가지라 그가 내 안에, 내가 그 안에 거하면 사람이 열매를 많이 맺나니 나를 떠나서는 너희가 아무것도 할 수 없음이라</blockquote><figcaption>요한복음 15장 5절</figcaption></figure>
+<p>그렇다고 자람이 우리를 구경꾼으로 앉혀 두는 것은 아닙니다. 바울은 이루라는 부름과 행하시는 이는 하나님이라는 선언을 한 문장 안에 나란히 두었습니다.</p>
+<figure class="verse"><blockquote>두렵고 떨림으로 너희 구원을 이루라 너희 안에서 행하시는 이는 하나님이시니 자기의 기쁘신 뜻을 위하여 너희에게 소원을 두고 행하게 하시나니</blockquote><figcaption>빌립보서 2장 12–13절</figcaption></figure>
+<p>천사의 소식 앞에서 마리아는 &ldquo;주의 여종이오니 말씀대로 내게 이루어지이다&rdquo;(눅 1:38) 하고 대답했습니다. 아기를 제 힘으로 만들지는 않았지만, 자기 삶을 그 약속 앞에 온전히 내어 드렸습니다. 죄와 싸우는 일도 그렇습니다. 싸움은 우리가 치르지만, 이기게 하시는 힘은 성령께 있습니다(롬 8:13). 순종은 은혜를 사는 값이 아니라, 은혜를 받은 사람의 감사입니다.</p>
+<p class="q"><span class="q-label">살피는 질문 2</span>씨가 자라는 동안 그저 밤낮 자고 깨는 27절의 농부를 보면 어떤 마음이 드나요? (부럽다, 불안하다, 게을러 보인다, 나와 비슷하다 등)</p>
+<div class="lines"><textarea rows="4" data-k="ta21" aria-label="메모" placeholder="여기에 적어 보세요 (이 기기에 저장됩니다)"></textarea></div>
+<h3><ol>
+<li>그늘</li>
+</ol></h3>
+<p>그러면 이 생명은 자라서 무엇이 됩니까. 예수님은 하나님 나라를 겨자씨에 비유하셨습니다(막 4:31–32). 가장 작은 씨가 자라, 공중의 새들이 그 그늘에 깃듭니다. 나무의 완성은 높이가 아니라 그늘입니다. 나 하나 살아남는 나무가 아니라, 누군가 깃들 수 있는 나무. 그것이 자라난 생명의 모습입니다.</p>
+<p>베드로의 후일담이 정확히 이 그림입니다. 뜰의 불가에서 무너졌던 그 사람이 오십여 일 뒤 수천 명 앞에서 자기가 부인했던 이름을 선포했고, 얼마 뒤에는 사람들이 병자를 침대째 메고 거리로 나와 그가 지나갈 때 그림자라도 덮이기를 바랐습니다. 이름을 숨기던 사람이, 그늘을 드리우는 사람이 된 것입니다.</p>
+<p>법정의 그 사람도 그랬습니다. 세월이 흘러 시가전의 바리케이드 안, 평생 그를 쫓아온 경감 자베르가 포로로 잡혀 처형을 기다리고 있었습니다. 한 번 죄인은 영원히 죄인이라고 믿는 사람이었습니다. 처형을 자청한 장발장은 그를 골목으로 끌고 가 — 밧줄을 끊었습니다. 촛대를 받았던 손이, 밧줄을 끊어 주는 손이 되어 있었습니다.</p>
+<p>자베르는 끊긴 밧줄을 손에 쥔 채 그 골목을 천천히 걸어 나갔습니다. 그 밤 그의 마음 깊은 곳에서 무슨 일이 있었는지는 하나님만 아십니다. 그늘은 강요하지 않습니다. 다만 거기 있습니다.</p>
+<p>첫 번째 이야기에서 심어 둔 구절이 이제 온전히 펼쳐집니다. 우리는 그가 만드신 작품이며 — 그리고 그 작품은 진열장에 두려고 지으신 것이 아니라, 선한 일을 위하여 지으셨습니다. 존재가 먼저고, 행함이 그 위에서 흘러나옵니다.</p>
+<figure class="verse"><blockquote>우리는 그가 만드신 바라 그리스도 예수 안에서 선한 일을 위하여 지으심을 받은 자니 이 일은 하나님이 전에 예비하사 우리로 그 가운데서 행하게 하려 하심이니라</blockquote><figcaption>에베소서 2장 10절</figcaption></figure>
+<h3><ol>
+<li>아픔이 끝나는 날</li>
+</ol></h3>
+<p>그리고 첫 번째 이야기부터 들고 온 질문 — 이토록 아낌없이 꾸며진 세계에서 왜 이렇게 자주 아픈가 — 이 여기서 닫힙니다. 두 번째 이야기는 아픔이 내 잘못의 값은 아니지만 첫 사람이 샘을 떠난 자리에서 이 세상에 들어왔다고 했고, 세 번째 이야기는 그 죄의 값이 치러졌고 그분이 우리의 슬픔까지 지셨다고 했습니다. 남은 조각은 둘입니다.</p>
+<p>먼저, 이 아픔에는 끝나는 날이 있습니다. 그리스도께서 다시 오셔서 모든 것을 바로잡으시는 날입니다. 사람이 한 번 죽는 것은 정해진 일이요 그 후에는 심판이 있다고 성경은 말합니다(히 9:27). 그날 우리는 모두 그리스도의 심판대 앞에 섭니다(고후 5:10). 그분 밖에서 그 자리에 선다는 것은, 내 빚을 내가 갚아야 하는 자리에 홀로 선다는 뜻입니다. 그래서 복음은 그날을 말하기 전에, 오늘 먼저 초대합니다. 그리고 그 심판석에 앉으실 분이 누구인지 우리는 이미 압니다. 우리 대신 심판을 받으신 분, 숯불을 피워 놓고 무너진 사람을 처음의 이름으로 다시 부르신 바로 그분입니다. 내가 받을 심판을 그분이 받으셨고, 그분의 의가 나의 의가 되었습니다. 그래서 그분 안에 있는 사람에게 그날은 판결을 기다리는 날이 아니라, 이미 받은 판결 — 결코 정죄함이 없다 — 이 온 세상 앞에서 확인되는 날입니다. 성경이 그분의 다시 오심을 두려움이 아니라 기다림의 말로 적는 까닭입니다. &ldquo;자기를 바라는 자들에게 두 번째 나타나시리라&rdquo;(히 9:28). 요한계시록은 마지막 장면에서 그날을 이렇게 그립니다. 하나님의 장막이 사람들과 함께 있게 되는 날, 이 세계를 지으신 분이 친히 우리 곁에 머무시는 날입니다.</p>
+<figure class="verse"><blockquote>모든 눈물을 그 눈에서 닦아 주시니 다시는 사망이 없고 애통하는 것이나 곡하는 것이나 아픈 것이 다시 있지 아니하리니 처음 것들이 다 지나갔음이러라</blockquote><figcaption>요한계시록 21장 4절</figcaption></figure>
+<p>아픈 것이 다시 있지 아니하리니. 사랑하는 이를 먼저 보낸 사람에게 성경이 먼저 건네는 말은 설명이 아니라 이 약속입니다. 상실의 슬픔은 감추어야 할 부끄러운 자리가 아닙니다. 무엇으로 쓰이기 전에, 먼저 닦여야 할 눈물입니다. 그리고 보좌에 앉으신 이가 덧붙이십니다. &ldquo;보라 내가 만물을 새롭게 하노라&rdquo;(계 21:5). 이 세계를 버리고 새것을 지으시겠다는 말이 아니라, 이 세계를 새롭게 하시겠다는 말입니다. 첫 번째 이야기에서 들은 야곱의 고백 — 이것은 다름 아닌 하나님의 집이요 — 이 마침내 온 세상의 고백이 되는 날입니다.</p>
+<p>다른 하나는, 그날을 기다리는 동안의 일입니다. 치러진 아픔은 버려지지 않고 그늘이 됩니다. 뜰의 불빛 곁에서 이름을 숨기던 베드로가 병자를 덮는 그림자를 드리웠듯, 내가 가장 숨기고 싶었던 자리가 누군가 와서 쉬는 자리가 됩니다. 버려지는 아픔은 없습니다. 그래서 그날까지 우리는 그늘로 삽니다. 아픔이 끝나는 날을 향해, 아픈 이들이 깃들 수 있는 나무로.</p>
+<figure class="verse"><blockquote>겨자씨 한 알과 같으니 땅에 심길 때에는 땅 위의 모든 씨보다 작은 것이로되 심긴 후에는 자라서 모든 풀보다 커지며 큰 가지를 내나니 공중의 새들이 그 그늘에 깃들일 만큼 되느니라</blockquote><figcaption>마가복음 4장 31–32절</figcaption></figure>
+<h2 class="sec seat">우리의 이야기</h2>
+<p>네 이야기를 함께 지나왔습니다. 기다리던 손님, 샘을 떠나 번호가 된 우리, 빈손으로 받은 선물. 그리고 오늘 — 받은 이름은 실패로 취소되지 않으며, 심긴 생명은 우리가 자고 깨는 사이에도 자라 마침내 누군가의 그늘이 된다는 것, 그리고 그 그늘 너머에 모든 눈물이 닦이는 날이 기다리고 있다는 것을 들었습니다.</p>
+<p>옮겨 심은 나무는 시들어 보이던 몇 주가 지나면 어느 날 아침 새잎을 내고, 몇 해 뒤에는 그 아래 그늘을 드리웁니다. 도착한 사람은 그렇게 정착합니다. 네 번째 이야기를 덮는 오늘이, 뿌리가 땅을 잡는 날이기를 바랍니다.</p>
+<h4>묵상 구절</h4>
+<figure class="verse"><blockquote>나는 포도나무요 너희는 가지라 그가 내 안에, 내가 그 안에 거하면 사람이 열매를 많이 맺나니 나를 떠나서는 너희가 아무것도 할 수 없음이라</blockquote><figcaption>요한복음 15장 5절</figcaption></figure>
+<h4>실천: 이름 불러 주기, 그리고 이야기 들려주기</h4>
+<p>미리엘은 번호로 불리던 사람을 형제여라 불렀고, 예수님은 무너진 시몬을 처음의 이름으로 다시 부르셨습니다. 이름을 불러 주는 일은 하나님의 방식을 닮아 가는 시작이자, 내 그늘에 처음으로 누군가를 들이는 연습입니다.</p>
+<ul class="dash"><li>이름 부르기: 앞으로 며칠 사이, 평소 역할이나 직함으로만 대하던 한 사람 — 경비원, 택배 기사, 식당 직원, 혹은 가족 — 의 이름을 기억하고, 이름으로 불러 인사해 보십시오.</li><li>이야기 들려주기: 네 이야기에서 내게 가장 오래 남은 한 장면을 한 사람에게 들려주십시오. 설득하려 하지 말고, 그냥 이야기해 주십시오. 미리엘은 장발장에게 설교하지 않았습니다. 문을 열고, 식탁에 앉히고, 이름을 불렀을 뿐입니다.</li></ul>
+<p><strong>아직 기도하지 않았다면.</strong> 세 번째 이야기의 「초대에 답하는 기도」는 지금도 그 자리에 있습니다. 이 이야기를 덮으며, 혹은 혼자 있는 조용한 시간에, 그 기도를 다시 펴 보셔도 좋습니다. 인도자나 교회의 목회자에게 말해 주시면 함께 기뻐할 것입니다.</p>
+<p class="q"><span class="q-label">돌아보는 질문</span>네 이야기를 지나며 받은 것 하나는 무엇인가요? (한 장면, 한 문장, 한 사람, 아직 잘 모르겠음 등)</p>
+<div class="lines"><textarea rows="2" data-k="ta22" aria-label="메모" placeholder="여기에 적어 보세요 (이 기기에 저장됩니다)"></textarea></div>
+<p class="q"><span class="q-label">가져갈 질문</span>내가 가장 오래 숨기고 싶었던 자리 — 실패, 상처, 부끄러운 계절 — 가 언젠가 누군가의 그늘이 된다면, 그 그늘에 깃들 사람은 누구일까요. 이 질문에는 다음 이야기가 없습니다. 답은 앞으로의 몇 해가 대신 써 줄 것입니다.</p>
+<p class="further"><strong>더 깊이 읽기</strong> — 『레미제라블에서 읽는 가스펠 스토리』 네 번째 이야기: 샹마티외 법정의 밤 전체, 그리고 은촛대 곁의 마지막 밤</p></main><script>
+(function(){
+  var KEY='gs-'+document.title+'-', ok=true;
+  try{localStorage.setItem(KEY+'_t','1'); localStorage.removeItem(KEY+'_t');}catch(e){ok=false;}
+  document.querySelectorAll('textarea[data-k]').forEach(function(t){
+    if(!ok) t.placeholder='여기에 적어 보세요 (이 보기 화면에서는 저장되지 않습니다. 폰 브라우저에서 파일을 열어 주세요)';
+    try{var v=localStorage.getItem(KEY+t.dataset.k); if(v) t.value=v;}catch(e){}
+    function fit(){t.style.height='auto'; t.style.height=Math.max(t.scrollHeight, t.rows*30+14)+'px';}
+    t.addEventListener('input',function(){fit(); try{localStorage.setItem(KEY+t.dataset.k,t.value);}catch(e){}});
+    fit();
+  });
+})();
+</script></body></html>

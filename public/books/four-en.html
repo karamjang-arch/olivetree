@@ -1,0 +1,460 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="color-scheme" content="light dark">
+<title>Gospel Story: Four Stories</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Source+Serif+4:ital,wght@0,400;0,600;0,700;1,400&display=swap" rel="stylesheet">
+<style>:root{
+  --ink:#2a2521; --ink-2:#5c534b; --ink-3:#8a8077;
+  --accent:#8c3b2a; --accent-soft:#f3e7e1;
+  --paper:#ffffff; --tint:#f7f3ec; --rule:#d9d0c4; --line:#cfc6ba;
+  --note:#2f4a5a; --note-bg:#eef3f5; --note-rule:#9fb4bf;
+  --serif:"Source Serif 4",Georgia,"Times New Roman",serif;
+  --sans:Inter,-apple-system,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --ink:#ece6df; --ink-2:#c4bab0; --ink-3:#958a80;
+    --accent:#e0957f; --accent-soft:#3a2a25;
+    --paper:#1c1a18; --tint:#25221f; --rule:#4a433d; --line:#4a433d;
+    --note:#b9d2de; --note-bg:#1f2a30; --note-rule:#4f6a77;
+  }
+}
+:root[data-theme="dark"]{
+  --ink:#ece6df; --ink-2:#c4bab0; --ink-3:#958a80;
+  --accent:#e0957f; --accent-soft:#3a2a25;
+  --paper:#1c1a18; --tint:#25221f; --rule:#4a433d; --line:#4a433d;
+  --note:#b9d2de; --note-bg:#1f2a30; --note-rule:#4f6a77;
+}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{margin:0;background:var(--paper);color:var(--ink);font-family:var(--serif);
+  font-size:18px;line-height:1.7;overflow-wrap:break-word;-webkit-font-smoothing:antialiased}
+main{max-width:40rem;margin:0 auto;padding:0 max(18px,env(safe-area-inset-left)) 90px}
+p{margin:0 0 .9em}
+strong{font-weight:700}
+em{font-style:normal;color:var(--ink-2)}
+
+/* cover */
+.cover{min-height:88vh;display:flex;flex-direction:column;justify-content:center;
+  padding:64px 0;border-bottom:1px solid var(--rule)}
+.cover-series{font-family:var(--sans);font-weight:500;letter-spacing:.32em;
+  font-size:14px;color:var(--accent);margin-bottom:18px}
+.cover-title{font-size:44px;line-height:1.25;font-weight:700;margin:0 0 14px;letter-spacing:-.01em}
+.cover-edition{font-family:var(--sans);font-size:17px;color:var(--ink-2);margin-bottom:28px}
+.cover-tag{font-size:17px;color:var(--ink-2);padding-top:22px;border-top:2px solid var(--accent);
+  width:fit-content}
+
+/* openers */
+.opener,.part{padding:72px 0 20px;margin-bottom:8px}
+.opener .eyebrow{font-family:var(--sans);font-weight:500;font-size:14px;letter-spacing:.12em;color:var(--accent)}
+.opener .eyebrow span{color:var(--ink-3)}
+.opener h1{font-size:34px;line-height:1.3;margin:10px 0 0;font-weight:700}
+.opener::after{content:"";display:block;width:48px;height:2px;background:var(--accent);margin-top:22px}
+.part{text-align:left}
+.part-num{font-family:var(--sans);font-size:14px;letter-spacing:.2em;color:var(--accent)}
+.part h1{font-size:30px;margin:8px 0 0}
+
+/* section seats */
+h2.sec{font-family:var(--sans);font-size:15px;font-weight:700;letter-spacing:.06em;color:var(--ink);
+  margin:44px 0 16px;padding-bottom:8px;border-bottom:1px solid var(--rule);display:flex;align-items:center;gap:10px}
+h2.sec.seat::before{content:"";width:8px;height:8px;border-radius:50%;background:var(--accent);flex:none}
+h3{font-family:var(--serif);font-size:19px;font-weight:700;margin:34px 0 12px;line-height:1.45}
+h4{font-family:var(--sans);font-size:14px;font-weight:700;color:var(--accent);margin:26px 0 8px;letter-spacing:.03em}
+
+/* scripture */
+figure.verse{margin:18px 0 22px;padding:14px 18px 12px;background:var(--tint);border-left:3px solid var(--accent);border-radius:0 6px 6px 0}
+figure.verse blockquote{margin:0;font-size:15.5px;line-height:1.85}
+figure.verse figcaption{font-family:var(--sans);font-size:12.5px;color:var(--ink-2);text-align:right;margin-top:6px}
+blockquote.prayer{margin:20px 0;padding:22px 26px;border:1px solid var(--rule);border-radius:8px;font-size:16px;line-height:2.05;background:var(--paper)}
+blockquote.q-quote{margin:10px 0;font-size:15.5px}
+
+/* questions */
+p.q{margin:22px 0 6px;padding-left:0}
+.q-label{display:inline-block;font-family:var(--sans);font-size:12.5px;font-weight:700;color:#fff;background:var(--accent);
+  padding:1px 9px;border-radius:3px;margin-right:9px;vertical-align:2px;letter-spacing:.02em}
+p.q.center{padding:14px 16px;background:var(--accent-soft);border-radius:6px}
+.lines{margin:2px 0 16px}
+.ln{height:30px;border-bottom:1px solid var(--line)}
+
+/* boxes */
+.box{margin:22px 0;padding:14px 18px;border-radius:6px;break-inside:avoid}
+.box-label{font-family:var(--sans);font-size:12.5px;font-weight:700;letter-spacing:.06em;margin-bottom:6px}
+.glossary{background:var(--tint);border:1px solid var(--rule)}
+.glossary .box-label{color:var(--accent)}
+.glossary ul{margin:0;padding:0;list-style:none}
+.glossary li{font-family:var(--sans);font-size:13.5px;line-height:1.7;margin:4px 0;color:var(--ink-2)}
+.glossary li strong{color:var(--ink)}
+.duo{border:1.5px dashed var(--rule);background:transparent}
+.duo .box-label{color:var(--ink)}
+.duo .box-label span{font-weight:500;color:var(--ink-3);margin-left:6px}
+.duo p{font-size:15px}
+.note,.memo,.glance{font-family:var(--sans);font-size:13.5px;line-height:1.75;background:var(--note-bg);
+  border-left:3px solid var(--note-rule);border-radius:0 6px 6px 0;color:var(--ink)}
+.note .box-label,.memo .box-label,.glance .box-label{color:var(--note)}
+.note p,.memo p,.glance p{margin:0 0 .5em}
+.memo{background:transparent;border:1px solid var(--note-rule);border-left-width:3px}
+.glance table{width:100%;border-collapse:collapse;margin:6px 0 10px;font-size:13px}
+.glance th,.glance td{text-align:left;padding:4px 8px;border-bottom:1px solid var(--note-rule);vertical-align:top}
+.glance th{font-weight:700}
+.glance ul{margin:0;padding-left:1.1em}
+
+/* lists */
+ul,ol{padding-left:1.3em;margin:0 0 1em}
+li{margin:.25em 0}
+ul.dash{list-style:none;padding:0;margin:6px 0 12px}
+ul.dash li{position:relative;padding-left:1.2em}
+ul.dash li::before{content:"—";position:absolute;left:0;color:var(--accent)}
+.aside-line{color:var(--ink-2);font-size:14.5px}
+p.further{font-family:var(--sans);font-size:13.5px;color:var(--ink-2);margin-top:26px;padding-top:12px;border-top:1px solid var(--rule)}
+table{border-collapse:collapse;width:100%;margin:12px 0 18px;font-family:var(--sans);font-size:14px}
+th,td{border:1px solid var(--rule);padding:8px 10px;text-align:left;vertical-align:top}
+th{background:var(--tint)}
+td:empty::after{content:"\00a0"}
+hr{border:0;border-top:1px solid var(--rule);margin:32px 0}
+
+/* leader body sans for 1부 */
+body.leader h2.sec:not(.seat),body.church h2.sec:not(.seat){font-size:17px;color:var(--ink)}
+
+
+.cover{min-height:80vh;align-items:flex-start;padding-top:40px}
+.cover .church{font-family:var(--sans);font-size:13px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-2);margin-bottom:46px;padding-bottom:12px;border-bottom:1px solid var(--rule)}
+.cover-series{letter-spacing:.3em}
+.cover-title{font-size:clamp(34px,10vw,52px)}
+.cover-tag{font-style:italic}
+.cover-hint{font-family:var(--sans);font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:var(--ink-3);margin-top:40px}
+.toc{margin:28px 0 8px;padding:20px 18px;background:var(--tint);border-radius:10px}
+.toc-label{font-family:var(--sans);font-size:12px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:var(--accent);margin-bottom:8px}
+.toc ol{list-style:none;margin:0;padding:0}
+.toc li{margin:0;border-top:1px solid var(--rule)}
+.toc li:first-child{border-top:0}
+.toc a{display:block;padding:12px 2px;text-decoration:none;color:var(--ink)}
+.toc .t1{display:block;font-family:var(--sans);font-size:12px;letter-spacing:.06em;color:var(--accent)}
+.toc .t2{display:block;font-size:18px;font-weight:600;line-height:1.3}
+.opener{padding:56px 0 12px;scroll-margin-top:8px}
+.opener h1{font-size:clamp(28px,8vw,36px)}
+h2.sec{font-size:13px;letter-spacing:.1em;text-transform:uppercase;margin-top:42px}
+figure.verse{margin:20px 0 24px}
+figure.verse blockquote{font-size:17px;line-height:1.7}
+figure.verse figcaption{font-size:13px}
+.q-label{font-size:12px}
+p.q{margin-top:24px}
+.lines{margin:6px 0 20px}
+.lines textarea{width:100%;display:block;border:0;border-radius:6px;background:var(--tint);color:var(--ink);font:inherit;font-size:17px;line-height:30px;padding:6px 12px;resize:vertical;min-height:62px;
+  background-image:repeating-linear-gradient(transparent,transparent 29px,var(--line) 29px,var(--line) 30px);background-attachment:local}
+.lines textarea:focus{outline:2px solid var(--accent);outline-offset:1px}
+.lines textarea::placeholder{color:var(--ink-3);font-size:15px}
+blockquote.prayer{font-size:17px;line-height:1.9;padding:20px 18px}
+.glossary li{font-size:14.5px}
+.further{font-size:14px}
+table{font-size:14.5px;display:block;overflow-x:auto}
+a{color:var(--accent)}
+@media print{
+  @page{size:A5;margin:16mm 14mm}
+  body{font-size:10pt}
+  main{max-width:none;padding:0}
+  .cover{min-height:150mm;break-after:page}
+  .opener{break-before:page}
+  .lines textarea{border-bottom:0;resize:none}
+  .toc a{color:inherit}
+  .cover-hint{display:none}
+}
+</style></head>
+<body class="wb"><main><section class="cover"><div class="church">Korean Presbyterian Church of Purdue</div><div class="cover-series">GOSPEL STORY</div><h1 class="cover-title">Four Stories</h1><div class="cover-tag">May the story of Jesus become your story</div><div class="cover-hint">Scroll to begin</div></section><nav class="toc" aria-label="Contents"><div class="toc-label">Contents</div><ol><li><a href="#story-one"><span class="t1">Story One · Creation</span><span class="t2">The Awaited Guest</span></a></li><li><a href="#story-two"><span class="t1">Story Two · Fall</span><span class="t2">People Who Became Numbers</span></a></li><li><a href="#story-three"><span class="t1">Story Three · Redemption</span><span class="t2">The Silver Candlesticks</span></a></li><li><a href="#story-four"><span class="t1">Story Four · New Life</span><span class="t2">The Name Restored</span></a></li></ol></nav>
+<h4>Every story passes through five places.</h4>
+<ul>
+<li><strong>The Word of God</strong> — one verse for the day</li>
+<li><strong>My Story</strong> — a scene from my life today</li>
+<li><strong>One Man&rsquo;s Story</strong> — a scene from the novel <em>Les Misérables</em></li>
+<li><strong>His Story</strong> — the answer the Bible gives</li>
+<li><strong>Our Story</strong> — the verse, the practice, and the question we carry into daily life</li>
+</ul>
+<header class="opener" id="story-one"><div class="eyebrow">Story One <span>· Creation</span></div><h1>The Awaited Guest</h1></header>
+<h2 class="sec seat">The Word of God</h2>
+<figure class="verse"><blockquote>And God saw everything that he had made, and behold, it was very good.</blockquote><figcaption>Genesis 1:31, ESV</figcaption></figure>
+<h2 class="sec seat">My Story</h2>
+<p>When the sun goes down, the world could have simply gone dark, like a switch flipped off. If survival were the point, a world in black and white would have done the job. Yet every evening the western sky is poured full of orange and violet, as if no one were counting the cost. Science explains a sunset as air scattering light, and the sweetness of fruit as a plant&rsquo;s strategy for spreading its seeds. Both explanations are true. But nowhere in them is a reason why that color should stop us on the walk home and make something in the chest ache a little. The first snowfall works the same way: grown adults crowd the window with the faces of children. What we feel in that moment appears on no list of what we need to survive. To some people it is a leftover, a byproduct that happened to stay. To others it is a clue that this world was made with more care than it needed.</p>
+<p>Yet most of us live our days by the opposite rule. It&rsquo;s eleven at night, and a thumb slides between lowest price, star ratings, and reviews, all to buy one phone charger. In another room, at the same hour, someone young is rewriting a personal statement, trying to prove their worth in a few pages. The scale that once weighed goods has quietly gotten a person up onto it, and at night we step on it in front of the mirror. What was I worth today?</p>
+<p>A world poured out without counting, and people who count down to the last cent. What does that mismatch tell us?</p>
+<p>There is one more question. If this world really was decorated this lavishly, why does living in it hurt so often? We won&rsquo;t answer that today. We&rsquo;ll carry it through to the fourth story.</p>
+<p class="q"><span class="q-label">Opening Question</span>If your everyday life were a black-and-white film, when was an ordinary but vivid moment you&rsquo;d remember in color? (a loved one&rsquo;s laugh, a step stopped short by a sunset, a meal made with care, and so on)</p>
+<div class="lines"><textarea rows="4" data-k="ta1" aria-label="Your notes" placeholder="Write here (saved on this device)"></textarea></div>
+<h2 class="sec seat">One Man's Story</h2>
+<p>What does love that gives without counting look like? The opening pages of <em>Les Misérables</em>, a French novel more than 160 years old, put it on display.</p>
+<p>In Digne, a small town, there was a door that was never locked at night. It belonged to Bishop Myriel. At his supper table, strangers often sat: travelers no one else would take in. That table asked for no proof of anything. Even when supper was only soup, both silver candlesticks were lit, and each guest found at his place the same silver spoon as the host. Even a slow guest could not miss what that table was saying: <em>You did not come here to be fed. You are the guest we have been waiting for.</em></p>
+<p>Where did this old man learn such a welcome? Set his table beside the Bible, and the first chapter of Genesis comes to mind. A table laid in silver whether or not a guest ever arrived looks like a distant echo of another table, the one laid on the first morning of the universe.</p>
+<h2 class="sec seat">His Story</h2>
+<aside class="box glossary"><div class="box-label">Words You May Not Know</div><ul><li><strong>Image</strong> — Being made in God&rsquo;s likeness. As a king&rsquo;s statue once stood in for the king, people were made to show God&rsquo;s character to the world.</li><li><strong>Glory</strong> — The first meaning of this word in the Bible is &ldquo;weight.&rdquo; To glorify someone is to treat them as weighty, as precious.</li><li><strong>Blessing</strong> — Not luck, but the good things God gives and the good relationship we have with him.</li></ul></aside>
+<p>The Bible has someone who found such a house as well. Jacob had cheated his brother and was on the run. One night he fell asleep in an open field with a stone for a pillow. The sky opened, and when he woke he cried out, “How awesome is this place! This is none other than the house of God, and this is the gate of heaven” (Gen 28:17, ESV). That house was not found by a qualified person. It was found by a man on the run. Centuries later, Jesus would bring that night&rsquo;s open sky to himself (see John 1:51). The road between heaven and earth turns out to be a person.</p>
+<h3><ol>
+<li>A Room Prepared in Advance</li>
+</ol></h3>
+<p>The world sees us as human resources that supply labor, or as consumers who buy things. A factory-made item is discarded when it stops working, and we feel our own worth threatened when we stop producing results. But the creation Genesis describes is not factory production. It is the preparing of a room.</p>
+<p>Read Genesis 1 and the order stands out. Light comes first, and the eye later. Air comes first, and the lungs later. What is needed always arrives before the one who needs it. At the very end of the list comes the human being. It is the order in which a couple expecting a child pick out wallpaper, assemble the crib, and choose a name in advance, and only then does the child arrive. A factory finishes only the surfaces people will see. This world has crystals in caves no eye has ever reached, and even those are cut along an orderly grain. A world finished even where no one is looking: a factory trying to save on cost would never have bothered. The first human being began life as a guest, receiving before working and enjoying before repaying.</p>
+<figure class="verse"><blockquote>So God created man in his own image, in the image of God he created him; male and female he created them. And God blessed them. And God said to them, “Be fruitful and multiply and fill the earth and subdue it, and have dominion over the fish of the sea and over the birds of the heavens and over every living thing that moves on the earth.”</blockquote><figcaption>Genesis 1:27–28, ESV</figcaption></figure>
+<p class="q"><span class="q-label">Looking Closer 1</span>In verse 28, God gave people a blessing before he gave them any work. What is one thing you&rsquo;ve already received today, before doing anything at all? (a night&rsquo;s sleep, the morning light, someone&rsquo;s greeting, a warm meal, not sure yet, and so on)</p>
+<div class="lines"><textarea rows="4" data-k="ta2" aria-label="Your notes" placeholder="Write here (saved on this device)"></textarea></div>
+<h3><ol>
+<li>The Signature Sets the Value</li>
+</ol></h3>
+<p>We spend our lives straining to prove our worth. Salary, grades, achievements: the world&rsquo;s standards work like the price tag on a product. But value does not always come from the thing itself. Nearly every refrigerator has a child&rsquo;s drawing stuck to it somewhere. A crooked sun, a dog with five legs. In the corner, in letters still clumsy, the child&rsquo;s name. Put that paper on the market and no one would buy it, yet in that house it is not for sale at any price. The paper is not precious. What set its value was not the drawing&rsquo;s usefulness but the name in the corner: whose hand it came from.</p>
+<p>The psalmist sings that human beings have been crowned with glory and honor. The Hebrew word behind “glory” (<em>kavod</em>) has a surprising first meaning: heavy. For the Hebrews, glory was weight before it was shine. What is light blows away in the wind; what is heavy holds its place. The more precious a thing, the more likely we are to carry it in both hands. To say that God has glorified you is to say that God counts you weighty, that he lifts you with both hands.</p>
+<p>Ephesians goes one step further and calls us God&rsquo;s workmanship. The Greek word is <em>poiēma</em>, the root of our word “poem.” The value of a product is set by its price tag. The value of a work of art is set by its signature.</p>
+<figure class="verse"><blockquote>what is man that you are mindful of him, and the son of man that you care for him? Yet you have made him a little lower than the heavenly beings and crowned him with glory and honor.</blockquote><figcaption>Psalm 8:4–5, ESV</figcaption></figure>
+<figure class="verse"><blockquote>For we are his workmanship, created in Christ Jesus for good works, which God prepared beforehand, that we should walk in them.</blockquote><figcaption>Ephesians 2:10, ESV</figcaption></figure>
+<p class="q center"><span class="q-label">Central Question</span>The world&rsquo;s scale always weighs us light. What is the scale that makes you feel lightest these days? (grades, performance, other people&rsquo;s opinions, comparison, age, nothing in particular, and so on)</p>
+<div class="lines"><textarea rows="6" data-k="ta3" aria-label="Your notes" placeholder="Write here (saved on this device)"></textarea></div>
+<h3><ol>
+<li>The Joy of the One Who Made Us</li>
+</ol></h3>
+<p>What, then, is the purpose of people made this precious? God did not call us the way an employer recruits for hard labor. A parent&rsquo;s greatest joy is not what a child does for them. It is watching a child grow up healthy and trusting, and enjoy life to the full.</p>
+<p>Deep in the Bible, at the very end of Zephaniah, a small prophetic book of three chapters, stands a startling sentence. The one who made the universe with a word is so full of joy over his people that he breaks into song. That song is open to us too, today. One phrase between the joy and the singing has a different texture: <em>he will quiet you by his love</em>. The Hebrew verb carries the sense of hush, of silence. Picture the long, soft quiet of a parent leaning over a sleeping baby. That is the look on God&rsquo;s face as he regards you.</p>
+<p>That is why Paul says that even the most ordinary acts, eating and drinking, are to be done for the glory of God. Glory here is not performance. It resembles the joy of a parent watching a child live out the day without a care. Parents do not feel they have won the world when their child achieves something big. They feel it when the child eats well and laughs.</p>
+<figure class="verse"><blockquote>The LORD your God is in your midst, a mighty one who will save; he will rejoice over you with gladness; he will quiet you by his love; he will exult over you with loud singing.</blockquote><figcaption>Zephaniah 3:17, ESV</figcaption></figure>
+<figure class="verse"><blockquote>So, whether you eat or drink, or whatever you do, do all to the glory of God.</blockquote><figcaption>1 Corinthians 10:31, ESV</figcaption></figure>
+<p class="q"><span class="q-label">Looking Closer 2</span>Underline the phrases in Zephaniah 3:17 that show what God feels toward us. Which one speaks loudest to you? (rejoice over you with gladness, quiet you by his love, exult over you with loud singing, and so on)</p>
+<div class="lines"><textarea rows="4" data-k="ta4" aria-label="Your notes" placeholder="Write here (saved on this device)"></textarea></div>
+<p class="q"><span class="q-label">Question to Linger On</span>How does “God counts me weighty” sound to you right now? (warm, strange, doubtful, something you&rsquo;d like to believe, and so on)</p>
+<div class="lines"><textarea rows="3" data-k="ta5" aria-label="Your notes" placeholder="Write here (saved on this device)"></textarea></div>
+<h2 class="sec seat">Our Story</h2>
+<p>Today we saw two tables: the table of the silver candlesticks that asked for no proof, and its original, the table of creation. This world is not a factory trimming its costs. It is a room that someone decorated lavishly while waiting for you. God counts you weighty, and he calls you with his song.</p>
+<h4>A Verse to Carry</h4>
+<p>Take God&rsquo;s song over you to heart.</p>
+<figure class="verse"><blockquote>…he will rejoice over you with gladness; he will quiet you by his love; he will exult over you with loud singing.</blockquote><figcaption>Zephaniah 3:17, ESV</figcaption></figure>
+<h4>Practice: Five Minutes of Stillness</h4>
+<p>God has poured out sunsets, wind, and the scent of flowers for you, without counting. In the days after you close this story, don&rsquo;t walk past that love. Take it in.</p>
+<ul class="dash"><li>Try it: Set aside just five minutes in a busy day. Put the screen down and look at the world God made for you. (look at the sky, smell the season, feel the warmth of a cup of tea)</li><li>A word: Where you stop, say “Thank you” in your heart. Who is that thanks for? Take your time with it.</li></ul>
+<p class="q"><span class="q-label">Question to Carry</span>If the world has been decorated this lavishly, why does living in it hurt so often? Don&rsquo;t answer today. Hold this question until you open the next story. If a moment comes to mind in between, remember it. The next story begins there.</p>
+<p class="further"><strong>Read Further</strong> — <em>The Gospel Story in Les Misérables</em>, Story One: the bishop who traded his house for a hospital, and the garden of useless flowers.</p>
+<header class="opener" id="story-two"><div class="eyebrow">Story Two <span>· Fall</span></div><h1>People Who Became Numbers</h1></header>
+<h2 class="sec seat">The Word of God</h2>
+<figure class="verse"><blockquote>for my people have committed two evils: they have forsaken me, the fountain of living waters, and hewed out cisterns for themselves, broken cisterns that can hold no water.</blockquote><figcaption>Jeremiah 2:13, ESV</figcaption></figure>
+<h2 class="sec seat">My Story</h2>
+<p class="q"><span class="q-label">A Word in Between</span>Since the last story, did you try the practice (Five Minutes of Stillness)? Or did the question you carried out (why does it hurt so often?) come to mind in some moment? Write it down in a single word.</p>
+<div class="lines"><textarea rows="2" data-k="ta6" aria-label="Your notes" placeholder="Write here (saved on this device)"></textarea></div>
+<p>Sunday night, eleven o&rsquo;clock. The week is nearly over, and plenty of people are lying awake with their phones. The screen holds next week&rsquo;s schedule in a neat column, and a thumb drifts, without deciding to, to everyone else&rsquo;s news. Someone won an award. Someone changed jobs. Someone posted vacation photos. Scrolling through them, something in the corner of the heart goes quietly heavy. Where am I, exactly? Is this pace okay?</p>
+<p>We carry a lot of numbers. A student ID and an employee number, a class rank and a GPA, a pay grade and a title. The numbers are convenient. They let other people place us at a glance. But convenience has a price. Hear yourself called by a number often enough and you start to think of yourself as one. When the number is good, the shoulders go back. When it&rsquo;s bad, standing in front of people feels unbearable. The number sets the mood, and the mood sets the day. By then the name has stepped back.</p>
+<p>In the last story we heard that God counts you weighty. So how did a being made that weighty come to think of itself as so light? The question we carried out of the last story comes back here: in a world decorated this lavishly, why does living in it hurt so often? Today the first piece of the answer arrives.</p>
+<p class="q"><span class="q-label">Opening Question</span>Think of a time you finally got what you had dreamed of and felt strangely empty. What was the scene? (the hollowness after getting into school or landing a job, snipping the tag off something new, the day after a promotion, nothing in particular comes to mind, and so on)</p>
+<div class="lines"><textarea rows="4" data-k="ta7" aria-label="Your notes" placeholder="Write here (saved on this device)"></textarea></div>
+<h2 class="sec seat">One Man's Story</h2>
+<p>The house from the last story, the one with the door that never locked: one night, someone came through it.</p>
+<p>On an evening in October 1815, a drifter with a knapsack walked into Digne. He had just come out of prison after nineteen years. At twenty-five, in the dead of winter, he had stolen a loaf of bread for his sister&rsquo;s starving children. The sentence was five years. But each time he tried to climb the wall, locked away and sick with worry for the children outside, the term grew longer, until it came to nineteen. Prison took his name and gave him a number: 24601. At first he ground his teeth at the injustice. Then he hated the world. In the end he simply became the number.</p>
+<p>Now he is free. Strangely, though, there is nowhere to go. The innkeepers took one look at the yellow passport issued to ex-convicts and announced that rooms empty a moment ago were suddenly full. People saw the paper, not the man holding it. When he tried to lay his tired body down in a doghouse, the dog barked furiously and drove him out. <em>Even a dog has a home, and I don&rsquo;t have so much as a doghouse.</em> That night he learned that nowhere in the world was there a place for him.</p>
+<p>Then, thinking this was the last try, he knocked on the door a passing woman had pointed out, the door that never locked. It opened, and before he could say a word, an old voice inside spoke first. <em>Come in.</em></p>
+<p>That night the bishop told him, “This is not my house. It is the house of Jesus Christ. This door does not ask the one who enters whether he has a name, but whether he has a sorrow.”</p>
+<p>What happened in that house that night, we will meet in the third story. Today, before that, there is something to ask. How does a person become a number? And why do we, outside any prison, make ourselves into numbers?</p>
+<h2 class="sec seat">His Story</h2>
+<aside class="box glossary"><div class="box-label">Words You May Not Know</div><ul><li><strong>Sin</strong> — Breaking God&rsquo;s law. At its root is a life aimed wrongly, turned away from God, the spring of life.</li><li><strong>The fall</strong> — The collapse of people and the world together, both made good at the start.</li><li><strong>Wages / gift</strong> — Wages are pay for work done. A gift is received free (Rom 6:23).</li><li><strong>Death (spiritual death)</strong> — Not the stopping of breath, but being cut off from the source of life. This is what the Bible calls death.</li></ul></aside>
+<h3><ol>
+<li>Thirsty Far from the Spring</li>
+</ol></h3>
+<p>The world defines sin as crimes like murder or theft. The Bible too calls sin a breaking of God&rsquo;s law. But its root lies much deeper. The prophet Jeremiah gave it in two pictures: forsaking the fountain of living water, and digging cisterns of their own, and broken ones at that, cisterns that cannot hold water.</p>
+<p>The biblical words behind “sin” (Hebrew <em>chata</em>, Greek <em>hamartia</em>) hold a surprising picture: an arrow that missed its target. Before sin is a list of bad deeds, it names an aim gone wrong. Fire a rocket at the moon with the angle off by a single degree, and it sails past thousands of miles from its target. Our trouble is not a few wrong actions. It is that the aim itself is bent.</p>
+<p>Someone who has left the spring is thirsty, and a thirsty person will dig any hole. One writer said we live by believing three lies. I am what I have. I am what I do. I am what others say about me. Bank account, achievements, reputation: these are the names of the cisterns we dig. A good grade moistens the throat for a moment, then dries out again before the next exam. Approval is followed quickly by hunger for more approval. The water leaks.</p>
+<p>This leaving had a beginning. The first book of the Bible records the day the first humans left the spring (Genesis 3). Everything had been given to them as a gift. Yet at a single word, that eating would make them like God, they chose to become their own master instead of trusting the Giver. And the choice did not end with one person.</p>
+<figure class="verse"><blockquote>for my people have committed two evils: they have forsaken me, the fountain of living waters, and hewed out cisterns for themselves, broken cisterns that can hold no water.</blockquote><figcaption>Jeremiah 2:13, ESV</figcaption></figure>
+<figure class="verse"><blockquote>Therefore, just as sin came into the world through one man, and death through sin, and so death spread to all men because all sinned—</blockquote><figcaption>Romans 5:12, ESV</figcaption></figure>
+<p class="q"><span class="q-label">Looking Closer 1</span>Of the three lies in the text (I am what I have; I am what I do; I am what others say about me), which sentence has held onto you the longest? (the first, the second, the third, all three, not sure)</p>
+<div class="lines"><textarea rows="4" data-k="ta8" aria-label="Your notes" placeholder="Write here (saved on this device)"></textarea></div>
+<h3><ol>
+<li>You Are the Man</li>
+</ol></h3>
+<p>If this diagnosis sounds like it is about someone else, you may be sitting exactly where a king sat three thousand years ago.</p>
+<p>David, king of Israel, collapsed at the height of his life. He took the wife of one of his officers, and to cover it up he sent her husband to the most dangerous place on the battlefield to die. He was king, so he could. No one could accuse a king. Then the prophet Nathan came to him with a story. A rich man with flocks and herds beyond counting took a poor neighbor&rsquo;s one little ewe lamb, which the neighbor had raised and held in his arms like a child, and served it to a guest. David burned with anger. The man who did this deserves to die. In that moment Nathan raised his hand toward the king. “You are the man!” (2 Sam 12:7, ESV).</p>
+<p>The Russian writer Solzhenitsyn, who spent eight years in the camps, wrote later that the line between good and evil runs not between countries but straight through the middle of every human heart. David had drawn his line outside himself: the bad people over there, and the judge, me, over here. Nathan moved that line to the center of the king&rsquo;s own heart. Eyes that had seen so clearly into other people&rsquo;s sin saw their own face for the first time when the mirror was turned around. And David&rsquo;s first words were not an excuse. “I have sinned against the LORD” (2 Sam 12:13, ESV). Before sin wounds a person, it is first a turning of the back on God. So before a holy God, sin cannot be brushed aside.</p>
+<figure class="verse"><blockquote>All we like sheep have gone astray; we have turned—every one—to his own way; and the LORD has laid on him the iniquity of us all.</blockquote><figcaption>Isaiah 53:6, ESV</figcaption></figure>
+<figure class="verse"><blockquote>for all have sinned and fall short of the glory of God,</blockquote><figcaption>Romans 3:23, ESV</figcaption></figure>
+<p class="q"><span class="q-label">Looking Closer 2</span>How does the phrase “All we like sheep” (Isaiah 53:6) land with you? (resentment, relief, being stung, recognition, not sure, and so on)</p>
+<div class="lines"><textarea rows="4" data-k="ta9" aria-label="Your notes" placeholder="Write here (saved on this device)"></textarea></div>
+<h3><ol>
+<li>A Door That Does Not Open from the Inside</li>
+</ol></h3>
+<p>Then can&rsquo;t we just pull ourselves together and try harder? Here we have to be honest.</p>
+<p>The first place the word “sin” appears in the Bible is Genesis 4. God told Cain that sin was crouching at the door, and that he was to rule over it (Gen 4:7). Yet in the very next scene Cain kills his brother. The command was right. The power to obey it was not in him.</p>
+<p>A cut flower in a vase looks lovely for a while, but the moment it was cut from the root, it was already dead. Wilting is only a matter of time. This is what the Bible means by death: being cut off from the source of life. And one more picture. A glass of clean water with just one percent poison in it cannot be drunk. That ninety-nine percent is clean is no comfort. This is why the relief of being less broken than others cannot save us.</p>
+<p>To be more honest still, we cannot decide even the most basic matters of life for ourselves. Could you make yourself an inch taller tonight? Could you stop your heart for a moment and start it again? Being alive is not our own achievement. Life was received from the beginning. Then can someone cut off from the spring that gave that life reconnect the broken place by his own strength? The Bible&rsquo;s diagnosis gets heavier here: a person who has left God is not sick but spiritually dead. The dead do not make themselves alive.</p>
+<p>It is a prison we built ourselves, so our own strength is already part of its walls. If the door will not open from the inside, it has to be opened from the outside. We have just seen, in a novel, a night when one unlocked door opened before a man with every other door in the world shut. And there is a real door that night points to. Jesus said, “I am the door” (John 10:9, ESV).</p>
+<figure class="verse"><blockquote>But God, being rich in mercy, because of the great love with which he loved us, even when we were dead in our trespasses, made us alive together with Christ—by grace you have been saved—</blockquote><figcaption>Ephesians 2:4–5, ESV</figcaption></figure>
+<figure class="verse"><blockquote>For the wages of sin is death, but the free gift of God is eternal life in Christ Jesus our Lord.</blockquote><figcaption>Romans 6:23, ESV</figcaption></figure>
+<p class="q center"><span class="q-label">Central Question</span>Where is the area in your life where, however hard you try, you end up back where you started and think, “I can&rsquo;t do this on my own”? (work, relationships, health, habits of the mind, worry about the future, and so on)</p>
+<div class="lines"><textarea rows="6" data-k="ta10" aria-label="Your notes" placeholder="Write here (saved on this device)"></textarea></div>
+<p class="q"><span class="q-label">Question to Linger On</span>Of the people in today&rsquo;s story, who seems most like you? (the drifter called by a number, David judging others, the person digging cisterns, not sure, and so on)</p>
+<div class="lines"><textarea rows="3" data-k="ta11" aria-label="Your notes" placeholder="Write here (saved on this device)"></textarea></div>
+<h2 class="sec seat">Our Story</h2>
+<p>Today we read a painful diagnosis together. We became numbers because we left the spring and dug cisterns of our own, long before any bad deed. And this door does not open from the inside. But the diagnosis is not meant to leave us in despair. Only someone who admits they cannot fix it by their own strength will hear a voice calling from outside.</p>
+<p>The first piece of the question we carried out of the first story arrived today. In a world decorated this lavishly, why does living in it hurt so often? First, your pain is not the price of your own failure. Pain reaches the innocent too. But the Bible does say where it came in. The world was not built wrong. It began where the first humans left the spring. Once the whole world had lost its spring, pain stopped choosing and reached everyone. The next piece comes in the next story, on the morning that door opens.</p>
+<h4>A Verse to Carry</h4>
+<p>Take to heart the words that honestly confess where we stand.</p>
+<figure class="verse"><blockquote>All we like sheep have gone astray; we have turned—every one—to his own way; and the LORD has laid on him the iniquity of us all.</blockquote><figcaption>Isaiah 53:6, ESV</figcaption></figure>
+<h4>Practice: Stop and Listen</h4>
+<ul class="dash"><li>Bring one to mind: Think of one thing lately that you&rsquo;ve worn yourself out trying to handle by your own strength. (work, relationships, health, children, habits of the mind, anything at all)</li><li>Stop: Before trying harder at it, pause and say quietly inside, “I can&rsquo;t do this on my own.”</li><li>Write it down: After saying it, write one line about what is left in your heart.</li></ul>
+<p class="q"><span class="q-label">Question to Carry</span>You have admitted, at a door that won&rsquo;t open from the inside, “I can&rsquo;t do this on my own.” Stay there. Don&rsquo;t answer today. Until you open the next story, simply watch what is left in your heart each time you say it. The next story begins there.</p>
+<p class="further"><strong>Read Further</strong> — <em>The Gospel Story in Les Misérables</em>, Story Two: the day it took Valjean to reach that door, and David before Nathan.</p>
+<header class="opener" id="story-three"><div class="eyebrow">Story Three <span>· Redemption</span></div><h1>The Silver Candlesticks</h1></header>
+<h2 class="sec seat">The Word of God</h2>
+<figure class="verse"><blockquote>But he was pierced for our transgressions; he was crushed for our iniquities; upon him was the chastisement that brought us peace, and with his wounds we are healed.</blockquote><figcaption>Isaiah 53:5, ESV</figcaption></figure>
+<h2 class="sec seat">My Story</h2>
+<p class="q"><span class="q-label">A Word in Between</span>Since the last story, did anything stay with you from the practice or the question you carried out (“I can&rsquo;t do this on my own,” and so on)? Write it down in a single word.</p>
+<div class="lines"><textarea rows="2" data-k="ta12" aria-label="Your notes" placeholder="Write here (saved on this device)"></textarea></div>
+<p>Anyone who has applied for a first apartment or a first loan knows the blank. Everything else on the form is filled in, and one line is empty: co-signer. It asks for the name of someone who will take the responsibility if you cannot. On that paper you are a person who has not yet proved anything. Then someone writes in their own name. A parent, perhaps, or a friend who got settled earlier, or an older person who has watched you for years. The meaning of that signature is one thing. If this person does not pay, I will.</p>
+<p>So a co-signature is not a light thing. To put your name beside someone else&rsquo;s debt is to promise that if they fall, you will fall in their place. People do not sign that for just anyone. They sign it for someone they truly love.</p>
+<p>In the last story we stood before a door that does not open from the inside. A prison we built ourselves, a debt we cannot pay ourselves. One question is left. Is there anyone who will write a name beside this debt? And can that person actually pay it?</p>
+<p class="q"><span class="q-label">Opening Question</span>When you need someone&rsquo;s help, what are you usually like? (quick to ask, determined to do it alone to the end, hesitant because you hate to impose, it depends, and so on)</p>
+<div class="lines"><textarea rows="4" data-k="ta13" aria-label="Your notes" placeholder="Write here (saved on this device)"></textarea></div>
+<h2 class="sec seat">One Man's Story</h2>
+<p>Remember the night we left him at the end of the last story. Behind that door, for the first time in his life, he was treated like a human being: a table set with silver spoons, the word <em>brother</em>, a bed with sheets. And that welcome hurt him.</p>
+<p>What happens when a hand frozen for a long time is suddenly held close to a fire? It does not feel warm. It hurts. While the hand is frozen it feels nothing, and only when warmth touches it does the pain arrive. For a heart that had been frozen for nineteen years, warmth was pain. He did not know how to take it. For a man who has forgotten how to receive, a gift is a threat. That night he stole the silver, climbed the wall, and ran.</p>
+<p>The next morning, gendarmes caught him. The silver spilled out of his knapsack, and, gripped by the collar, he was dragged back to that same door. A gendarme knocked. One word from the bishop and the rest of his life was prison. And it would not even be a lie. <em>This man stole.</em> It was true, and that one sentence would end it.</p>
+<p>The door opened.</p>
+<h2 class="sec seat">His Story</h2>
+<aside class="box glossary"><div class="box-label">Words You May Not Know</div><ul><li><strong>Grace</strong> — God&rsquo;s love and gifts, given freely to people who have not earned them.</li><li><strong>Faith</strong> — Not the size of my certainty, but reaching out empty hands to someone worth trusting.</li><li><strong>Covenant</strong> — A promise God makes with people. A promise in which God takes hold first.</li><li><strong>Redemption</strong> — Buying something back by paying the price. The same picture as paying to get back something you left in pawn.</li><li><strong>Righteousness</strong> — The standing of being counted “right” before God. Not something I build up, but a robe Christ puts on me.</li><li><strong>Condemnation</strong> — A guilty verdict. “No condemnation” means the verdict has already come back not guilty.</li><li><strong>Repentance</strong> — More than regret for a wrong. It is turning from the road you were on and facing God.</li><li><strong>Receive</strong> — To welcome (John 1:12). To trust Jesus and take him in as the Lord of my life.</li><li><strong>Holy Spirit</strong> — One of the three persons of God. He opens hearts to believe the gospel, gives new life, and stays with us.</li></ul></aside>
+<h3><ol>
+<li>Who Paid the Price</li>
+</ol></h3>
+<p>The moment the bishop saw the captive, he spoke. “Ah, there you are! I am delighted to see you. But why did you leave the candlesticks? I gave you those along with the silver. They are silver too, and worth two hundred francs by themselves. Why did you take only the plates?” The gendarmes, bewildered, let go of his collar. The bishop took the two silver candlesticks down from the mantel, pressed them into his hands, and only then sent the gendarmes away. Then he said, in a grave voice, “Jean Valjean, my brother, you no longer belong to evil but to good. I have bought your soul.”</p>
+<p>It was the first time in nineteen years that his name was spoken not with contempt but with the word <em>brother</em>. A thief, at the door of the house he had robbed.</p>
+<p>Here there is something to ask honestly. The thief was released without paying. So did the price disappear? No. The bishop paid for the silver. From his own property, at his own loss. The co-signer on that loan form does the same. The debt does not vanish. The owner of the debt changes. To the one who received, it was free. To the one who gave, it cost everything. Of course, the illustration goes only so far. The bishop took a loss but did not take a punishment in the man&rsquo;s place, and what he said before the gendarmes was not true. That morning is a shadow pointing to the original.</p>
+<p>What happened on the cross is the original. If a judge freed a guilty person at no cost, we would not call it mercy. We would call it injustice. God did not look the other way at our sin. Love that feels nothing in the face of evil that wrecks what it loves is not love. What the Bible calls the wrath of God is that holy opposition. God did not make that wrath disappear. He sent his Son. The Son wrote his own name beside our debt and paid it with his own life. Isaiah painted this scene as two words changing places: <em>him</em> and <em>us</em>. The piercing and the crushing, the chastisement and the wounds went to him. The peace and the healing came to us.</p>
+<p>The one who could sign that line had to have three qualifications. Because it was a human debt, he had to be human. Because it was a debt owed to God, he had to be God. And he had to have no debt of his own to pay. Jesus is fully God and fully human, and he knew no sin. That is why the Bible calls him “the guarantor of a better covenant” (Heb 7:22, ESV).</p>
+<figure class="verse"><blockquote>But he was pierced for our transgressions; he was crushed for our iniquities; upon him was the chastisement that brought us peace, and with his wounds we are healed. All we like sheep have gone astray; we have turned—every one—to his own way; and the LORD has laid on him the iniquity of us all.</blockquote><figcaption>Isaiah 53:5–6, ESV</figcaption></figure>
+<figure class="verse"><blockquote>For our sake he made him to be sin who knew no sin, so that in him we might become the righteousness of God.</blockquote><figcaption>2 Corinthians 5:21, ESV</figcaption></figure>
+<figure class="verse"><blockquote>Since, therefore, we have now been justified by his blood, much more shall we be saved by him from the wrath of God.</blockquote><figcaption>Romans 5:9, ESV</figcaption></figure>
+<p>There is one more strange thing in what Myriel did. He did not only cover the theft. He added the candlesticks. He did not stop at undoing what was stolen. He put into the man&rsquo;s hands what he had not stolen. If getting back what you lost is restoration, receiving more than you lost is grace. God did not only take our sin away either. In the empty place he clothed us in his righteousness. He did not make us people whose debt was merely erased. He made us heirs of the Son.</p>
+<figure class="verse"><blockquote>…where sin increased, grace abounded all the more,</blockquote><figcaption>Romans 5:20, ESV</figcaption></figure>
+<p class="q"><span class="q-label">Looking Closer 1</span>Read Isaiah 53:5–6 aloud. Of what went to <em>him</em> and what came to <em>us</em>, which one word speaks loudest to you? (pierced, crushed, chastisement, wounds / peace, healing, and so on)</p>
+<div class="lines"><textarea rows="4" data-k="ta14" aria-label="Your notes" placeholder="Write here (saved on this device)"></textarea></div>
+<h3><ol>
+<li>Open Hands</li>
+</ol></h3>
+<p>If the price has been paid in full, one question is left. How does that price become mine?</p>
+<p>The world teaches that you get what you work for. So without noticing, we assume that even salvation has to be earned by a good character or religious effort. Here two words part ways: a paycheck and a gift. A paycheck is pay for work done, so on payday we do not bow our heads. A gift is something I did not make myself worthy of. The giver&rsquo;s heart did that, so before a gift the head bows. And that is exactly why it is hard. As warmth hurts a frozen hand, a gift we cannot repay hurts our pride. This is why Valjean ran. He had forgotten how to receive. Perhaps something of that same feeling is mixed into our own hesitation before the gospel.</p>
+<p class="q center"><span class="q-label">Central Question</span>When you receive a gift you cannot repay, what rises in you first? (gratitude, guilt, a sense of burden, a wish to repay somehow, puzzlement, and so on)</p>
+<div class="lines"><textarea rows="6" data-k="ta15" aria-label="Your notes" placeholder="Write here (saved on this device)"></textarea></div>
+<figure class="verse"><blockquote>For by grace you have been saved through faith. And this is not your own doing; it is the gift of God, not a result of works, so that no one may boast.</blockquote><figcaption>Ephesians 2:8–9, ESV</figcaption></figure>
+<p>Here many people stumble once more. The moment they hear the word <em>faith</em>, they take it as one more assignment. My faith is so weak, it wavers so often. Will it be enough?</p>
+<p>Imagine a bridge over a deep canyon. One person strides across. Another crawls across with trembling knees. Who is safer? If the bridge is steel, both are equally safe. If the bridge is rotten wood, even the boldest person falls. What carries us across is not the trembling of the knees but the strength of what the feet rest on. Faith is not merit. It is open hands. Hands held out to receive a gift do not earn the gift&rsquo;s price. But open hands also mean something else: letting go of what we were gripping. The shovel we used to dig cisterns, the things we clutched to prove ourselves, and the very direction of life that said we could live without God. The Bible calls this turning repentance, and it comes with faith. Repentance does not pay for forgiveness. It is turning around toward a Father who is already running to meet you.</p>
+<figure class="verse"><blockquote>But to all who did receive him, who believed in his name, he gave the right to become children of God,</blockquote><figcaption>John 1:12, ESV</figcaption></figure>
+<p>Even these open hands are not something we squeeze out ourselves. Jesus said that a person must be born again by the Spirit, and he compared that work to the wind. As we saw in the last story, this door does not open from the inside. It opens first from the other side. If something in you stirs in front of this story today, it may be the sound of that wind.</p>
+<figure class="verse"><blockquote>The wind blows where it wishes, and you hear its sound, but you do not know where it comes from or where it goes. So it is with everyone who is born of the Spirit.</blockquote><figcaption>John 3:8, ESV</figcaption></figure>
+<p>So the last thing to ask is not the temperature of my faith but how strong that bridge is. The last words of Jesus on the cross are the answer. <em>It is finished.</em> The Greek word behind this, <em>tetelestai</em>, is said to have been written on receipts in that era to mark a debt as paid in full. And three days later, at dawn, the tomb was empty. When Paul lists those who met the risen Jesus, he says that once more than five hundred saw him at the same time, and that most of them were still alive (see 1 Cor 15:5–6). It was a list of witnesses you could go and ask. This is also why disciples who had scattered from the tomb were, a few weeks later, people who staked their lives on telling this news. A dead man&rsquo;s promise is buried with him. This promise belongs to a living one. The risen hands still carry the nail marks. The guarantor&rsquo;s signature has not been erased.</p>
+<figure class="verse"><blockquote>When Jesus had received the sour wine, he said, “It is finished,” and he bowed his head and gave up his spirit.</blockquote><figcaption>John 19:30, ESV</figcaption></figure>
+<figure class="verse"><blockquote>There is therefore now no condemnation for those who are in Christ Jesus.</blockquote><figcaption>Romans 8:1, ESV</figcaption></figure>
+<p class="q"><span class="q-label">Looking Closer 2</span>Of the words Ephesians 2:8–9 uses to explain salvation (grace, faith, gift), which is hardest for you to hear right now?</p>
+<div class="lines"><textarea rows="4" data-k="ta16" aria-label="Your notes" placeholder="Write here (saved on this device)"></textarea></div>
+<p class="q"><span class="q-label">Question to Linger On</span>“For a man who has forgotten how to receive, a gift is a threat.” How does that sound to you? (like my story, not sure, I don&rsquo;t relate, it stings, and so on)</p>
+<div class="lines"><textarea rows="3" data-k="ta17" aria-label="Your notes" placeholder="Write here (saved on this device)"></textarea></div>
+<h2 class="sec seat">A Prayer in Answer to the Invitation</h2>
+<p>The price has already been paid. The gift belongs to the one who holds out open hands. Like the man handed the candlesticks, someone reading this may be standing before a gift today. And the voice calling now is not a human one. In the second story we were thirsty people beside cisterns we had dug ourselves. To that thirst, Jesus himself cries out.</p>
+<figure class="verse"><blockquote>If anyone thirsts, let him come to me and drink.</blockquote><figcaption>John 7:37, ESV</figcaption></figure>
+<p>The only qualification Jesus asks for is thirst. Your knees may tremble, and the bridge is still steel. Aching hands mean warmth has reached them. If your heart is ready, follow the prayer below with your eyes and say it quietly inside. If you have believed for a long time, you may pray it again as the confession of the day you first believed.</p>
+<blockquote class="prayer">God,<br>I have come here thirsty.<br>I have lived away from you, digging my own cisterns with my own strength.<br>I confess that this was sin against you.<br>Please forgive me.<br>I believe that Jesus died on the cross in my place<br>and paid the full price of my sin.<br>I believe that he rose again on the third day.<br>I receive this gift with empty hands.<br>Now I turn around and welcome Jesus as the Lord of my life.<br>I am not my own now. I am yours.<br>In Jesus&rsquo; name I pray. Amen.</blockquote>
+<h4>If You Have Prayed This Prayer</h4>
+<ul class="dash"><li>What you hold on to is not the size of your prayer, but Christ, who received it, and his promise. In Christ you are a person whose price has been paid. Read John 1:12 slowly once more.</li></ul>
+<figure class="verse"><blockquote>But to all who did receive him, who believed in his name, he gave the right to become children of God,</blockquote><figcaption>John 1:12, ESV</figcaption></figure>
+<figure class="verse"><blockquote>All that the Father gives me will come to me, and whoever comes to me I will never cast out.</blockquote><figcaption>John 6:37, ESV</figcaption></figure>
+<ul class="dash"><li>The church confirms this confession together in baptism and rejoices over it. If you&rsquo;d like, quietly tell your group leader or a pastor of the church. It is a great gift to have someone near who will rejoice with you over a first confession.</li><li>This door will not be locked tomorrow, or the day after.</li></ul>
+<h2 class="sec seat">Our Story</h2>
+<p>Today we saw the morning at the doorway: a morning when a man who deserved a sentence was handed a gift instead. If the bishop&rsquo;s silver bought the rest of one man&rsquo;s life, the blood of Christ bought our eternity. The question we carried unanswered out of the first story, in a world decorated this lavishly, why does living in it hurt so often, received its second piece today. The root of the pain, our sin, has had its price paid. And he carried even our griefs and sorrows in his own body (see Isa 53:4). The last piece comes in the next story. It is time to see what a person whose price has been paid grows into next.</p>
+<h4>A Verse to Carry</h4>
+<figure class="verse"><blockquote>There is therefore now no condemnation for those who are in Christ Jesus.</blockquote><figcaption>Romans 8:1, ESV</figcaption></figure>
+<h4>Practice: Wiping Off the Dust</h4>
+<p>Even people who have received grace still make mistakes and stumble. Jesus said that the one who has already bathed needs only to have his feet washed, and is completely clean (see John 13:10). Dirt on the feet does not cancel the bath.</p>
+<ul class="dash"><li>Clean: In the days after you close this story, find the time to tidy your room or desk once. Focus on the physical act of wiping the dust away.</li><li>Reflect: As you clean, think about this: dust piling up in a room does not make it any less your house.</li><li>Write: When you finish, write one line about a bit of dust on your heart lately. If you prayed “A Prayer in Answer to the Invitation,” add this: “Even so, I am the Lord&rsquo;s child.”</li></ul>
+<p class="q"><span class="q-label">Question to Carry</span>If it is true that the price has been paid in full, what would change in my life? Don&rsquo;t answer today. Carry this question until you open the next story, and notice how your heart feels whenever the thought arises. The next story begins with that feeling.</p>
+<p class="further"><strong>Read Further</strong> — <em>The Gospel Story in Les Misérables</em>, Story Three: the father who ran to meet the prodigal, and the servant forgiven millions who would not forgive a hundred.</p>
+<header class="opener" id="story-four"><div class="eyebrow">Story Four <span>· New Life</span></div><h1>The Name Restored</h1></header>
+<h2 class="sec seat">The Word of God</h2>
+<figure class="verse"><blockquote>I know that you have but little power, and yet you have kept my word and have not denied my name.</blockquote><figcaption>Revelation 3:8, ESV</figcaption></figure>
+<h2 class="sec seat">My Story</h2>
+<p>Do you remember the first day of unpacking in a new place? A new school, a new job, a marriage, or a move to another country altogether: on that day your body arrived. Your heart did not. Years went by and you still dreamed in the old streets, and on a truly sad day you had no one in the new place you could call. If you have lived that way, you know. Arriving and settling are different things. Arriving ends in a day. No one can say when settling ends.</p>
+<p>In the third story we stood before a gift whose price had been paid. For the person who received it, that declaration may have felt like being handed the key to a new home. And we went away carrying a question. If that is true, what changes in my life? Yet the morning after receiving a gift, we mostly wake up as the same person. The same hurry, the same comparing, the same phone at two in the morning. I was handed the key to the new house. Why am I still living by the habits of the old one?</p>
+<p>Even if you have not yet taken that declaration as your own, the question will not be strange to you. Everyone has had the morning after a firm resolution, meeting the same old self as yesterday. So the question of the last story is this. How does someone who has arrived settle?</p>
+<p class="q"><span class="q-label">Opening Question</span>When you think, “what will change?”, what is your heart doing right now? (burden, tiredness, anticipation, numbness, not sure, and so on)</p>
+<div class="lines"><textarea rows="4" data-k="ta18" aria-label="Your notes" placeholder="Write here (saved on this device)"></textarea></div>
+<h2 class="sec seat">One Man's Story</h2>
+<p>We should finish the story of the man who left Digne with the silver candlesticks in his arms.</p>
+<p>That evening, in an open field, a boy passing by dropped a silver coin, and the man set his foot on it and would not give it back. A man with a two-hundred-franc pair of candlesticks held to his chest, a foot planted on one coin, a chimney sweep&rsquo;s earnings for days. Only after the boy ran off crying did he understand what he had done. He wandered the field calling for the boy and then collapsed, weeping. It was the first time in nineteen years that he had wept. Late that night he dropped to the ground in the open field and wept. What he had been given at the bishop&rsquo;s doorway became, that night, truly his.</p>
+<p>Eight years passed. Under a new name, Madeleine, he had settled in a northern town, built a factory that fed hundreds of families, and become mayor. The two silver candlesticks still stood on his mantel. It was a fine life. But it was a borrowed name. Under his feet there was always a place that would give way if someone called out the real one.</p>
+<p>Then one day word came. Jean Valjean had been caught. An old laborer named Champmathieu, mistaken for him, was to be sentenced in court the next day. All he had to do was keep quiet. Then the name Jean Valjean would belong to someone else forever, and he could live out his days as the respected Madeleine. And if he thought of the hundreds of households that depended on the factory, silence might even be the way that saves everyone. Silence always comes with a plausible reason. He paced his room all night. The two candlesticks on the mantel watched him.</p>
+<p>The next evening, in the courtroom at Arras, an old man wept without understanding why: “I am Champmathieu. It is true.” As that voice rang out, a man seated in the place of honor behind the judges stood up.</p>
+<h2 class="sec seat">His Story</h2>
+<aside class="box glossary"><div class="box-label">Words You May Not Know</div><ul><li><strong>New life (sanctification)</strong> — The lifelong process by which someone who has become a child of God grows to fit that name.</li><li><strong>Abide</strong> — To stay, to remain attached. A word less about effort than about where you are.</li><li><strong>Dwelling place</strong> — The place where God lives among his people (Rev 21:3).</li><li><strong>New heaven and new earth</strong> — The promise of the last day: God does not throw this world away but makes it new.</li></ul></aside>
+<h3><ol>
+<li>A Name That Is Never Canceled</li>
+</ol></h3>
+<p>“I am Jean Valjean.”</p>
+<p>For nineteen years the world took his name from him, and for eight years he hid it himself. Just now, in the most dangerous place in the world, he took it back with his own mouth. The freest man in that courtroom that day was the one who had just pronounced his own sentence.</p>
+<p>The strength to give up a splendid false name and speak a dangerous true one: where did it come from? Not from a strong will. He had already heard that name in another voice. When the world called him 24601, one voice had called him <em>brother</em>. The Bible has one more person who heard that voice.</p>
+<p>Simon, a fisherman from Galilee, received a new name from Jesus: Peter, meaning <em>rock</em>. To a man quick with words and quick to be afraid, the name of something unshakable was given. Worldly titles are issued after the results are settled up. This name came first, as a promise, to a man with no results.</p>
+<p>And then comes the night when that name seems furthest away. The night Jesus was arrested, Simon sat warming himself by a charcoal fire in the courtyard of the high priest&rsquo;s house. A servant girl at the gate asked first, and then the people standing around the fire. He denied it three times. <em>I do not know the man.</em> It was not in front of soldiers with swords. What broke him was not torture but the terror of being found out. A rooster crowed, and he went outside and wept bitterly. Here was the widest gap there could be between a name received and a life lived.</p>
+<p>The risen Lord waited for him on the shore of Galilee, with a charcoal fire already lit. The last time Simon had stood beside a charcoal fire was that courtyard, where he had thrown away his name three times. If comfort means a way around the place of shame, restoration is going back to that place together and laying a new memory over it. Jesus asked three times: <em>Do you love me?</em> For a man who had denied him three times in the courtyard, he was given three chances to confess his love. And with each answer, what came back was not a settling of accounts but a trust: <em>Feed my sheep.</em></p>
+<p>Boiled down to one sentence, what that morning confirmed is this. A status received is not canceled by failure, and the quality of life lived grows on top of that status. We grow because we are already children. Here is the first answer to the question from My Story: I was handed the key to the new house, so why am I still living by the habits of the old one? Even in the times when nothing seemed to change, the name was never canceled.</p>
+<p>Revelation 3:8, our verse for today, comes from a letter the risen Lord sent to a small church named Philadelphia. Right after the promise of an open door comes this praise: with little power, you have not denied my name. Think of Peter, who denied his teacher three times, and you can feel how weighty the line is. Not great power but little power, and still not leaving that name: this is what it means to live by the name you have been given. And the same letter closes with a promise to make the wavering into a pillar and write a new name on it.</p>
+<figure class="verse"><blockquote>I know your works. Behold, I have set before you an open door, which no one is able to shut. I know that you have but little power, and yet you have kept my word and have not denied my name.</blockquote><figcaption>Revelation 3:8, ESV</figcaption></figure>
+<figure class="verse"><blockquote>The one who conquers, I will make him a pillar in the temple of my God. Never shall he go out of it, and I will write on him the name of my God, and the name of the city of my God, the new Jerusalem, which comes down from my God out of heaven, and my own new name.</blockquote><figcaption>Revelation 3:12, ESV</figcaption></figure>
+<figure class="verse"><blockquote>He said to him the third time, “Simon, son of John, do you love me?” Peter was grieved because he said to him the third time, “Do you love me?” and he said to him, “Lord, you know everything; you know that I love you.” Jesus said to him, “Feed my sheep.”</blockquote><figcaption>John 21:17, ESV</figcaption></figure>
+<p class="q"><span class="q-label">Looking Closer 1</span>In verse 17, Jesus calls him not “Peter” but “Simon, son of John,” the name of the day they first met. How does that call sound to you? (tender, puzzling, painful, a fresh start, and so on)</p>
+<div class="lines"><textarea rows="4" data-k="ta19" aria-label="Your notes" placeholder="Write here (saved on this device)"></textarea></div>
+<p class="q center"><span class="q-label">Central Question</span>How does the sentence “A status received is not canceled by failure” sound to you right now? (comfort, puzzlement, hard to believe, like my story, not yet like my story, and so on)</p>
+<div class="lines"><textarea rows="6" data-k="ta20" aria-label="Your notes" placeholder="Write here (saved on this device)"></textarea></div>
+<h3><ol>
+<li>While We Sleep and Wake</li>
+</ol></h3>
+<p>Then where does the strength to grow on that status come from? They say muscles grow not while we exercise but while we rest and sleep. The body repairs the tiny tears exercise made in the fibers, and while we rest it fills them in a little thicker than before. The moment of effort and the moment of growth are not the same.</p>
+<p>The parable Jesus told about growth has exactly this odd corner. A farmer scatters seed. What does the farmer do next? He sleeps and wakes. While he sleeps and rises, night and day, the seed sprouts and grows, and he himself does not know how. What makes it grow is not the farmer&rsquo;s diligence but the life inside the seed. The parable is first about how the kingdom of God grows, but the same principle runs through the life of one person planted in that kingdom.</p>
+<figure class="verse"><blockquote>And he said, “The kingdom of God is as if a man should scatter seed on the ground. He sleeps and rises night and day, and the seed sprouts and grows; he knows not how. The earth produces by itself, first the blade, then the ear, then the full grain in the ear.</blockquote><figcaption>Mark 4:26–28, ESV</figcaption></figure>
+<p>So it is with a transplanted tree. For the first few weeks it looks, if anything, to be withering. All the roots&rsquo; strength goes into gripping the new soil, and none is left to send upward. The time that looked like arriving without settling is, for the tree, the time the roots take hold. Nothing seems to change above. Below, everything is changing.</p>
+<p>Through Ezekiel, God promised to take out the hardened heart and give a soft one, and to put his own Spirit within people (see Ezek 36:26–27). The Spirit who blew like the wind and opened the door in the last story now stays within us and changes the heart from the inside.</p>
+<figure class="verse"><blockquote>And I will give you a new heart, and a new spirit I will put within you. And I will remove the heart of stone from your flesh and give you a heart of flesh.</blockquote><figcaption>Ezekiel 36:26, ESV</figcaption></figure>
+<p>That is why Jesus spoke of growth not in the language of effort but in the language of abiding. A branch does not squeeze out its fruit. It stays on the vine, and fruit comes as the result of that union. Life grows even while we sleep and wake, when its roots find good soil: the Word and prayer, worship with baptism and the Lord&rsquo;s Supper, and a community.</p>
+<figure class="verse"><blockquote>I am the vine; you are the branches. Whoever abides in me and I in him, he it is that bears much fruit, for apart from me you can do nothing.</blockquote><figcaption>John 15:5, ESV</figcaption></figure>
+<p>This does not mean growth leaves us sitting as spectators. In a single sentence, Paul set side by side the call to work and the declaration that God is the one at work.</p>
+<figure class="verse"><blockquote>…work out your own salvation with fear and trembling, for it is God who works in you, both to will and to work for his good pleasure.</blockquote><figcaption>Philippians 2:12–13, ESV</figcaption></figure>
+<p>Hearing the angel&rsquo;s news, Mary answered, “Behold, I am the servant of the Lord; let it be to me according to your word” (Luke 1:38, ESV). She did not make the child by her own strength, but she gave her whole life over to the promise. Fighting sin is the same. We fight the battle, but the power to win belongs to the Spirit (see Rom 8:13). Obedience is not the price for buying grace. It is the gratitude of a person who has received it.</p>
+<p class="q"><span class="q-label">Looking Closer 2</span>Watching the farmer in verse 27, who simply sleeps and rises while the seed grows, what do you feel? (envy, anxiety, he looks lazy, he&rsquo;s like me, and so on)</p>
+<div class="lines"><textarea rows="4" data-k="ta21" aria-label="Your notes" placeholder="Write here (saved on this device)"></textarea></div>
+<h3><ol>
+<li>Shade</li>
+</ol></h3>
+<p>And what does this life grow into? Jesus compared the kingdom of God to a mustard seed (see Mark 4:31–32). The smallest of seeds grows until the birds of the air nest in its shade. A tree is finished not when it is tall but when someone can nest in it. That is the shape of a life that has grown.</p>
+<p>Peter&rsquo;s later story is exactly this picture. The man who fell apart beside the courtyard fire stood up some fifty days later in front of thousands and proclaimed the name he had denied. Not long after, people carried the sick into the streets on their beds, hoping that at least his shadow might fall on them as he passed. A man who had hidden his name had become a man who casts shade.</p>
+<p>The man in the courtroom was the same. Years later, inside a barricade in street fighting, Inspector Javert, who had hunted him all his life, was a prisoner awaiting execution. He was a man who believed that once a criminal, always a criminal. Valjean, who had asked to carry out the execution, led him into an alley and cut the rope. The hand that took the candlesticks had become a hand that cuts the ropes of another.</p>
+<p>Javert walked slowly out of that alley with the cut rope in his hand. What happened in the depths of his heart that night, only God knows. Shade does not force anyone. It is simply there.</p>
+<p>The verse planted in the first story now unfolds fully. We are his workmanship, and that work of art was not made to sit in a display case. It was created for good works. Being comes first, and doing flows out of it.</p>
+<figure class="verse"><blockquote>For we are his workmanship, created in Christ Jesus for good works, which God prepared beforehand, that we should walk in them.</blockquote><figcaption>Ephesians 2:10, ESV</figcaption></figure>
+<h3><ol>
+<li>The Day the Pain Ends</li>
+</ol></h3>
+<p>And the question we have carried since the first story, in a world decorated this lavishly, why does living in it hurt so often, closes here. The second story said that pain is not the price of my own failure but came into this world where the first human left the spring. The third said the price of that sin was paid, and that he carried even our sorrows. Two pieces remain.</p>
+<p>First, this pain has a day it ends. It is the day Christ returns and sets everything right. The Bible says it is appointed for a person to die once, and after that comes judgment (see Heb 9:27). On that day all of us stand before the judgment seat of Christ (see 2 Cor 5:10). Standing there apart from him means standing alone with my own debt. So the invitation comes now, before that day. And we already know who will sit on that judgment seat: the one who took the judgment in our place, the one who lit a charcoal fire and called a broken man by his first name again. He received the judgment that was mine, and his righteousness became mine. So for the person in him, that day is not a day of waiting for a verdict. It is the day the verdict already received, <em>no condemnation</em>, is confirmed before the whole world. This is why the Bible writes of his return not in the language of fear but of waiting: “to save those who are eagerly waiting for him” (Heb 9:28, ESV). Revelation paints that day in its closing scene: the dwelling place of God is with man, and the one who made this world makes his home with us.</p>
+<figure class="verse"><blockquote>He will wipe away every tear from their eyes, and death shall be no more, neither shall there be mourning, nor crying, nor pain anymore, for the former things have passed away.</blockquote><figcaption>Revelation 21:4, ESV</figcaption></figure>
+<p><em>Nor pain anymore.</em> To a person who has lost someone beloved, the Bible gives a promise first, not an explanation. The grief of loss is not a shameful place to be hidden. Before it is made to mean anything, it is simply a tear that needs wiping. And the one seated on the throne adds, “Behold, I am making all things new” (Rev 21:5, ESV). Not a word about discarding this world and building another, but about making this world new. The confession of Jacob we heard in the first story, <em>this is none other than the house of God</em>, becomes at last the confession of the whole world.</p>
+<p>The other piece is about the time of waiting. Pain is not thrown away. In God&rsquo;s hands it can become shade. As Peter, who hid his name beside the courtyard fire, cast a shadow over the sick, the place you most wanted to hide becomes a place where someone comes to rest. No pain is wasted. Until that day we live as shade, a tree where the hurting can nest.</p>
+<figure class="verse"><blockquote>It is like a grain of mustard seed, which, when sown on the ground, is the smallest of all the seeds on earth, yet when it is sown it grows up and becomes larger than all the garden plants and puts out large branches, so that the birds of the air can make nests in its shade.</blockquote><figcaption>Mark 4:31–32, ESV</figcaption></figure>
+<h2 class="sec seat">Our Story</h2>
+<p>We have come through four stories together: the awaited guest, we who left the spring and became numbers, and the gift received with open hands. And today we heard that the name we received is not canceled by failure, that planted life grows even while we sleep and wake until it becomes someone&rsquo;s shade, and that beyond that shade a day is waiting when every tear is wiped away.</p>
+<p>A transplanted tree looks withered for a few weeks, then one morning puts out new leaves, and a few years later casts shade beneath it. This is how someone who has arrived settles. May today, as you close the fourth story, be the day your roots take hold.</p>
+<h4>A Verse to Carry</h4>
+<figure class="verse"><blockquote>I am the vine; you are the branches. Whoever abides in me and I in him, he it is that bears much fruit, for apart from me you can do nothing.</blockquote><figcaption>John 15:5, ESV</figcaption></figure>
+<h4>Practice: Calling Names, and Telling the Story</h4>
+<p>Myriel called a man known by a number <em>brother</em>, and Jesus called broken Simon by his first name again. Calling someone by name is how we begin to treat people the way God treats us, and a first practice at giving someone your shade.</p>
+<ul class="dash"><li>Say a name: In the coming days, choose one person you usually deal with only by role or title (a security guard, a delivery driver, restaurant staff, or a family member). Learn their name, and greet them by it.</li><li>Tell the story: Tell one person the scene from the four stories that has stayed with you longest. Don&rsquo;t try to persuade them. Just tell it. Myriel did not preach to Valjean. He opened the door, sat him at the table, and called him by name.</li></ul>
+<p><strong>If You Haven&rsquo;t Prayed Yet.</strong> The prayer in the third story, “A Prayer in Answer to the Invitation,” is still right where it was. As you close this story, or in a quiet moment alone, you are welcome to open it again. If you tell your group leader or a pastor of the church, they will rejoice with you.</p>
+<p class="q"><span class="q-label">Looking Back</span>What is one thing you received on the way through the four stories? (a scene, a sentence, a person, not sure yet, and so on)</p>
+<div class="lines"><textarea rows="2" data-k="ta22" aria-label="Your notes" placeholder="Write here (saved on this device)"></textarea></div>
+<p class="q"><span class="q-label">Question to Carry</span>If the place you most wanted to hide (a failure, a wound, a shameful season) became someone&rsquo;s shade someday, who would be nesting in it? There is no next story for this question. You will find the answer in the years ahead.</p>
+<p class="further"><strong>Read Further</strong> — <em>The Gospel Story in Les Misérables</em>, Story Four: the whole night of the Champmathieu trial, and the last night beside the silver candlesticks.</p></main><script>
+(function(){
+  var KEY='gs-'+document.title+'-', ok=true;
+  try{localStorage.setItem(KEY+'_t','1'); localStorage.removeItem(KEY+'_t');}catch(e){ok=false;}
+  document.querySelectorAll('textarea[data-k]').forEach(function(t){
+    if(!ok) t.placeholder='Write here (this viewer cannot save notes; open the file in your phone browser to keep them)';
+    try{var v=localStorage.getItem(KEY+t.dataset.k); if(v) t.value=v;}catch(e){}
+    function fit(){t.style.height='auto'; t.style.height=Math.max(t.scrollHeight, t.rows*30+14)+'px';}
+    t.addEventListener('input',function(){fit(); try{localStorage.setItem(KEY+t.dataset.k,t.value);}catch(e){}});
+    fit();
+  });
+})();
+</script></body></html>
