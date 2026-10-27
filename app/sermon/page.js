@@ -2,6 +2,8 @@ import Link from "next/link";
 import Header from "../../components/Header";
 import Footer from "../../components/Footer";
 import Calendar from "../../components/Calendar";
+import SermonBrowser from "../../components/SermonBrowser";
+import { thumbBg } from "../../lib/thumb";
 import { sermonList, sermonFeatured, sermonCalendarLinks, calendarEvents, todayKey, fmtDate } from "../../lib/content";
 
 export const metadata = { title: "설교 · Olive Tree" };
@@ -11,11 +13,9 @@ function Feature({ label, s }) {
   if (!s) return null;
   return (
     <Link href={`/sermon/${s.id}`} className="card vcard">
-      {s.video && (
-        <div className="thumb" style={{ backgroundImage: `url(https://img.youtube.com/vi/${s.video}/hqdefault.jpg)` }}>
-          <span className="play" aria-hidden="true" />
-        </div>
-      )}
+      <div className="thumb" style={{ backgroundImage: thumbBg(s) }}>
+        <span className="play" aria-hidden="true" />
+      </div>
       <div className="body">
         <h3>{label}</h3>
         <div className="ctitle">{s.title}</div>
@@ -55,18 +55,11 @@ export default async function SermonPage() {
           <Calendar events={events} today={today} mode="sermon" links={links} />
         </section>
 
-        {all.length > 0 && (
-          <div className="rows">
-            <h3 className="rowhead">전체 설교</h3>
-            {all.map((s) => (
-              <Link key={s.id} href={`/sermon/${s.id}`} className="row">
-                <span className="rd">{s.date}</span>
-                <span className="rtitle">{s.title}</span>
-                <span className="rp">{s.passage}</span>
-              </Link>
-            ))}
-          </div>
-        )}
+        <section className="block" id="all">
+          <div className="label">Archive</div>
+          <h2>전체 설교</h2>
+          <SermonBrowser sermons={all} />
+        </section>
         <Footer />
       </main>
     </>

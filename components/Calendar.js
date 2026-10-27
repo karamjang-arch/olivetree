@@ -1,16 +1,24 @@
 "use client";
 import Link from "next/link";
 import { useState } from "react";
+import { CATS, HONEY_COLOR, colorOf } from "../lib/cats";
 
-const FILTERS = [["all", "전체"], ["honey", "꿀보다성경"], ["sermon", "설교"]];
+const SERMON_KEYS = ["dawn", "sunday", "friday", "special", "etc"];
+const TABS = {
+  all: [["all", "전체"], ["honey", "꿀보다성경"], ["dawn", "새벽"], ["sunday", "주일"], ["friday", "금요"], ["special", "특별"]],
+  sermon: [["all", "전체"], ["dawn", "새벽"], ["sunday", "주일"], ["friday", "금요"], ["special", "특별"]],
+  honey: [],
+};
 
-// mode: "all"(필터 탭 표시) | "honey" | "sermon" (해당 종류만 표시)
+// mode: "all" | "sermon" | "honey" — 보여줄 종류의 범위
 // links: { "YYYY-MM-DD": href } 가 있으면 그 날짜만 눌러서 이동
 export default function Calendar({ events, today, selected, mode = "all", links }) {
   const base = (selected || today).split("-").map(Number);
   const [ym, setYm] = useState({ y: base[0], m: base[1] });
   const [tab, setTab] = useState("all");
-  const filter = mode === "all" ? tab : mode;
+
+  const allowed = mode === "honey" ? ["honey"] : mode === "sermon" ? SERMON_KEYS : ["honey", ...SERMON_KEYS];
+  const keep = (k) => allowed.includes(k) && (tab === "all" || k === tab);
 
   const first = new Date(Date.UTC(ym.y, ym.m - 1, 1)).getUTCDay();
   const days = new Date(Date.UTC(ym.y, ym.m, 0)).getUTCDate();
@@ -20,6 +28,7 @@ export default function Calendar({ events, today, selected, mode = "all", links 
     const t = new Date(Date.UTC(ym.y, ym.m - 1 + n, 1));
     setYm({ y: t.getUTCFullYear(), m: t.getUTCMonth() + 1 });
   };
+  const tabs = TABS[mode];
 
   return (
     <div className="cal">
@@ -28,9 +37,9 @@ export default function Calendar({ events, today, selected, mode = "all", links 
         <strong className="serif">{ym.y}년 {ym.m}월</strong>
         <button onClick={() => move(1)} aria-label="다음 달">›</button>
       </div>
-      {mode === "all" && (
+      {tabs.length > 0 && (
         <div className="tabs">
-          {FILTERS.map(([k, l]) => (
+          {tabs.map(([k, l]) => (
             <button key={k} className={tab === k ? "on" : ""} onClick={() => setTab(k)}>{l}</button>
           ))}
         </div>
@@ -40,12 +49,12 @@ export default function Calendar({ events, today, selected, mode = "all", links 
         {cells.map((d, i) => {
           if (!d) return <div key={i} />;
           const k = key(d);
-          const ev = (events[k] || []).filter((e) => filter === "all" || e === filter);
+          const ev = [...new Set((events[k] || []).filter(keep))];
           const cls = `day${k === today ? " today" : ""}${k === selected ? " sel" : ""}`;
           const inner = (
             <>
               <span>{d}</span>
-              <i>{ev.includes("honey") && <b className="dot h" />}{ev.includes("sermon") && <b className="dot s" />}</i>
+              <i>{ev.map((e) => <b key={e} className="dot" style={{ background: colorOf(e) }} />)}</i>
             </>
           );
           const href = links ? links[k] : k === today ? "/" : `/d/${k}`;
@@ -55,8 +64,9 @@ export default function Calendar({ events, today, selected, mode = "all", links 
         })}
       </div>
       <div className="legend">
-        {filter !== "sermon" && <span><b className="dot h" /> 꿀보다성경</span>}
-        {filter !== "honey" && <span><b className="dot s" /> 설교</span>}
+        {allowed.map((k) => (
+          <span key={k}><b className="dot" style={{ background: colorOf(k) }} /> {k === "honey" ? "꿀보다성경" : CATS[k].label}</span>
+        ))}
       </div>
     </div>
   );

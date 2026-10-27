@@ -25,10 +25,10 @@ export default async function SermonPage({ params }) {
           </div>
         )}
 
-        {s.summary && <div className="panel"><h3>설교 요약</h3><p>{s.summary}</p></div>}
+        {s.summary && <div className="panel t-read"><h3>설교 요약</h3><p>{s.summary}</p></div>}
 
         {s.questions?.length > 0 && (
-          <div className="panel">
+          <div className="panel t-memory">
             <h3>적용 질문</h3>
             <ol>{s.questions.map((q, i) => <li key={i}>{q}</li>)}</ol>
           </div>

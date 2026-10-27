@@ -3,6 +3,7 @@ import Hero from "./Hero";
 import Header from "./Header";
 import Calendar from "./Calendar";
 import Footer from "./Footer";
+import { thumbBg } from "../lib/thumb";
 import { getHoneyDay, sermonsOn, calendarEvents, todayKey, fmtDate } from "../lib/content";
 
 export default async function DayView({ date }) {
@@ -23,12 +24,10 @@ export default async function DayView({ date }) {
 
           <div className="cards">
             {sermons.map((s) => (
-              <Link key={s.id} href={`/sermon/${s.id}`} className={`card sermon${s.video ? "" : " nothumb"}`}>
-                {s.video && (
-                  <div className="thumb" style={{ backgroundImage: `url(https://img.youtube.com/vi/${s.video}/hqdefault.jpg)` }}>
-                    <span className="play" aria-hidden="true" />
-                  </div>
-                )}
+              <Link key={s.id} href={`/sermon/${s.id}`} className="card sermon">
+                <div className="thumb" style={{ backgroundImage: thumbBg(s) }}>
+                  <span className="play" aria-hidden="true" />
+                </div>
                 <div className="body">
                   <h3>{s.kind}</h3>
                   <div className="ctitle">{s.title}</div>

@@ -30,17 +30,17 @@ export default async function HoneyPage({ params }) {
         <div className="label">통독 · 꿀보다성경</div>
         <h1 className="serif page-title">{fmtDate(date)}</h1>
 
-        <div className="panel"><h3>오늘의 읽기</h3><div className="passage">{day.passage}</div></div>
+        <div className="panel t-read"><h3>오늘의 읽기</h3><div className="passage">{day.passage}</div></div>
 
         {audio && (
-          <div className="panel">
+          <div className="panel t-audio">
             <h3>오디오 말씀</h3>
             <div className="audio-wrap"><iframe className="audio" src={audio} title="오디오 말씀" allow="autoplay" loading="lazy" /></div>
           </div>
         )}
 
         {chapters.length > 0 && (
-          <div className="panel">
+          <div className="panel t-text">
             <h3>오늘의 본문 · 개역개정</h3>
             {chapters.map((c) => (
               <details key={`${c.book}${c.chapter}`} className="chap">
@@ -55,12 +55,12 @@ export default async function HoneyPage({ params }) {
           </div>
         )}
 
-        <div className="panel" id="memory">
+        <div className="panel t-memory" id="memory">
           <h3>오늘의 암송</h3>
           <MemoryCards cards={cards} />
         </div>
 
-        <div className="panel">
+        <div className="panel t-quiz">
           <details className="quizbox">
             <summary>꿀퀴즈 · 오늘 읽은 본문으로 푸는 {day.quiz.length}문항</summary>
             <Quiz items={day.quiz} />

@@ -164,3 +164,88 @@ a.card.mcard,.card.mcard{display:block;padding:18px 20px;text-decoration:none;co
 .chap>summary::after{content:"+";color:var(--muted)}.chap[open]>summary::after{content:"–"}
 .scripture{font-size:17px;line-height:2;margin:4px 0 14px}
 .scripture sup{font-size:11px;color:var(--accent);margin-right:3px;font-weight:600}
+
+/* ===== 디자인 정리 (색 대비·구분·움직임) ===== */
+:root{
+  --bg:#f1eee2; --card:#ffffff; --line:#ddd9c8; --deep:#0f2a47; --deep2:#163a5f;
+  --shadow:0 6px 22px rgba(15,42,71,.08); --shadow-lg:0 14px 34px rgba(15,42,71,.14);
+}
+body{background:var(--bg)}
+
+/* 상단 바: 짙은 색 */
+header.top{background:linear-gradient(90deg,var(--deep),var(--deep2));border-bottom:0;box-shadow:0 2px 14px rgba(15,42,71,.25);backdrop-filter:none}
+header.top .logo{color:#fff}
+header.top nav a{color:rgba(255,255,255,.72);margin-left:22px;position:relative;transition:color .2s}
+header.top nav a:hover{color:#fff}
+header.top nav a::after{content:"";position:absolute;left:0;right:0;bottom:-6px;height:2px;background:#c9d8b8;transform:scaleX(0);transition:transform .25s}
+header.top nav a:hover::after{transform:scaleX(1)}
+@media(max-width:640px){header.top nav a{margin-left:13px}}
+
+/* 히어로: 빵 윤곽 + 지나가는 빛 */
+.rings{display:none}
+.bread{position:absolute;right:48px;top:50%;transform:translateY(-52%);width:min(46%,430px);height:auto;pointer-events:none}
+.bread path{fill:none;stroke-linecap:round;stroke-linejoin:round}
+.bread .base{stroke:rgba(255,255,255,.28);stroke-width:2.2}
+.bread .glow{stroke:#fff;stroke-width:3.4;stroke-dasharray:14 86;filter:drop-shadow(0 0 7px rgba(255,255,255,.95));animation:travel 5.5s linear infinite}
+@keyframes travel{from{stroke-dashoffset:0}to{stroke-dashoffset:-100}}
+@media(max-width:760px){.bread{width:62%;right:-6%;top:auto;bottom:40px;transform:none;opacity:.55}}
+@media (prefers-reduced-motion:reduce){.bread .glow{animation:none;stroke-dasharray:none;opacity:.5}}
+
+/* 카드·패널 음영 */
+.card,.panel,.cal{box-shadow:var(--shadow)}
+a.card:hover{box-shadow:var(--shadow-lg)}
+
+/* 패널: 주제별 색 띠 */
+.panel{--px:26px;--py:24px;--hue:#173b63;--tint:#e5edf6;padding:var(--py) var(--px);border:1px solid var(--line);border-top:4px solid var(--hue);border-radius:18px;overflow:hidden}
+.panel>h3{margin:calc(-1*var(--py)) calc(-1*var(--px)) 18px;padding:11px var(--px);background:var(--tint);color:var(--hue);letter-spacing:.1em}
+.panel.t-read{--hue:#173b63;--tint:#e5edf6}
+.panel.t-audio{--hue:#3f6b57;--tint:#e4efe8}
+.panel.t-text{--hue:#8a6a2d;--tint:#f4ecd8}
+.panel.t-memory{--hue:#9a4f43;--tint:#f6e6e1}
+.panel.t-quiz{--hue:#58588f;--tint:#e8e8f5}
+@media(max-width:640px){.panel{--px:18px;--py:20px}}
+.quizbox>summary{color:var(--hue)}
+
+/* 달력 */
+.cal{background:linear-gradient(180deg,#e6ecdd,#dfe7d6);border:1px solid #cdd6c0;max-width:600px}
+.cal .day{background:rgba(255,255,255,.55);transition:background .15s,transform .15s}
+.cal .day:hover{background:#fff;transform:translateY(-1px)}
+.cal .day.off{background:transparent}
+.cal .day.today{border:2px solid var(--deep)}
+.cal .day.sel{background:var(--deep);color:#fff}
+.cal .tabs button{background:rgba(255,255,255,.7);transition:all .15s}
+.cal-head button{background:rgba(255,255,255,.8)}
+.dot{width:7px;height:7px}
+.legend{flex-wrap:wrap}
+
+/* 탭 */
+.tabs.big{margin:6px 0 14px;flex-wrap:wrap}
+.tabs.big button{display:inline-flex;align-items:center;gap:7px;padding:8px 18px;font-size:14px;box-shadow:0 2px 6px rgba(15,42,71,.06)}
+.tabs button.on{box-shadow:0 4px 12px rgba(15,42,71,.25)}
+.sb-tools{display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin-bottom:14px}
+.sb-tools select{font:inherit;font-size:14px;padding:8px 12px;border:1px solid var(--line);border-radius:10px;background:#fff;color:var(--ink)}
+.count{margin-left:auto;color:var(--muted);font-size:13.5px}
+.sb .rows{margin-top:0;background:#fff;border:1px solid var(--line);border-radius:16px;box-shadow:var(--shadow);padding:4px 18px}
+.sb .row:first-child{border-top:0}
+.rtitle{display:flex;align-items:center;gap:9px}
+.more-btn{margin:16px auto 0;display:block;cursor:pointer}
+
+/* 섹션 제목 */
+section.block>h2{position:relative;padding-left:14px}
+section.block>h2::before{content:"";position:absolute;left:0;top:.28em;bottom:.28em;width:4px;border-radius:2px;background:var(--accent)}
+
+/* 오늘 카드 */
+.card.sermon .thumb{background-color:#26405e}
+.card.honey{border-left:4px solid #6f9a6a}
+
+/* 움직임 */
+@keyframes rise{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:none}}
+.panel,.card,.cal,.sb .rows{animation:rise .6s cubic-bezier(.2,.7,.2,1) both}
+.cards>*:nth-child(2),.panel:nth-of-type(2){animation-delay:.08s}
+.cards>*:nth-child(3),.panel:nth-of-type(3){animation-delay:.16s}
+.panel:nth-of-type(4){animation-delay:.24s}.panel:nth-of-type(5){animation-delay:.32s}
+.hero h1,.hero .lead{animation:rise .8s cubic-bezier(.2,.7,.2,1) both}
+.hero .lead{animation-delay:.12s}.hero .lead.em{animation-delay:.24s}
+@media (prefers-reduced-motion:reduce){.panel,.card,.cal,.sb .rows,.hero h1,.hero .lead{animation:none}}
+.cal .tabs button.on{background:var(--deep);color:#fff;border-color:var(--deep)}
+.cal .day.off{color:#8d977f}

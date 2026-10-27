@@ -18,13 +18,13 @@ export default async function D6Page({ params }) {
         <div className="label">새김 D6 · 말씀 암송</div>
         <h1 className="serif page-title">{d.ref}</h1>
 
-        <div className="panel">
+        <div className="panel t-read">
           <div className="verse">{d.verse}</div>
           {d.nkjv && <p className="cite en">{d.nkjv}</p>}
         </div>
 
         {d.audios?.length > 0 && (
-          <div className="panel">
+          <div className="panel t-audio">
             <h3>들어 보기</h3>
             {d.audios.map((a) => (
               <div key={a.url} className="aud">
@@ -35,8 +35,8 @@ export default async function D6Page({ params }) {
           </div>
         )}
 
-        {d.sections?.map((s) => (
-          <div key={s.title} className="panel">
+        {d.sections?.map((s, i) => (
+          <div key={s.title} className={`panel ${["t-read", "t-audio", "t-text", "t-memory", "t-quiz"][i % 5]}`}>
             <h3>{s.title}</h3>
             {s.body.split(/\n\s*\n/).map((p, i) => <p key={i} className="para">{p}</p>)}
           </div>
