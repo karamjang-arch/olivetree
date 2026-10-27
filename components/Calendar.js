@@ -3,11 +3,13 @@ import Link from "next/link";
 import { useState } from "react";
 import { CATS, HONEY_COLOR, colorOf } from "../lib/cats";
 
+const BLOG_KEYS = ["recitation", "lecture", "family", "journal"];
 const SERMON_KEYS = ["dawn", "sunday", "friday", "special", "etc"];
 const TABS = {
   all: [["all", "전체"], ["honey", "꿀보다성경"], ["dawn", "새벽"], ["sunday", "주일"], ["friday", "금요"], ["special", "특별"]],
   sermon: [["all", "전체"], ["dawn", "새벽"], ["sunday", "주일"], ["friday", "금요"], ["special", "특별"]],
   honey: [],
+  blog: [["all", "전체"], ["recitation", "암송"], ["lecture", "특강"], ["family", "올리브 가족"], ["journal", "저널"]],
 };
 
 // mode: "all" | "sermon" | "honey" — 보여줄 종류의 범위
@@ -17,8 +19,8 @@ export default function Calendar({ events, today, selected, mode = "all", links 
   const [ym, setYm] = useState({ y: base[0], m: base[1] });
   const [tab, setTab] = useState("all");
 
-  const allowed = mode === "honey" ? ["honey"] : mode === "sermon" ? SERMON_KEYS : ["honey", ...SERMON_KEYS];
-  const keep = (k) => allowed.includes(k) && (tab === "all" || k === tab);
+  const allowed = mode === "honey" ? ["honey"] : mode === "sermon" ? SERMON_KEYS : mode === "blog" ? BLOG_KEYS : ["honey", ...SERMON_KEYS];
+  const keep = (k) => { const b = k.replace("~", ""); return allowed.includes(b) && (tab === "all" || b === tab); };
 
   const first = new Date(Date.UTC(ym.y, ym.m - 1, 1)).getUTCDay();
   const days = new Date(Date.UTC(ym.y, ym.m, 0)).getUTCDate();
@@ -54,7 +56,9 @@ export default function Calendar({ events, today, selected, mode = "all", links 
           const inner = (
             <>
               <span>{d}</span>
-              <i>{ev.map((e) => <b key={e} className="dot" style={{ background: colorOf(e) }} />)}</i>
+              <i>{ev.map((e) => e.endsWith("~")
+                ? <b key={e} className="dot ring" style={{ borderColor: colorOf(e) }} />
+                : <b key={e} className="dot" style={{ background: colorOf(e) }} />)}</i>
             </>
           );
           const href = links ? links[k] : k === today ? "/" : `/d/${k}`;
@@ -67,6 +71,7 @@ export default function Calendar({ events, today, selected, mode = "all", links 
         {allowed.map((k) => (
           <span key={k}><b className="dot" style={{ background: colorOf(k) }} /> {k === "honey" ? "꿀보다성경" : CATS[k].label}</span>
         ))}
+        {mode === "blog" && <span className="sep"><b className="dot" style={{ background: "#6b7463" }} /> 쓴 날 <b className="dot ring" style={{ borderColor: "#6b7463" }} /> 지정한 날</span>}
       </div>
     </div>
   );

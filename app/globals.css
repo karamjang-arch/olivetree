@@ -320,3 +320,34 @@ header.top .brand .glow{stroke:#e8f3d0;stroke-width:60;stroke-dasharray:9 91;ani
 @media(max-width:760px){.bread{width:50%;right:-4%}}
 .card.sermon{grid-template-columns:minmax(300px,58%) 1fr}
 @media(max-width:760px){.card.sermon{grid-template-columns:1fr}}
+
+/* 블로그 */
+.pgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(290px,1fr));gap:18px}
+.card.pcard{display:flex;flex-direction:column;text-decoration:none;color:inherit;overflow:hidden;border-top:4px solid var(--hue);transition:transform .25s cubic-bezier(.2,.7,.2,1),box-shadow .25s}
+.card.pcard:hover{transform:translateY(-5px);box-shadow:var(--shadow-lg)}
+.pthumb{aspect-ratio:16/10;background:#d9e0d0 center/cover no-repeat;transition:transform .5s}
+.pthumb.none{display:flex;align-items:center;justify-content:center;background:var(--tint);color:var(--hue);font-family:"Great Vibes",Fraunces,cursive;font-size:30px}
+.card.pcard:hover .pthumb{transform:scale(1.04)}
+.card.pcard{--clip:1}
+.pbody{padding:16px 20px 20px;position:relative;background:#fff}
+.ptag{font-size:12px;letter-spacing:.1em;font-weight:600;color:var(--hue);margin-bottom:6px}
+.ptitle{font-size:19px;line-height:1.4;font-weight:600}
+.psum{margin:8px 0 0;color:var(--muted);line-height:1.65;font-size:14.5px;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+.pdate{margin-top:10px;font-size:12.5px;color:var(--muted)}
+.dot.ring{background:transparent!important;border:2px solid;box-sizing:border-box}
+.legend .sep{margin-left:10px;padding-left:10px;border-left:1px solid #b9c3ab}
+.back{display:inline-block;margin:6px 0 14px;color:var(--muted);text-decoration:none;font-size:14px}
+.back:hover{color:var(--ink)}
+.post{margin-top:22px;line-height:1.9;font-size:17px}
+.post p{margin:0 0 14px}.post .gap{height:10px}
+.post .bh{margin:28px 0 12px;padding-left:12px;border-left:4px solid var(--hue)}
+.post blockquote{margin:18px 0;padding:6px 18px;border-left:3px solid var(--hue);color:var(--muted)}
+.post .bcallout{margin:18px 0;padding:16px 20px;background:var(--tint);border-radius:14px;border:1px solid rgba(0,0,0,.05)}
+.post figure{margin:22px 0}.post figure img{width:100%;border-radius:14px;box-shadow:var(--shadow);display:block}
+.post figcaption{margin-top:8px;font-size:13.5px;color:var(--muted);text-align:center}
+.post hr{border:0;border-top:1px solid var(--line);margin:26px 0}
+.vwrap{position:relative;aspect-ratio:16/9;margin:20px 0;border-radius:14px;overflow:hidden;box-shadow:var(--shadow)}
+.vwrap iframe{position:absolute;inset:0;width:100%;height:100%;border:0}
+
+/* 폰: 오디오 창을 칸 높이에 맞춤 (0.8배 축소 후 480px를 꽉 채우도록 600px) */
+@media(max-width:640px){.audio-wrap{height:520px}.audio{height:650px}}

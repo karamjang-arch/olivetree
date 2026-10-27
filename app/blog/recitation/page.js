@@ -1,7 +1,6 @@
 import Link from "next/link";
 import Header from "../../../components/Header";
 import Footer from "../../../components/Footer";
-import BlogTabs from "../../../components/BlogTabs";
 import { d6List } from "../../../lib/content";
 
 export const revalidate = 3600;
@@ -17,7 +16,7 @@ export default async function Recitation() {
           <div className="label">Blog · Memory</div>
           <h1 className="serif page-title">암송</h1>
         </div>
-        <BlogTabs current="recitation" />
+        <Link href="/blog" className="back">← 블로그로</Link>
 
         <section className="block">
           <div className="label">새김 D6</div>
