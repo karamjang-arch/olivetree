@@ -1,0 +1,23 @@
+{
+  "byDate": { "2026-10-27": ["331ef6b3672f81cbba04e698c0c5acf6"] },
+  "cards": {
+    "331ef6b3672f81cbba04e698c0c5acf6": {
+      "id": "331ef6b3672f81cbba04e698c0c5acf6",
+      "ref": "신명기 18:15",
+      "text": "네 하나님 여호와께서 너희 가운데 네 형제 중에서 너를 위하여 나와 같은 선지자 하나를 일으키시리니 너희는 그의 말을 들을지니라"
+    }
+  },
+  "details": {
+    "331ef6b3672f81cbba04e698c0c5acf6": {
+      "id": "331ef6b3672f81cbba04e698c0c5acf6",
+      "ref": "신명기 18:15",
+      "verse": "네 하나님 여호와께서 너희 가운데 네 형제 중에서 너를 위하여 나와 같은 선지자 하나를 일으키시리니 너희는 그의 말을 들을지니라 (신명기 18:15)",
+      "nkjv": "The LORD your God will raise up for you a Prophet like me from your midst, from your brethren. Him you shall hear, (Deuteronomy 18:15)",
+      "audios": [
+        { "url": "https://jiqvkvhdgzesqagkfnnw.supabase.co/storage/v1/object/public/d6-audio/D6_W35_Deuteronomy18_15_KOR.mp3", "label": "한국어" },
+        { "url": "https://jiqvkvhdgzesqagkfnnw.supabase.co/storage/v1/object/public/d6-audio/D6_W35_Deuteronomy18_15_ENG.mp3", "label": "English" }
+      ],
+      "sections": []
+    }
+  }
+}
