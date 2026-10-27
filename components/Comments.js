@@ -4,7 +4,7 @@ import { useEffect, useState } from "react";
 const when = (iso) => (iso ? new Date(iso).toLocaleDateString("ko-KR", { month: "long", day: "numeric", timeZone: "America/Indianapolis" }) : "");
 
 // target: "honey:2026-10-27" | "blog:<id>" | "sermon:<id>"
-export default function Comments({ target, label, prompt = "함께 나눠 주세요" }) {
+export default function Comments({ target, label, prompt = "" }) {
   const [list, setList] = useState(null);
   const [name, setName] = useState("");
   const [text, setText] = useState("");

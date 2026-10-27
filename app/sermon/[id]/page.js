@@ -37,7 +37,7 @@ export default async function SermonPage({ params }) {
 
         <div className="panel t-comment">
           <h3>은혜를 나눕니다</h3>
-          <Comments target={`sermon:${s.id}`} label={s.title} prompt="들으신 말씀의 은혜를 남겨 보세요" />
+          <Comments target={`sermon:${s.id}`} label={s.title} />
         </div>
 
         <div className="pn"><Link href={`/d/${s.date}`}>‹ 이 날의 홈</Link><span /><span /></div>

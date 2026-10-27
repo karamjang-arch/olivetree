@@ -70,7 +70,7 @@ export default async function HoneyPage({ params }) {
 
         <div className="panel t-comment">
           <h3>오늘 읽고 나눕니다</h3>
-          <Comments target={`honey:${date}`} label={`통독 ${date}`} prompt="아멘! 오늘 말씀에서 받은 은혜를 남겨 보세요" />
+          <Comments target={`honey:${date}`} label={`통독 ${date}`} />
         </div>
 
         <div className="pn">
