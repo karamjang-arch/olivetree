@@ -102,3 +102,21 @@ details summary{cursor:pointer;font-weight:600}
 .pn a{color:var(--navy);text-decoration:none;font-weight:600}
 .card.honey{grid-column:1/-1}
 .narrow{padding-top:36px}
+.narrow-top{padding-top:36px}
+.cards.list{margin-top:20px}
+.card.vcard{display:block}
+.card.vcard .thumb{min-height:0;aspect-ratio:16/9}
+footer .church{margin-top:4px;font-size:11px;letter-spacing:.08em;opacity:.8}
+@media(max-width:640px){
+  .wrap{padding:0 16px}
+  header.top .wrap{height:54px}
+  nav a{margin-left:14px;font-size:13px}
+  .logo{font-size:18px}
+  .hero{border-radius:22px;padding:44px 22px 84px;margin-top:16px}
+  .rings{width:320px;height:320px;right:-110px;top:-90px}
+  .card .body{padding:18px 18px 22px}
+  .panel{padding:20px 18px}
+  .audio{height:300px}
+  section.block{margin:40px 0}
+  .cal{padding:16px}
+}

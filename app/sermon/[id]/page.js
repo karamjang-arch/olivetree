@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import Header from "../../../components/Header";
+import Footer from "../../../components/Footer";
 import { getSermon, allSermons, fmtDate } from "../../../lib/content";
 
 export function generateStaticParams() {
@@ -32,6 +33,7 @@ export default async function SermonPage({ params }) {
         </div>
 
         <div className="pn"><Link href={`/d/${s.date}`}>‹ 이 날의 홈</Link><span /><span /></div>
+        <Footer />
       </main>
     </>
   );

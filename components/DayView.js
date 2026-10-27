@@ -2,6 +2,7 @@ import Link from "next/link";
 import Hero from "./Hero";
 import Header from "./Header";
 import Calendar from "./Calendar";
+import Footer from "./Footer";
 import { getHoneyDay, sermonsOn, calendarEvents, todayKey, fmtDate } from "../lib/content";
 
 export default async function DayView({ date }) {
@@ -58,7 +59,7 @@ export default async function DayView({ date }) {
           <Calendar events={calendarEvents()} today={today} selected={date} />
         </section>
 
-        <footer>© {today.slice(0, 4)} Olive Tree</footer>
+        <Footer />
       </main>
     </>
   );

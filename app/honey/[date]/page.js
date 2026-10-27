@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import Header from "../../../components/Header";
+import Footer from "../../../components/Footer";
 import Quiz from "../../../components/Quiz";
 import { getHoneyDay, honeyAudio, honeyNeighbors, honeyDates, fmtDate } from "../../../lib/content";
 
@@ -63,6 +64,7 @@ export default async function HoneyPage({ params }) {
           <Link href={`/d/${date}`}>이 날의 홈</Link>
           {next ? <Link href={`/honey/${next}`}>다음 날 ›</Link> : <span />}
         </div>
+        <Footer />
       </main>
     </>
   );
