@@ -158,3 +158,9 @@ a.card.mcard,.card.mcard{display:block;padding:18px 20px;text-decoration:none;co
 .cite.en{margin-top:12px;font-family:Fraunces,serif;font-style:italic}
 .aud{margin:10px 0}.aud audio{width:100%;margin-top:6px}
 .para{margin:10px 0;line-height:1.85;white-space:pre-line}
+
+.chap{border-top:1px solid var(--line);padding:2px 0}.chap:first-of-type{border-top:0}
+.chap>summary{cursor:pointer;font-weight:600;padding:10px 0;list-style:none;display:flex;justify-content:space-between}
+.chap>summary::after{content:"+";color:var(--muted)}.chap[open]>summary::after{content:"–"}
+.scripture{font-size:17px;line-height:2;margin:4px 0 14px}
+.scripture sup{font-size:11px;color:var(--accent);margin-right:3px;font-weight:600}

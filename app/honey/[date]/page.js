@@ -5,6 +5,7 @@ import Footer from "../../../components/Footer";
 import Quiz from "../../../components/Quiz";
 import Calendar from "../../../components/Calendar";
 import MemoryCards from "../../../components/MemoryCards";
+import { chaptersFor } from "../../../lib/scripture";
 import {
   getHoneyDay, honeyAudio, honeyNeighbors, honeyDates, honeyMemoryCards, honeyCalendarLinks, calendarEvents, todayKey, fmtDate,
 } from "../../../lib/content";
@@ -20,6 +21,7 @@ export default async function HoneyPage({ params }) {
   if (!day) notFound();
   const [audio, cards, events] = await Promise.all([honeyAudio(date), honeyMemoryCards(date, day.memory), calendarEvents()]);
   const { prev, next } = honeyNeighbors(date);
+  const chapters = chaptersFor(day.passage);
 
   return (
     <>
@@ -34,6 +36,22 @@ export default async function HoneyPage({ params }) {
           <div className="panel">
             <h3>오디오 말씀</h3>
             <div className="audio-wrap"><iframe className="audio" src={audio} title="오디오 말씀" allow="autoplay" loading="lazy" /></div>
+          </div>
+        )}
+
+        {chapters.length > 0 && (
+          <div className="panel">
+            <h3>오늘의 본문 · 개역개정</h3>
+            {chapters.map((c) => (
+              <details key={`${c.book}${c.chapter}`} className="chap">
+                <summary>{c.book} {c.chapter}장</summary>
+                <p className="scripture">
+                  {c.verses.map((t, i) => (
+                    <span key={i}><sup>{i + 1}</sup>{t} </span>
+                  ))}
+                </p>
+              </details>
+            ))}
           </div>
         )}
 
