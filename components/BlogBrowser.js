@@ -19,7 +19,7 @@ export function PostCard({ x }) {
         {!has && <span>{m.en}</span>}
       </div>
       <div className="pbody">
-        <div className="ptag">{m.name}</div>
+        <div className="ptag">{m.name}{x.author ? ` · ${x.author}` : ""}</div>
         <div className="ptitle">{x.title}</div>
         {x.summary && <p className="psum">{x.summary}</p>}
         <div className="pdate">{x.created}{x.pinned && x.pinned !== x.created ? ` · ${x.pinned}` : ""}</div>

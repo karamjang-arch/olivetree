@@ -3,13 +3,13 @@ import Link from "next/link";
 import { useState } from "react";
 import { CATS, HONEY_COLOR, colorOf } from "../lib/cats";
 
-const BLOG_KEYS = ["recitation", "lecture", "family", "journal"];
+const BLOG_KEYS = ["recitation", "lecture", "family", "book", "journal"];
 const SERMON_KEYS = ["dawn", "sunday", "friday", "special", "etc"];
 const TABS = {
   all: [["all", "전체"], ["honey", "꿀보다성경"], ["dawn", "새벽"], ["sunday", "주일"], ["friday", "금요"], ["special", "특별"]],
   sermon: [["all", "전체"], ["dawn", "새벽"], ["sunday", "주일"], ["friday", "금요"], ["special", "특별"]],
   honey: [],
-  blog: [["all", "전체"], ["recitation", "암송"], ["lecture", "특강"], ["family", "올리브 가족"], ["journal", "저널"]],
+  blog: [["all", "전체"], ["recitation", "암송"], ["lecture", "특강"], ["family", "올리브 가족"], ["book", "도서"], ["journal", "저널"]],
 };
 
 // mode: "all" | "sermon" | "honey" — 보여줄 종류의 범위

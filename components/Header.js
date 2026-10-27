@@ -18,6 +18,7 @@ export default function Header() {
           <Link href="/sermon">설교</Link>
           <Link href="/honey">통독</Link>
           <Link href="/gospel">가스펠</Link>
+          <Link href="/benaiah">브나야</Link>
           <Link href="/blog">블로그</Link>
         </nav>
       </div>
