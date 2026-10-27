@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import Header from "../../../../components/Header";
+import Comments from "../../../../components/Comments";
 import Footer from "../../../../components/Footer";
 import { getBlogPost } from "../../../../lib/content";
 import { metaOf } from "../../../../lib/blog";
@@ -62,6 +63,13 @@ export default async function PostPage({ params }) {
         <article className="post" style={{ "--hue": m.hue, "--tint": m.tint }}>
           {p.blocks.map((b) => <Block key={b.id} b={b} />)}
         </article>
+        {(p.types.length > 0 || p.tags.length > 0) && (
+          <div className="tagrow">{[...p.types, ...p.tags].map((t) => <span key={t}>#{t}</span>)}</div>
+        )}
+        <div className="panel t-comment" style={{ "--hue": m.hue, "--tint": m.tint }}>
+          <h3>댓글</h3>
+          <Comments target={`blog:${p.id}`} label={p.title} />
+        </div>
         <Footer />
       </main>
     </>

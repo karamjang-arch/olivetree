@@ -351,3 +351,27 @@ header.top .brand .glow{stroke:#e8f3d0;stroke-width:60;stroke-dasharray:9 91;ani
 
 /* 폰: 오디오 창을 칸 높이에 맞춤 (0.8배 축소 후 480px를 꽉 채우도록 600px) */
 @media(max-width:640px){.audio-wrap{height:520px}.audio{height:650px}}
+
+/* 태그 */
+.tagbar{display:flex;flex-wrap:wrap;gap:6px;margin:0 0 16px}
+.tagbar button{font:inherit;font-size:13px;padding:4px 12px;border-radius:999px;border:1px solid var(--line);background:#fff;color:var(--muted);cursor:pointer;transition:all .15s}
+.tagbar button:hover{border-color:var(--accent);color:var(--ink)}
+.tagbar button.on{background:var(--deep);border-color:var(--deep);color:#fff}
+.ptags{display:flex;flex-wrap:wrap;gap:6px;margin-top:10px}
+.ptags span,.tagrow span{font-size:12.5px;color:var(--hue,#557565);background:var(--tint,#e4efe8);padding:2px 9px;border-radius:999px}
+.tagrow{display:flex;flex-wrap:wrap;gap:8px;margin:18px 0}
+
+/* 댓글 */
+.panel.t-comment{--hue:#557565;--tint:#e4efe8}
+.comments .cm{padding:12px 0;border-bottom:1px solid var(--line)}
+.comments .cm:last-child{border-bottom:0}
+.cm-h{display:flex;gap:10px;align-items:baseline;font-size:14px}.cm-h span{color:var(--muted);font-size:12.5px}
+.comments .cm p{margin:6px 0 0;line-height:1.7;white-space:pre-line}
+.cform{display:grid;gap:10px;margin-top:16px}
+.cform input,.cform textarea{font:inherit;font-size:15px;padding:11px 14px;border:1px solid var(--line);border-radius:12px;background:#fff;color:var(--ink);width:100%;box-sizing:border-box}
+.cform input:focus,.cform textarea:focus{outline:2px solid var(--accent);outline-offset:1px;border-color:transparent}
+.cform .hp{position:absolute;left:-9999px;width:1px;height:1px;opacity:0}
+.cnote{font-size:12.5px;color:var(--muted)}
+.cerr{font-size:13.5px;color:#b5524a}
+.cform .btn{justify-self:start;border:0}
+.cform .btn:disabled{opacity:.6}

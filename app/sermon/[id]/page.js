@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import Header from "../../../components/Header";
+import Comments from "../../../components/Comments";
 import Footer from "../../../components/Footer";
 import { getSermon, fmtDate } from "../../../lib/content";
 
@@ -33,6 +34,11 @@ export default async function SermonPage({ params }) {
             <ol>{s.questions.map((q, i) => <li key={i}>{q}</li>)}</ol>
           </div>
         )}
+
+        <div className="panel t-comment">
+          <h3>은혜를 나눕니다</h3>
+          <Comments target={`sermon:${s.id}`} label={s.title} prompt="들으신 말씀의 은혜를 남겨 보세요" />
+        </div>
 
         <div className="pn"><Link href={`/d/${s.date}`}>‹ 이 날의 홈</Link><span /><span /></div>
         <Footer />

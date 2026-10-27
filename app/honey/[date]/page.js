@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import Header from "../../../components/Header";
+import Comments from "../../../components/Comments";
 import Footer from "../../../components/Footer";
 import Quiz from "../../../components/Quiz";
 import Calendar from "../../../components/Calendar";
@@ -65,6 +66,11 @@ export default async function HoneyPage({ params }) {
             <summary>꿀퀴즈 · 오늘 읽은 본문으로 푸는 {day.quiz.length}문항</summary>
             <Quiz items={day.quiz} />
           </details>
+        </div>
+
+        <div className="panel t-comment">
+          <h3>오늘 읽고 나눕니다</h3>
+          <Comments target={`honey:${date}`} label={`통독 ${date}`} prompt="아멘! 오늘 말씀에서 받은 은혜를 남겨 보세요" />
         </div>
 
         <div className="pn">
