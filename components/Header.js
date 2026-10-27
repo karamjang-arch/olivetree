@@ -20,6 +20,7 @@ export default function Header() {
           <Link href="/gospel">가스펠</Link>
           <Link href="/benaiah">브나야</Link>
           <Link href="/blog">블로그</Link>
+          <Link href="/search" className="sicon" aria-label="검색"><svg viewBox="0 0 24 24" width="17" height="17" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round"><circle cx="11" cy="11" r="7" /><path d="M20 20l-3.5-3.5" /></svg></Link>
         </nav>
       </div>
     </header>
