@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import Blocks from "../../../components/Blocks";
+import SettleArt from "../../../components/SettleArt";
 import Header from "../../../components/Header";
 import Footer from "../../../components/Footer";
 import { settleGet, settleCat } from "../../../lib/settle";
@@ -24,13 +25,27 @@ export default async function SettlePage({ params }) {
         <p className="lead-sum">{x.summary}</p>
         <div className="pdate">확인한 날 {x.verified}{LIFE[x.shelf] ? ` · ${LIFE[x.shelf]}` : ""}</div>
 
+        <figure className="shero">
+          {x.cover ? <img src={`/api/cover/${x.id}`} alt="" /> : <SettleArt cat={x.category} hue={c.hue} tint={c.tint} />}
+          {x.cover && x.credit && <figcaption>사진: {x.credit}</figcaption>}
+        </figure>
+
         <article className="post md" style={{ "--hue": c.hue, "--tint": c.tint }}><Blocks blocks={x.blocks} /></article>
 
         {x.links?.length > 0 && (
           <div className="panel t-read" style={{ "--hue": c.hue, "--tint": c.tint }}>
             <h3>공식 링크</h3>
             <div className="btns">
-              {x.links.map((l) => <a key={l.url} className="btn" href={l.url} target="_blank" rel="noreferrer">{l.label || l.url}</a>)}
+              {x.links.map((l) => {
+                let host = "";
+                try { host = new URL(l.url).hostname; } catch {}
+                return (
+                  <a key={l.url} className="btn olink" href={l.url} target="_blank" rel="noreferrer">
+                    {host && <img src={`https://www.google.com/s2/favicons?domain=${host}&sz=64`} alt="" width="18" height="18" />}
+                    {l.label || l.url}
+                  </a>
+                );
+              })}
             </div>
           </div>
         )}

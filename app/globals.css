@@ -441,3 +441,11 @@ header.top .brand:hover svg{transform:scale(1.08) rotate(-3deg)}
 .post th{background:var(--tint);color:var(--hue)}
 .post ul,.post ol{padding-left:22px;margin:0 0 14px}.post li{margin:4px 0}
 .btoggle{margin:10px 0}.btoggle summary{cursor:pointer;font-weight:600}
+.sart{display:block;width:100%;aspect-ratio:320/150;object-fit:cover}
+.card.scard .sart{transition:transform .4s cubic-bezier(.2,.7,.2,1)}
+.card.scard:hover .sart{transform:scale(1.04)}
+.shero{margin:22px 0 8px;border-radius:14px;overflow:hidden}
+.shero .sart{aspect-ratio:320/130}
+.shero figcaption{font-size:12px;color:var(--muted);padding:6px 2px 0;background:none}
+.btn.olink{display:inline-flex;align-items:center;gap:8px}
+.btn.olink img{border-radius:4px;background:#fff}

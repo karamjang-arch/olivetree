@@ -2,6 +2,7 @@
 import Link from "next/link";
 import { useState } from "react";
 import { SETTLE_CATS, settleCat } from "../lib/settle-cats";
+import SettleArt from "./SettleArt";
 
 export default function SettleBrowser({ items }) {
   const [tab, setTab] = useState("all");
@@ -26,6 +27,9 @@ export default function SettleBrowser({ items }) {
           const c = settleCat(i.category);
           return (
             <Link key={i.id} href={`/settle/${i.id}`} className="card scard" style={{ "--hue": c.hue, "--tint": c.tint }}>
+              {i.cover
+                ? <img className="sart" src={`/api/cover/${i.id}`} alt="" loading="lazy" />
+                : <SettleArt cat={i.category} hue={c.hue} tint={c.tint} />}
               <div className="stop"><span>{c.name}</span><span>{i.sub}</span></div>
               <div className="sbody">
                 <div className="ptitle">{i.title}</div>
