@@ -134,3 +134,11 @@ footer .church{margin-top:4px;font-size:11px;letter-spacing:.08em;opacity:.8}
 .reader-bar .rl a.on{text-decoration:underline}
 .reader-frame{flex:1;width:100%;border:0;background:#fff}
 @media(max-width:640px){.reader-bar .rt{display:none}.reader-bar{justify-content:space-between}}
+
+.card.sermon.nothumb{display:block}
+.rows{margin-top:36px}
+.rowhead{font-size:13px;letter-spacing:.12em;text-transform:uppercase;color:var(--accent);margin-bottom:8px}
+.row{display:grid;grid-template-columns:96px 1fr auto;gap:12px;padding:12px 0;border-top:1px solid var(--line);text-decoration:none;color:inherit;font-size:15px}
+.row:hover .rtitle{text-decoration:underline}
+.rd,.rp{color:var(--muted);font-size:13.5px}
+@media(max-width:640px){.row{grid-template-columns:1fr;gap:2px}}

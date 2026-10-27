@@ -2,15 +2,13 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import Header from "../../../components/Header";
 import Footer from "../../../components/Footer";
-import { getSermon, allSermons, fmtDate } from "../../../lib/content";
+import { getSermon, fmtDate } from "../../../lib/content";
 
-export function generateStaticParams() {
-  return allSermons().map((s) => ({ id: s.id }));
-}
+export const revalidate = 3600;
 
 export default async function SermonPage({ params }) {
   const { id } = await params;
-  const s = getSermon(id);
+  const s = await getSermon(id);
   if (!s) notFound();
 
   return (
@@ -21,16 +19,20 @@ export default async function SermonPage({ params }) {
         <h1 className="serif page-title">{s.title}</h1>
         <div className="date">{fmtDate(s.date)} · {s.passage} · {s.preacher}</div>
 
-        <div className="video">
-          <iframe src={`https://www.youtube.com/embed/${s.video}`} title={s.title} allowFullScreen loading="lazy" />
-        </div>
+        {s.video && (
+          <div className="video">
+            <iframe src={`https://www.youtube.com/embed/${s.video}`} title={s.title} allowFullScreen loading="lazy" />
+          </div>
+        )}
 
-        <div className="panel"><h3>설교 요약</h3><p>{s.summary}</p></div>
+        {s.summary && <div className="panel"><h3>설교 요약</h3><p>{s.summary}</p></div>}
 
-        <div className="panel">
-          <h3>적용 질문</h3>
-          <ol>{s.questions.map((q, i) => <li key={i}>{q}</li>)}</ol>
-        </div>
+        {s.questions?.length > 0 && (
+          <div className="panel">
+            <h3>적용 질문</h3>
+            <ol>{s.questions.map((q, i) => <li key={i}>{q}</li>)}</ol>
+          </div>
+        )}
 
         <div className="pn"><Link href={`/d/${s.date}`}>‹ 이 날의 홈</Link><span /><span /></div>
         <Footer />

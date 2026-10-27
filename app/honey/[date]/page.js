@@ -14,7 +14,7 @@ export default async function HoneyPage({ params }) {
   const { date } = await params;
   const day = await getHoneyDay(date);
   if (!day) notFound();
-  const audio = honeyAudio(date);
+  const audio = await honeyAudio(date);
   const { prev, next } = honeyNeighbors(date);
 
   // 퀴즈 근거 구절 (중복 제거)

@@ -7,7 +7,7 @@ import { getHoneyDay, sermonsOn, calendarEvents, todayKey, fmtDate } from "../li
 
 export default async function DayView({ date }) {
   const today = todayKey();
-  const [honey, sermons] = [await getHoneyDay(date), sermonsOn(date)];
+  const [honey, sermons, events] = await Promise.all([getHoneyDay(date), sermonsOn(date), calendarEvents()]);
   const isToday = date === today;
 
   return (
@@ -23,15 +23,17 @@ export default async function DayView({ date }) {
 
           <div className="cards">
             {sermons.map((s) => (
-              <Link key={s.id} href={`/sermon/${s.id}`} className="card sermon">
-                <div className="thumb" style={{ backgroundImage: `url(https://img.youtube.com/vi/${s.video}/hqdefault.jpg)` }}>
-                  <span className="play" aria-hidden="true" />
-                </div>
+              <Link key={s.id} href={`/sermon/${s.id}`} className={`card sermon${s.video ? "" : " nothumb"}`}>
+                {s.video && (
+                  <div className="thumb" style={{ backgroundImage: `url(https://img.youtube.com/vi/${s.video}/hqdefault.jpg)` }}>
+                    <span className="play" aria-hidden="true" />
+                  </div>
+                )}
                 <div className="body">
                   <h3>{s.kind}</h3>
                   <div className="ctitle">{s.title}</div>
                   <div className="cmeta">{s.passage} · {s.preacher}</div>
-                  <p className="excerpt">{s.summary}</p>
+                  {s.summary && <p className="excerpt">{s.summary}</p>}
                 </div>
               </Link>
             ))}
@@ -56,7 +58,7 @@ export default async function DayView({ date }) {
           <div className="label">Calendar</div>
           <h2>달력으로 보기</h2>
           <p className="date">날짜를 누르면 그날의 말씀으로 이동합니다.</p>
-          <Calendar events={calendarEvents()} today={today} selected={date} />
+          <Calendar events={events} today={today} selected={date} />
         </section>
 
         <Footer />
