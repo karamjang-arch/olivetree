@@ -3,6 +3,22 @@ import { hasNotion, notionComments, notionAddComment } from "../../../lib/notion
 const OK = /^(honey|blog|sermon|d6):[A-Za-z0-9-]{1,40}$/;
 const hits = new Map(); // IP별 간단한 도배 방지(서버가 꺼졌다 켜지면 초기화되는 느슨한 방식)
 
+// 새 댓글이 달리면 휴대폰 알림(ntfy). NTFY_TOPIC이 없으면 건너뛴다.
+async function notify({ name, text, target, label }) {
+  const topic = process.env.NTFY_TOPIC;
+  if (!topic) return;
+  const [kind, id] = target.split(":");
+  const path = kind === "honey" ? `/honey/${id}` : kind === "blog" ? `/blog/p/${id}` : kind === "sermon" ? `/sermon/${id}` : `/d6/${id}`;
+  try {
+    await fetch("https://ntfy.sh/", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ topic, title: `댓글 · ${name}`, message: `${text}\n— ${label || kind}`, click: `https://o-live-tree.vercel.app${path}` }),
+      signal: AbortSignal.timeout(3000),
+    });
+  } catch {}
+}
+
 const json = (o, status = 200, extra = {}) =>
   new Response(JSON.stringify(o), { status, headers: { "Content-Type": "application/json", ...extra } });
 
@@ -37,7 +53,9 @@ export async function POST(req) {
   hits.set(ip, [...recent, now]);
 
   try {
-    return json({ ok: true, comment: await notionAddComment({ name, text, target, label }) });
+    const comment = await notionAddComment({ name, text, target, label });
+    await notify({ name, text, target, label });
+    return json({ ok: true, comment });
   } catch (e) {
     console.error("comment", e.message);
     const why = e.status === 404 ? "노션 댓글 DB에 연결(Connections)이 필요합니다"
