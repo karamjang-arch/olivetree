@@ -40,6 +40,10 @@ export async function POST(req) {
     return json({ ok: true, comment: await notionAddComment({ name, text, target, label }) });
   } catch (e) {
     console.error("comment", e.message);
-    return json({ error: "저장하지 못했습니다. 잠시 후 다시 시도해 주세요." }, 500);
+    const why = e.status === 404 ? "노션 댓글 DB에 연결(Connections)이 필요합니다"
+      : e.status === 403 ? "노션 연결에 입력(Insert content) 권한이 필요합니다"
+      : e.status === 400 ? "댓글 DB의 칸 이름이 달라졌는지 확인이 필요합니다"
+      : "잠시 후 다시 시도해 주세요";
+    return json({ error: `저장하지 못했습니다 (${e.status || "오류"}). ${why}.` }, 500);
   }
 }
