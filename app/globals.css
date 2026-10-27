@@ -262,3 +262,30 @@ section.block>h2::before{content:"";position:absolute;left:0;top:.28em;bottom:.2
 .mcard,.row{transition:background .15s,transform .15s}
 .row:hover{background:#eef3ea}
 .mcard:hover{transform:translateY(-2px)}
+
+/* 가스펠 카드 윗부분 색 띠 */
+.card.book{--hue:#3f6b57;--tint:#e4efe8;border-top:4px solid var(--hue);overflow:hidden}
+.card.book.t-text{--hue:#8a6a2d;--tint:#f4ecd8}
+.card.book .bandh{margin:0;padding:11px 24px;background:var(--tint);color:var(--hue);font-size:12.5px;letter-spacing:.1em;font-weight:600}
+.card.book:hover{border-color:var(--hue)}
+.card.book:hover .ctitle{color:var(--hue)}
+.card.book .btn.primary{background:var(--hue);border-color:var(--hue)}
+.card.book .btn.primary:hover{filter:brightness(1.15);background:var(--hue)}
+.card.book .btn:hover{background:var(--tint);color:var(--hue);border-color:var(--hue)}
+.card.book .btn.primary:hover{color:#fff}
+@media(max-width:640px){.card.book .bandh{padding:10px 18px}}
+
+/* 홈 설교 카드 세로로 길게 */
+.card.sermon .thumb{min-height:340px}
+.card.sermon .body{padding:30px 30px 32px}
+@media(max-width:760px){.card.sermon .thumb{min-height:0;aspect-ratio:16/10}}
+
+/* 빵 윤곽 (새 모양) */
+.bread{width:min(40%,420px);transform:translateY(-50%);right:56px}
+.bread .base{stroke:rgba(255,255,255,.42);stroke-width:5}
+.bread .glow{stroke-width:7;stroke-dasharray:12 88}
+@media(max-width:760px){.bread{width:64%;right:-8%;top:auto;bottom:36px;transform:none;opacity:.5}}
+.card.book{padding:0;border-top:1px solid var(--line)}
+.card.book .bandh{border-top:4px solid var(--hue)}
+.card.book .body{padding:24px 28px 30px}
+.bread{width:min(36%,380px);right:44px}

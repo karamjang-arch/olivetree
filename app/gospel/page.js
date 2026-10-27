@@ -19,9 +19,9 @@ export default function GospelStory() {
         </div>
         <div className="cards list">
           {books.map((b) => (
-            <div key={b.slug} className="card book">
+            <div key={b.slug} className={`card book ${b.kind === "교재" ? "t-text" : "t-audio"}`}>
+              <h3 className="bandh">{b.kind === "교재" ? "가스펠 교재" : "가스펠 스토리 · 책"}</h3>
               <div className="body">
-                <h3>{b.kind}</h3>
                 <div className="ctitle">{b.ko.title}</div>
                 <div className="cmeta">{b.en.title}</div>
                 <p className="excerpt">{b.blurb}</p>
