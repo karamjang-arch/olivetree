@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { BREAD } from "../lib/bread";
+import { BREAD, OLIVE } from "../lib/bread";
 
 export default function Header() {
   return (
@@ -9,7 +9,7 @@ export default function Header() {
         <Link href="/" className="brand" aria-label="Our Daily Bread">
           <svg viewBox="0 0 1040 760" aria-hidden="true">
             {BREAD.map((p, i) => <path key={"b" + i} d={p} className="base" />)}
-            {BREAD.map((p, i) => <path key={"g" + i} d={p} className="glow" pathLength="100" style={{ animationDelay: `${(i % 6) * 0.45}s` }} />)}
+            <path d={OLIVE} className="glow" pathLength="100" />
           </svg>
           <span>Our Daily Bread</span>
         </Link>

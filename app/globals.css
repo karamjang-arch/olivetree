@@ -310,3 +310,13 @@ a.card.book{text-decoration:none;color:inherit;display:block}
 .panel>.muted{margin:0;color:var(--muted)}
 header.top .brand span{padding:4px 10px 4px 2px;margin-right:-6px}
 .page-tabs{display:flex;flex-wrap:wrap;gap:8px}
+
+/* 올리브 가지 하나만 따라 흐르는 빛, 빵은 작게 */
+.bread{width:min(28%,300px);right:64px}
+.bread .base{stroke:rgba(255,255,255,.4);stroke-width:5}
+.bread .glow{stroke:#e8f3d0;stroke-width:8;stroke-dasharray:9 91;animation-duration:4.5s;filter:drop-shadow(0 0 8px rgba(232,243,208,.95))}
+header.top .brand svg{width:36px;height:27px}
+header.top .brand .glow{stroke:#e8f3d0;stroke-width:60;stroke-dasharray:9 91;animation-duration:3.5s}
+@media(max-width:760px){.bread{width:50%;right:-4%}}
+.card.sermon{grid-template-columns:minmax(300px,58%) 1fr}
+@media(max-width:760px){.card.sermon{grid-template-columns:1fr}}
