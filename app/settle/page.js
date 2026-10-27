@@ -5,8 +5,10 @@ import { settleAll } from "../../lib/settle";
 
 export const metadata = { title: "정착 · Olive Tree" };
 
-export default function Settle() {
-  const items = settleAll().map(({ id, category, sub, title, summary, verified, church }) => ({ id, category, sub, title, summary, verified, church }));
+export const revalidate = 600;
+
+export default async function Settle() {
+  const items = (await settleAll()).map(({ id, category, sub, title, summary, verified, church }) => ({ id, category, sub, title, summary, verified, church }));
   return (
     <>
       <Header />

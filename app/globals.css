@@ -436,3 +436,8 @@ header.top .brand{position:absolute;left:50%;top:50%;transform:translate(-50%,-5
 header.top .brand:hover svg{transform:scale(1.08) rotate(-3deg)}
 @media(max-width:1240px){header.top .brand{display:none}}
 @media(max-width:640px){header.top nav a{margin-left:14px;font-size:14px}header.top nav .sicon{margin-left:12px}}
+.post table{width:100%;border-collapse:collapse;margin:14px 0;font-size:15px;display:block;overflow-x:auto}
+.post th,.post td{border:1px solid var(--line);padding:8px 12px;text-align:left;vertical-align:top}
+.post th{background:var(--tint);color:var(--hue)}
+.post ul,.post ol{padding-left:22px;margin:0 0 14px}.post li{margin:4px 0}
+.btoggle{margin:10px 0}.btoggle summary{cursor:pointer;font-weight:600}

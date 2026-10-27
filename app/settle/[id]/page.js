@@ -1,22 +1,19 @@
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import { marked } from "marked";
+import Blocks from "../../../components/Blocks";
 import Header from "../../../components/Header";
 import Footer from "../../../components/Footer";
-import { settleGet, settleCat, settleAll } from "../../../lib/settle";
+import { settleGet, settleCat } from "../../../lib/settle";
 
-export function generateStaticParams() {
-  return settleAll().map((x) => ({ id: x.id }));
-}
+export const revalidate = 600;
 
 const LIFE = { yearly: "매년 바뀔 수 있는 내용입니다", monthly: "자주 바뀌는 내용입니다", evergreen: "", stable: "" };
 
 export default async function SettlePage({ params }) {
   const { id } = await params;
-  const x = settleGet(id);
+  const x = await settleGet(id);
   if (!x) notFound();
   const c = settleCat(x.category);
-  const html = x.detail ? marked.parse(x.detail, { gfm: true, breaks: false }) : "";
   return (
     <>
       <Header />
@@ -27,7 +24,7 @@ export default async function SettlePage({ params }) {
         <p className="lead-sum">{x.summary}</p>
         <div className="pdate">확인한 날 {x.verified}{LIFE[x.shelf] ? ` · ${LIFE[x.shelf]}` : ""}</div>
 
-        {html && <article className="post md" style={{ "--hue": c.hue, "--tint": c.tint }} dangerouslySetInnerHTML={{ __html: html }} />}
+        <article className="post md" style={{ "--hue": c.hue, "--tint": c.tint }}><Blocks blocks={x.blocks} /></article>
 
         {x.links?.length > 0 && (
           <div className="panel t-read" style={{ "--hue": c.hue, "--tint": c.tint }}>
