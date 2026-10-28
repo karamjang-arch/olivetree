@@ -6,7 +6,7 @@ import Header from "../../../components/Header";
 import Footer from "../../../components/Footer";
 import { settleGet, settleCat } from "../../../lib/settle";
 
-export const revalidate = 600;
+export const revalidate = 300;
 
 const LIFE = { yearly: "매년 바뀔 수 있는 내용입니다", monthly: "자주 바뀌는 내용입니다", evergreen: "", stable: "" };
 
