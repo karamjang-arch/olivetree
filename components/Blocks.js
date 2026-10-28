@@ -6,7 +6,11 @@ export const RT = ({ t = [] }) =>
     if (x.annotations?.bold) n = <b>{n}</b>;
     if (x.annotations?.italic) n = <i>{n}</i>;
     if (x.annotations?.code) n = <code>{n}</code>;
-    if (x.href) n = <a href={x.href} target="_blank" rel="noreferrer">{n}</a>;
+    if (x.href) {
+      // 사이트 안의 링크는 같은 창에서 연다
+      const local = x.href.replace(/^https?:\/\/o-live-tree\.vercel\.app/, "");
+      n = local.startsWith("/") ? <a href={local}>{n}</a> : <a href={x.href} target="_blank" rel="noreferrer">{n}</a>;
+    }
     if (x.annotations?.color && x.annotations.color !== "default") n = <span className={`c-${x.annotations.color}`}>{n}</span>;
     return <span key={i}>{n}</span>;
   });
