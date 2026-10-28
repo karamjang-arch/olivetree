@@ -1,8 +1,17 @@
 import "./globals.css";
 
 export const metadata = {
-  title: "Olive Tree · 장가람",
-  description: "말씀을 따라 걷는 하루, 꿀보다성경",
+  metadataBase: new URL("https://o-live-tree.vercel.app"),
+  title: "Olive Tree · Our Daily Bread",
+  description: "오늘의 말씀과 설교, 성경 통독, 가스펠, 정착 안내",
+  openGraph: {
+    title: "Olive Tree · Our Daily Bread",
+    description: "오늘의 말씀과 설교, 성경 통독, 가스펠, 정착 안내",
+    url: "https://o-live-tree.vercel.app",
+    siteName: "Olive Tree",
+    locale: "ko_KR",
+    type: "website",
+  },
 };
 
 export default function RootLayout({ children }) {
