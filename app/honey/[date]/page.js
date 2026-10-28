@@ -11,7 +11,7 @@ import {
   getHoneyDay, honeyAudio, honeyNeighbors, honeyDates, honeyMemoryCards, honeyCalendarLinks, calendarEvents, todayKey, fmtDate,
 } from "../../../lib/content";
 
-export const revalidate = 3600;
+export const revalidate = 300;
 export function generateStaticParams() {
   return honeyDates().map((date) => ({ date }));
 }

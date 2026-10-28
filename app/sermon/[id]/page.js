@@ -5,7 +5,7 @@ import Comments from "../../../components/Comments";
 import Footer from "../../../components/Footer";
 import { getSermon, fmtDate } from "../../../lib/content";
 
-export const revalidate = 3600;
+export const revalidate = 300;
 
 export default async function SermonPage({ params }) {
   const { id } = await params;

@@ -7,7 +7,7 @@ import { thumbBg } from "../../lib/thumb";
 import { sermonList, sermonFeatured, sermonCalendarLinks, calendarEvents, todayKey, fmtDate } from "../../lib/content";
 
 export const metadata = { title: "설교 · Olive Tree" };
-export const revalidate = 3600;
+export const revalidate = 300;
 
 function Feature({ label, s }) {
   if (!s) return null;
