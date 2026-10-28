@@ -4,7 +4,7 @@ import Calendar from "../../components/Calendar";
 import BlogBrowser, { PostCard } from "../../components/BlogBrowser";
 import { blogList, blogEvents, blogLinks, todayKey } from "../../lib/content";
 
-export const revalidate = 600;
+export const revalidate = 300;
 export const metadata = { title: "블로그 · Olive Tree" };
 
 export default async function BlogHome() {
@@ -27,7 +27,7 @@ export default async function BlogHome() {
           </section>
         )}
 
-        <section className="block">
+        <section className="block" id="archive">
           <div className="label">Archive</div>
           <h2>모아 보기</h2>
           <BlogBrowser posts={posts} />

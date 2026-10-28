@@ -7,6 +7,7 @@ export const RT = ({ t = [] }) =>
     if (x.annotations?.italic) n = <i>{n}</i>;
     if (x.annotations?.code) n = <code>{n}</code>;
     if (x.href) n = <a href={x.href} target="_blank" rel="noreferrer">{n}</a>;
+    if (x.annotations?.color && x.annotations.color !== "default") n = <span className={`c-${x.annotations.color}`}>{n}</span>;
     return <span key={i}>{n}</span>;
   });
 
@@ -16,8 +17,23 @@ function One({ b }) {
     case "paragraph": return d.rich_text.length ? <p><RT t={d.rich_text} /></p> : <div className="gap" />;
     case "heading_1": case "heading_2": return <h2 className="bh"><RT t={d.rich_text} /></h2>;
     case "heading_3": return <h3 className="bh"><RT t={d.rich_text} /></h3>;
-    case "quote": return <blockquote><RT t={d.rich_text} /></blockquote>;
-    case "callout": return <div className="bcallout"><RT t={d.rich_text} />{b.kids && <Blocks blocks={b.kids} />}</div>;
+    case "quote": {
+      // "본문 — 이사야 53:6" 꼴이면 출처를 따로 떼어 보여 준다
+      const text = d.rich_text.map((x) => x.plain_text).join("");
+      const m = text.match(/^([\s\S]+?)\s+[—–-]\s+([가-힣0-9 .:,\-–]+)$/);
+      if (m) return <blockquote className="verse"><p>{m[1]}</p><cite>{m[2]}</cite></blockquote>;
+      return <blockquote><RT t={d.rich_text} />{b.kids && <Blocks blocks={b.kids} />}</blockquote>;
+    }
+    case "callout": {
+      const tone = (d.color || "default").replace("_background", "");
+      const hasKids = b.kids?.length > 0;
+      return (
+        <aside className={`bcallout tone-${tone}${hasKids ? " titled" : ""}`}>
+          {hasKids ? <div className="ctitle2"><RT t={d.rich_text} /></div> : <RT t={d.rich_text} />}
+          {hasKids && <Blocks blocks={b.kids} />}
+        </aside>
+      );
+    }
     case "toggle": return <details className="btoggle"><summary><RT t={d.rich_text} /></summary>{b.kids && <Blocks blocks={b.kids} />}</details>;
     case "divider": return <hr />;
     case "image": return (
