@@ -11,11 +11,14 @@ export const RT = ({ t = [] }) =>
     return <span key={i}>{n}</span>;
   });
 
-function One({ b }) {
+function One({ b, anchors }) {
   const d = b[b.type];
   switch (b.type) {
     case "paragraph": return d.rich_text.length ? <p><RT t={d.rich_text} /></p> : <div className="gap" />;
-    case "heading_1": case "heading_2": return <h2 className="bh"><RT t={d.rich_text} /></h2>;
+    case "heading_1": case "heading_2": {
+      const id = anchors ? encodeURIComponent(d.rich_text.map((x) => x.plain_text).join("")) : undefined;
+      return <h2 className="bh" id={id}><RT t={d.rich_text} /></h2>;
+    }
     case "heading_3": return <h3 className="bh"><RT t={d.rich_text} /></h3>;
     case "quote": {
       // "본문 — 이사야 53:6" 꼴이면 출처를 따로 떼어 보여 준다
@@ -64,7 +67,7 @@ function One({ b }) {
 }
 
 // 연속된 목록 항목은 하나의 목록으로 묶는다
-export default function Blocks({ blocks }) {
+export default function Blocks({ blocks, anchors }) {
   const out = [];
   for (let i = 0; i < blocks.length; i++) {
     const b = blocks[i];
@@ -75,7 +78,7 @@ export default function Blocks({ blocks }) {
       i--;
       const Tag = type === "bulleted_list_item" ? "ul" : "ol";
       out.push(<Tag key={b.id}>{items.map((x) => <li key={x.id}><RT t={x[type].rich_text} />{x.kids && <Blocks blocks={x.kids} />}</li>)}</Tag>);
-    } else out.push(<One key={b.id} b={b} />);
+    } else out.push(<One key={b.id} b={b} anchors={anchors} />);
   }
   return <>{out}</>;
 }

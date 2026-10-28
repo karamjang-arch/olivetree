@@ -1,6 +1,6 @@
 import { hasNotion, notionComments, notionAddComment } from "../../../lib/notion";
 
-const OK = /^(honey|blog|sermon|d6):[A-Za-z0-9-]{1,40}$/;
+const OK = /^(honey|blog|sermon|d6|book):[A-Za-z0-9-]{1,40}$/;
 const hits = new Map(); // IP별 간단한 도배 방지(서버가 꺼졌다 켜지면 초기화되는 느슨한 방식)
 
 // 새 댓글이 달리면 휴대폰 알림(ntfy). NTFY_TOPIC이 없으면 건너뛴다.

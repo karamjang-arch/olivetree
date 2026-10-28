@@ -7,6 +7,8 @@ import { getBlogPost, blogList } from "../../../../lib/content";
 import { metaOf } from "../../../../lib/blog";
 import Blocks from "../../../../components/Blocks";
 import { PostCard } from "../../../../components/BlogBrowser";
+import { BookCard } from "../../../../components/LibraryBrowser";
+import { libAll } from "../../../../lib/library";
 
 export const revalidate = 300;
 
@@ -32,9 +34,10 @@ function textOf(blocks = []) {
 
 export default async function PostPage({ params }) {
   const { id } = await params;
-  const [p, all] = await Promise.all([getBlogPost(id), blogList()]);
+  const [p, all, lib] = await Promise.all([getBlogPost(id), blogList(), libAll()]);
   if (!p) notFound();
   const m = metaOf(p.slug);
+  const books = lib.filter((b) => p.books?.includes(b.id) || b.posts.includes(p.id));
   const minutes = Math.max(1, Math.round(textOf(p.blocks) / 500));
   const series = p.series ? all.filter((x) => x.series === p.series).sort((a, b) => (a.part ?? 99) - (b.part ?? 99)) : [];
   const idx = series.findIndex((x) => x.id === p.id);
@@ -81,6 +84,14 @@ export default async function PostPage({ params }) {
               <div className="biblerow"><b>이 글의 성경</b>{p.bibles.map((t) => <Link key={t} href={`/blog?bible=${encodeURIComponent(t)}`}>{t}</Link>)}</div>
             )}
           </div>
+        )}
+
+        {books.length > 0 && (
+          <section className="postbooks">
+            <div className="label">Book</div>
+            <h3>이 글의 책</h3>
+            <div className="shelf">{books.map((b) => <BookCard key={b.id} b={b} />)}</div>
+          </section>
         )}
 
         {p.series && (
