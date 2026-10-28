@@ -14,7 +14,7 @@ export default function Header() {
           <span>Our Daily Bread</span>
         </Link>
         <nav>
-          <Link href="/">오늘</Link>
+          <Link href="/">홈</Link>
           <Link href="/sermon">설교</Link>
           <Link href="/honey">통독</Link>
           <Link href="/gospel">가스펠</Link>

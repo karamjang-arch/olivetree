@@ -605,3 +605,52 @@ header.top .brand:hover svg{transform:scale(1.08) rotate(-3deg)}
 .card.tband .more{color:var(--hue)}
 @media(max-width:760px){.card.sermon.tband .sgrid{grid-template-columns:1fr}}
 @media(max-width:640px){.card.tband .bandh{padding:10px 18px}}
+/* ───── 홈 포털 ───── */
+.portal{display:grid;grid-template-columns:minmax(0,1.35fr) minmax(0,1fr);gap:22px}
+.pt-lead{display:flex;flex-direction:column;background:#fff;border-radius:22px;overflow:hidden;box-shadow:var(--shadow);text-decoration:none;color:inherit;border-top:4px solid var(--hue);transition:transform .25s,box-shadow .25s}
+.pt-lead:hover{transform:translateY(-4px);box-shadow:var(--shadow-lg)}
+.pt-img{position:relative;aspect-ratio:16/8;background:#d9e0d0 center/cover no-repeat;display:flex;align-items:center;justify-content:center}
+.pt-img.none{background:linear-gradient(135deg,var(--tint),#fff);color:var(--hue)}
+.pt-img .sthumb small{font-size:20px}.pt-img .sthumb b{font-size:72px}
+.pt-en{font-family:"Great Vibes",cursive;font-size:46px}
+.pt-badge{position:absolute;left:18px;top:16px;background:var(--hue);color:#fff;font-size:12px;font-weight:700;letter-spacing:.06em;padding:4px 12px;border-radius:999px}
+.pt-body{padding:22px 26px 26px}
+.pt-title{font-family:"Noto Serif KR",Fraunces,serif;font-size:clamp(22px,2.6vw,28px);font-weight:700;line-height:1.35;word-break:keep-all}
+.pt-lead:hover .pt-title{color:var(--hue)}
+.pt-sub{font-family:Fraunces,"Noto Serif KR",serif;color:var(--muted);margin-top:6px;font-size:16px}
+.pt-sum{margin:12px 0 0;line-height:1.75;color:var(--ink)}
+.pt-date,.pt-d{font-size:13px;color:var(--muted);margin-top:10px}
+.pt-side{background:#fff;border-radius:22px;padding:20px 22px;box-shadow:var(--shadow);display:flex;flex-direction:column}
+.pt-head{display:flex;justify-content:space-between;align-items:baseline;margin:4px 0 10px}
+.pt-head b{font-size:15px}
+.pt-head a,.pt-cap a{font-size:13px;color:var(--muted);text-decoration:none}
+.pt-head a:hover,.pt-cap a:hover{color:var(--deep)}
+.pt-head:not(:first-child){margin-top:18px;padding-top:16px;border-top:1px solid var(--line)}
+.pt-sermons{list-style:none;padding:0;margin:0;display:flex;flex-direction:column;gap:12px}
+.pt-sermons a{display:flex;gap:14px;align-items:center;text-decoration:none;color:inherit}
+.pt-th{flex:0 0 118px;aspect-ratio:16/9;border-radius:10px;background:#26405e center/cover no-repeat;transition:transform .25s}
+.pt-sermons a:hover .pt-th{transform:scale(1.04)}
+.pt-tx{display:flex;flex-direction:column;min-width:0}
+.pt-k{font-size:11.5px;font-weight:700;letter-spacing:.06em}
+.pt-t{font-weight:600;line-height:1.4;word-break:keep-all}
+.pt-sermons a:hover .pt-t{color:var(--deep);text-decoration:underline;text-underline-offset:3px}
+.pt-tx .pt-d{margin-top:2px;font-size:12.5px}
+.pt-list{list-style:none;padding:0;margin:0}
+.pt-list li a{display:flex;align-items:center;gap:10px;padding:8px 0;border-bottom:1px dashed var(--line);text-decoration:none;color:inherit;line-height:1.4;word-break:keep-all}
+.pt-list li:last-child a{border-bottom:0}
+.pt-list li a:hover{color:var(--deep)}
+.pt-list .dot{flex:0 0 8px;height:8px;border-radius:50%}
+.portal3{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:22px;margin-top:22px}
+.pt-card{background:#fff;border-radius:22px;padding:20px 22px;box-shadow:var(--shadow);text-decoration:none;color:inherit;display:block;transition:transform .25s,box-shadow .25s}
+a.pt-card:hover{transform:translateY(-4px);box-shadow:var(--shadow-lg)}
+.pt-cap{display:flex;justify-content:space-between;align-items:baseline;font-size:12.5px;font-weight:700;letter-spacing:.1em;color:var(--accent);margin-bottom:12px}
+.pt-bookrow{display:flex;gap:16px;align-items:flex-start}
+.pt-bookrow .bcover.md{width:96px;font-size:11px}
+.pt-t2{font-family:"Noto Serif KR",serif;font-weight:700;font-size:18px;line-height:1.35;word-break:keep-all}
+.pt-line{font-size:13.5px;line-height:1.7;margin:8px 0 0;display:-webkit-box;-webkit-line-clamp:4;-webkit-box-orient:vertical;overflow:hidden}
+.pt-foot{margin-top:14px;padding-top:12px;border-top:1px solid var(--line);font-size:13px;color:#7a2e2a;font-weight:600}
+@media(max-width:900px){.portal{grid-template-columns:1fr}.portal3{grid-template-columns:1fr}}
+.cal .tabs{flex-wrap:nowrap;overflow-x:auto;scrollbar-width:none}
+.cal .tabs::-webkit-scrollbar{display:none}
+.cal .tabs button{white-space:nowrap;flex:0 0 auto}
+@media(max-width:640px){.pt-img{aspect-ratio:16/10}.pt-badge{top:12px;left:12px;font-size:11px}.pt-img .sthumb{margin-top:18px}}

@@ -6,12 +6,13 @@ import Footer from "./Footer";
 import { thumbBg } from "../lib/thumb";
 import { getHoneyDay, sermonsOn, calendarEvents, todayKey, fmtDate, blogList } from "../lib/content";
 import { metaOf } from "../lib/blog";
+import HomeLatest from "./HomeLatest";
 import { CATS, catOf, HONEY_COLOR } from "../lib/cats";
 
 // 색 하나로 띠 배경(옅은 색)까지 만든다
 const tint = (hex) => `color-mix(in srgb, ${hex} 14%, #fff)`;
 
-export default async function DayView({ date }) {
+export default async function DayView({ date, home = false }) {
   const today = todayKey();
   const [honey, sermons, events, posts] = await Promise.all([getHoneyDay(date), sermonsOn(date), calendarEvents(), blogList()]);
   // 그날 올린 글, 그날 쓴 글, 그날을 가리키는 글
@@ -76,6 +77,8 @@ export default async function DayView({ date }) {
             {!honey && sermons.length === 0 && dayPosts.length === 0 && <div className="card empty">이 날에 올라온 내용이 없습니다.</div>}
           </div>
         </section>
+
+        {home && <HomeLatest today={today} />}
 
         <section className="block" id="calendar">
           <div className="label">Calendar</div>
