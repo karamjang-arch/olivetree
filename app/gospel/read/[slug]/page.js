@@ -13,17 +13,17 @@ export default async function Reader({ params, searchParams }) {
   const sp = await searchParams;
   const b = getBook(slug);
   if (!b) notFound();
-  const lang = sp?.lang === "en" ? "en" : "ko";
+  const lang = sp?.lang === "en" && b.en ? "en" : "ko";
   const cur = b[lang];
 
   return (
     <div className="reader">
       <div className="reader-bar">
-        <Link href="/gospel">‹ 가스펠</Link>
+        <Link href={b.series === "life" ? "/gospel/life" : "/gospel"}>‹ 가스펠</Link>
         <span className="rt">{cur.title}</span>
         <span className="rl">
           <Link href={`/gospel/read/${slug}?lang=ko`} className={lang === "ko" ? "on" : ""}>KO</Link>
-          <Link href={`/gospel/read/${slug}?lang=en`} className={lang === "en" ? "on" : ""}>EN</Link>
+          {b.en && <Link href={`/gospel/read/${slug}?lang=en`} className={lang === "en" ? "on" : ""}>EN</Link>}
           <a href={cur.file} target="_blank" rel="noreferrer">새 창</a>
         </span>
       </div>

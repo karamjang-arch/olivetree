@@ -1,10 +1,13 @@
+import Link from "next/link";
 import Header from "../../../components/Header";
 import Footer from "../../../components/Footer";
 import GospelTabs from "../../../components/GospelTabs";
+import { allBooks } from "../../../lib/books";
 
 export const metadata = { title: "가스펠 라이프 · Olive Tree" };
 
 export default function GospelLife() {
+  const books = allBooks().filter((b) => b.series === "life");
   return (
     <>
       <Header />
@@ -14,7 +17,22 @@ export default function GospelLife() {
           <h1 className="serif page-title">가스펠</h1>
           <GospelTabs active="life" />
         </div>
-        <div className="card empty soon">가스펠 라이프는 준비 중입니다.</div>
+        <div className="cards list">
+          {books.map((b) => (
+            <div key={b.slug} className={`card book ${b.kind === "교재" ? "t-text" : "t-audio"}`}>
+              <h3 className="bandh">{b.kind === "교재" ? "가스펠 라이프 · 교재" : "가스펠 라이프 · 책"}</h3>
+              <div className="body">
+                <div className="ctitle">{b.ko.title}</div>
+                {b.en && <div className="cmeta">{b.en.title}</div>}
+                <p className="excerpt">{b.blurb}</p>
+                <div className="btns">
+                  <Link className="btn primary" href={`/gospel/read/${b.slug}?lang=ko`}>{b.en ? "한국어로 읽기" : "읽기"}</Link>
+                  {b.en && <Link className="btn" href={`/gospel/read/${b.slug}?lang=en`}>Read in English</Link>}
+                </div>
+              </div>
+            </div>
+          ))}
+        </div>
         <Footer />
       </main>
     </>

@@ -23,11 +23,11 @@ export default function GospelStory() {
               <h3 className="bandh">{b.kind === "교재" ? "가스펠 교재" : "가스펠 스토리 · 책"}</h3>
               <div className="body">
                 <div className="ctitle">{b.ko.title}</div>
-                <div className="cmeta">{b.en.title}</div>
+                {b.en && <div className="cmeta">{b.en.title}</div>}
                 <p className="excerpt">{b.blurb}</p>
                 <div className="btns">
                   <Link className="btn primary" href={`/gospel/read/${b.slug}?lang=ko`}>한국어로 읽기</Link>
-                  <Link className="btn" href={`/gospel/read/${b.slug}?lang=en`}>Read in English</Link>
+                  {b.en && <Link className="btn" href={`/gospel/read/${b.slug}?lang=en`}>Read in English</Link>}
                 </div>
               </div>
             </div>

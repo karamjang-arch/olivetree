@@ -3,16 +3,54 @@
     "slug": "lesmis",
     "series": "story",
     "kind": "책",
-    "ko": { "title": "레미제라블에서 읽는 가스펠 스토리", "version": "v3.5", "file": "/books/lesmis-ko.html" },
-    "en": { "title": "The Gospel Story in Les Misérables", "version": "v0.9", "file": "/books/lesmis-en.html" },
+    "ko": {
+      "title": "레미제라블에서 읽는 가스펠 스토리",
+      "version": "v3.5",
+      "file": "/books/lesmis-ko.html"
+    },
+    "en": {
+      "title": "The Gospel Story in Les Misérables",
+      "version": "v0.9",
+      "file": "/books/lesmis-en.html"
+    },
     "blurb": "은촛대에서 24601까지, 한 사람의 이야기에서 시작해 하나님의 이야기로 이어지는 가스펠 스토리."
   },
   {
     "slug": "four",
     "series": "story",
     "kind": "교재",
-    "ko": { "title": "가스펠 스토리: 네 편의 이야기", "version": "v3.5", "file": "/books/four-ko.html" },
-    "en": { "title": "Gospel Story: Four Stories", "version": "v0.9", "file": "/books/four-en.html" },
+    "ko": {
+      "title": "가스펠 스토리: 네 편의 이야기",
+      "version": "v3.5",
+      "file": "/books/four-ko.html"
+    },
+    "en": {
+      "title": "Gospel Story: Four Stories",
+      "version": "v0.9",
+      "file": "/books/four-en.html"
+    },
     "blurb": "하나님 말씀 · 나의 이야기 · 한 사람의 이야기 · 그분의 이야기 · 우리의 이야기를 따라 함께 읽는 교재."
+  },
+  {
+    "slug": "steps",
+    "series": "life",
+    "kind": "책",
+    "ko": {
+      "title": "예수님과 함께 걷는 열두 걸음",
+      "version": "v1.0",
+      "file": "/books/steps-ko.html"
+    },
+    "blurb": "믿게 된 다음 날 아침, 무엇부터 하면 될까. 복음·예배·말씀·기도에서 고난·이웃까지, 예수님과 나란히 걷는 열두 걸음."
+  },
+  {
+    "slug": "meet",
+    "series": "life",
+    "kind": "교재",
+    "ko": {
+      "title": "가스펠 라이프: 열두 번의 모임",
+      "version": "v1.0",
+      "file": "/books/meet-ko.html"
+    },
+    "blurb": "읽다 · 멈추다 · 만나다 · 새기다 · 걷다. 다섯 자리를 지나며 열두 걸음을 함께 걷는 소그룹 교재."
   }
 ]
