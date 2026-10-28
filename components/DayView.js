@@ -6,6 +6,10 @@ import Footer from "./Footer";
 import { thumbBg } from "../lib/thumb";
 import { getHoneyDay, sermonsOn, calendarEvents, todayKey, fmtDate, blogList } from "../lib/content";
 import { metaOf } from "../lib/blog";
+import { CATS, catOf, HONEY_COLOR } from "../lib/cats";
+
+// 색 하나로 띠 배경(옅은 색)까지 만든다
+const tint = (hex) => `color-mix(in srgb, ${hex} 14%, #fff)`;
 
 export default async function DayView({ date }) {
   const today = todayKey();
@@ -27,23 +31,25 @@ export default async function DayView({ date }) {
 
           <div className="cards">
             {sermons.map((s) => (
-              <Link key={s.id} href={`/sermon/${s.id}`} className="card sermon">
+              <Link key={s.id} href={`/sermon/${s.id}`} className="card sermon tband" style={{ "--hue": CATS[catOf(s.kind)].color, "--tint": tint(CATS[catOf(s.kind)].color) }}>
+                <h3 className="bandh">{s.kind}</h3>
+                <div className="sgrid">
                 <div className="thumb" style={{ backgroundImage: thumbBg(s) }}>
                   <span className="play" aria-hidden="true" />
                 </div>
                 <div className="body">
-                  <h3>{s.kind}</h3>
                   <div className="ctitle">{s.title}</div>
                   <div className="cmeta">{s.passage} · {s.preacher}</div>
                   {s.summary && <p className="excerpt">{s.summary}</p>}
+                </div>
                 </div>
               </Link>
             ))}
 
             {honey && (
-              <Link href={`/honey/${date}`} className="card honey">
+              <Link href={`/honey/${date}`} className="card honey tband" style={{ "--hue": HONEY_COLOR, "--tint": tint(HONEY_COLOR) }}>
+                <h3 className="bandh">꿀보다성경 · 통독</h3>
                 <div className="body">
-                  <h3>꿀보다성경</h3>
                   <div className="passage">{honey.passage}</div>
                   <div className="verse sm">“{honey.memory.text}”</div>
                   <div className="cite">{honey.memory.cite}</div>
@@ -55,9 +61,9 @@ export default async function DayView({ date }) {
             {dayPosts.map((p) => {
               const m = metaOf(p.slug);
               return (
-                <Link key={p.id} href={`/blog/p/${p.id}`} className="card daypost" style={{ "--hue": m.hue, "--tint": m.tint }}>
+                <Link key={p.id} href={`/blog/p/${p.id}`} className="card daypost tband" style={{ "--hue": m.hue, "--tint": m.tint }}>
+                  <h3 className="bandh">블로그 · {m.name}{p.series ? ` · ${p.series}${p.part ? ` ${p.part}편` : ""}` : ""}</h3>
                   <div className="body">
-                    <h3>블로그 · {m.name}{p.series ? ` · ${p.series}${p.part ? ` ${p.part}편` : ""}` : ""}</h3>
                     <div className="ctitle">{p.title}</div>
                     {p.subtitle && <div className="cmeta">{p.subtitle}</div>}
                     {p.summary && <p className="excerpt">{p.summary}</p>}
