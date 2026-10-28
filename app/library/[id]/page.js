@@ -28,7 +28,7 @@ export default async function Book({ params }) {
   const withBooks = all.filter((x) => x.id !== b.id && b.withBooks.includes(x.id));
   const related = posts.filter((p) => b.posts.includes(p.id) || p.books?.includes(b.id));
   const facts = [
-    ["저자", b.author], ["옮긴이", b.translator], ["출판사", b.publisher], ["출간", b.year], ["쪽수", b.pages ? `${b.pages}쪽` : ""],
+    ["저자", b.author], ["옮긴이", b.translator], ["출판사", b.publisher], ["출간", b.year], ["쪽수", b.pages ? `${b.pages}쪽` : ""], ["정리한 날", b.noted ? b.noted.replaceAll("-", ". ") : ""],
   ].filter(([, v]) => v);
   return (
     <>
