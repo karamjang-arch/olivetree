@@ -525,3 +525,6 @@ header.top .brand:hover svg{transform:scale(1.08) rotate(-3deg)}
 .sthumb small{font-size:15px;letter-spacing:.02em}
 .sthumb b{font-size:46px;line-height:1;font-weight:600}
 @media (max-width:640px){.article .post{font-size:16.5px}.article .post>p:first-of-type{font-size:17.5px}.seriesbox{padding:20px}.bsearch input{font-size:15px}}
+.card.daypost{text-decoration:none;color:inherit;border-top:4px solid var(--hue);transition:transform .25s,box-shadow .25s}
+.card.daypost:hover{transform:translateY(-4px);box-shadow:var(--shadow-lg)}
+.card.daypost h3{color:var(--hue)}
