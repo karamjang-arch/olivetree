@@ -3,6 +3,7 @@ import { youtubeId } from "../lib/notion";
 import { getSermon, fmtDate } from "../lib/content";
 import { thumbBg } from "../lib/thumb";
 import { CATS, catOf } from "../lib/cats";
+import { isCardToggle } from "../lib/cards";
 
 // 설교 링크(/sermon/<id>)만 담은 줄은 썸네일 카드로 보여 준다
 const sermonIdOf = (rt = []) => {
@@ -68,7 +69,8 @@ function One({ b, anchors }) {
         </aside>
       );
     }
-    case "toggle": return <details className="btoggle"><summary><RT t={d.rich_text} /></summary>{b.kids && <Blocks blocks={b.kids} />}</details>;
+    case "toggle": if (isCardToggle(b)) return null; // 카드뉴스 원고는 본문에서 숨김
+      return <details className="btoggle"><summary><RT t={d.rich_text} /></summary>{b.kids && <Blocks blocks={b.kids} />}</details>;
     case "divider": return <hr />;
     case "image": return (
       <figure>

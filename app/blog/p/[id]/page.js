@@ -9,6 +9,7 @@ import Blocks from "../../../../components/Blocks";
 import { PostCard } from "../../../../components/BlogBrowser";
 import { BookCard } from "../../../../components/LibraryBrowser";
 import { libAll } from "../../../../lib/library";
+import { cardsFromBlocks } from "../../../../lib/cards";
 
 export const revalidate = 300;
 
@@ -32,6 +33,7 @@ export default async function PostPage({ params }) {
   const idx = series.findIndex((x) => x.id === p.id);
   const prev = idx > 0 ? series[idx - 1] : null;
   const next = idx >= 0 && idx < series.length - 1 ? series[idx + 1] : null;
+  const cards = cardsFromBlocks(p.blocks);
   const keys = new Set([...(p.topics || []), ...(p.tags || [])]);
   const related = all
     .filter((x) => x.id !== p.id && (!p.series || x.series !== p.series))
@@ -62,6 +64,23 @@ export default async function PostPage({ params }) {
         <article className="post">
           <Blocks blocks={p.blocks} />
         </article>
+
+        {cards.length > 0 && (
+          <section className="cardnews">
+            <div className="cn-head">
+              <div><div className="label">Card news</div><h3>카드뉴스로 보기</h3></div>
+              <a className="cn-zip" href={`/api/card/${p.id}/zip`}>전체 내려받기</a>
+            </div>
+            <div className="cn-track">
+              {cards.map((c) => (
+                <figure key={c.n} className="cn-card">
+                  <img src={`/api/card/${p.id}/${c.n}`} alt={`${c.n} / ${cards.length} ${c.head || c.title || c.quote || ""}`} loading={c.n > 2 ? "lazy" : "eager"} width={1080} height={1350} />
+                  <figcaption><span>{c.n} / {cards.length}</span><a href={`/api/card/${p.id}/${c.n}?dl=1`}>이 장 저장</a></figcaption>
+                </figure>
+              ))}
+            </div>
+          </section>
+        )}
 
         {(p.tags.length > 0 || p.types.length > 0 || p.bibles?.length > 0) && (
           <div className="post-foot">

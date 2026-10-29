@@ -804,3 +804,16 @@ a.pt-card:hover{transform:translateY(-4px);box-shadow:var(--shadow-lg)}
 .bpager button.on{background:var(--navy);color:#fff;border-color:var(--navy)}
 .bpager button:disabled{opacity:.4;cursor:default}
 @media(max-width:700px){.btable .c-no,.btable .c-src,.btable .c-date{display:none}.btable .c-cat{width:auto}.btable .tmeta{display:block;font-size:12px;color:var(--muted);margin-top:3px}.btable td{padding:11px 10px}}
+
+/* 카드뉴스 캐러셀 */
+.cardnews{margin:40px 0 8px;padding-top:26px;border-top:1px solid var(--line)}
+.cn-head{display:flex;align-items:flex-end;justify-content:space-between;gap:12px;margin-bottom:14px}
+.cn-head h3{margin:2px 0 0}
+.cn-zip{font-size:14px;font-weight:600;padding:8px 14px;border:1px solid var(--line);border-radius:999px;background:#fff;color:var(--ink);text-decoration:none;white-space:nowrap}
+.cn-zip:hover{border-color:var(--hue,#173b63);color:var(--hue,#173b63)}
+.cn-track{display:flex;gap:14px;overflow-x:auto;scroll-snap-type:x mandatory;padding:4px 2px 14px;-webkit-overflow-scrolling:touch}
+.cn-card{flex:0 0 min(78%,340px);scroll-snap-align:start;margin:0}
+.cn-card img{display:block;width:100%;height:auto;aspect-ratio:4/5;border-radius:12px;box-shadow:0 6px 20px rgba(23,59,99,.12);background:#f2e8da}
+.cn-card figcaption{display:flex;justify-content:space-between;font-size:13px;color:var(--muted);margin-top:8px}
+.cn-card figcaption a{color:var(--muted)}
+.cn-card figcaption a:hover{color:var(--ink)}
