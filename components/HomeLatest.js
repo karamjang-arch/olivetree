@@ -6,7 +6,7 @@ import { allBooks } from "../lib/books";
 import { metaOf } from "../lib/blog";
 import { CATS, catOf } from "../lib/cats";
 import { thumbBg } from "../lib/thumb";
-import { Poster, bg } from "./BlogBrowser";
+import { Poster, bg } from "./PostArt";
 import BookCover from "./BookCover";
 
 // 홈 포털: 최근 소식 한눈에
