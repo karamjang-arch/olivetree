@@ -723,3 +723,11 @@ a.pt-card:hover{transform:translateY(-4px);box-shadow:var(--shadow-lg)}
 .seriesbox h3 a{color:#fff;text-decoration:none}.seriesbox h3 a:hover{text-decoration:underline}
 .seriesbox .seriesmap{display:inline-block;margin:-6px 0 12px;color:#f0b59c;font-size:13.5px;font-weight:600;text-decoration:none}
 .seriesbox .seriesmap:hover{text-decoration:underline}
+
+/* 본문 사진첩: 이어진 사진 2열, 홀수면 첫 장을 넓게 */
+.post .gallery{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin:22px 0}
+.post .gallery figure{margin:0}
+.post .gallery img{width:100%;aspect-ratio:3/2;object-fit:cover;border-radius:12px;box-shadow:var(--shadow);display:block}
+.post .gallery.n3 figure:first-child,.post .gallery.n5 figure:first-child,.post .gallery.n7 figure:first-child{grid-column:1/-1}
+.post .gallery.n3 figure:first-child img,.post .gallery.n5 figure:first-child img{aspect-ratio:16/9}
+.post .gallery figcaption{margin-top:6px;font-size:12.5px}

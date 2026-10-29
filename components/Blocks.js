@@ -72,7 +72,7 @@ function One({ b, anchors }) {
     case "divider": return <hr />;
     case "image": return (
       <figure>
-        <img src={`/api/img/${b.id.replace(/-/g, "")}`} alt="" loading="lazy" />
+        <img src={imgSrc(b)} alt={d.caption?.map((x) => x.plain_text).join("") || ""} loading="lazy" />
         {d.caption?.length > 0 && <figcaption><RT t={d.caption} /></figcaption>}
       </figure>
     );
@@ -97,11 +97,30 @@ function One({ b, anchors }) {
   }
 }
 
+const imgSrc = (b) => b.image?.external?.url?.replace(/^https?:\/\/o-live-tree\.vercel\.app/, "") || `/api/img/${b.id.replace(/-/g, "")}`;
+
 // 연속된 목록 항목은 하나의 목록으로 묶는다
 export default function Blocks({ blocks, anchors }) {
   const out = [];
   for (let i = 0; i < blocks.length; i++) {
     const b = blocks[i];
+    if (b.type === "image" && blocks[i + 1]?.type === "image") {
+      // 이어진 사진은 사진첩처럼 묶는다
+      const imgs = [];
+      while (i < blocks.length && blocks[i].type === "image") { imgs.push(blocks[i]); i++; }
+      i--;
+      out.push(
+        <div key={b.id} className={`gallery n${imgs.length}`}>
+          {imgs.map((x) => (
+            <figure key={x.id}>
+              <img src={imgSrc(x)} alt={x.image.caption?.map((c) => c.plain_text).join("") || ""} loading="lazy" />
+              {x.image.caption?.length > 0 && <figcaption><RT t={x.image.caption} /></figcaption>}
+            </figure>
+          ))}
+        </div>
+      );
+      continue;
+    }
     if (b.type === "bulleted_list_item" || b.type === "numbered_list_item") {
       const type = b.type;
       const items = [];
