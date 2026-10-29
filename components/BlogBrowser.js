@@ -30,18 +30,19 @@ export function PostCard({ x }) {
 const norm = (s) => (s || "").toLowerCase().replace(/\s+/g, "");
 const KEYS = ["cat", "topic", "series", "tag", "bible", "q"];
 
-export default function BlogBrowser({ posts }) {
+export default function BlogBrowser({ posts, decks = [] }) {
   const [f, setF] = useState({ cat: "all", topic: "", series: "", tag: "", bible: "", q: "" });
   const [more, setMore] = useState(false);
   const [view, setView] = useState("card"); // card | table
   const [order, setOrder] = useState("new");
   const [page, setPage] = useState(1);
+  const [viewer, setViewer] = useState(null); // { x, count, i }
   const PER = 15;
   useEffect(() => {
     const sp = new URLSearchParams(window.location.search);
     let v = sp.get("view");
     if (!v) { try { v = localStorage.getItem("blogView"); } catch {} }
-    if (v === "table" || v === "card") setView(v);
+    if (v === "table" || v === "card" || (v === "news" && decks.length)) setView(v);
   }, []);
   const pickView = (v) => { setView(v); try { localStorage.setItem("blogView", v); } catch {} };
   useEffect(() => setPage(1), [f, order, view]);
@@ -82,6 +83,8 @@ export default function BlogBrowser({ posts }) {
     );
   }, [posts, f]);
 
+  const deckOf = Object.fromEntries(decks.map((d) => [d.id, d.count]));
+  const newsList = list.filter((p) => deckOf[p.id]);
   const active = ["topic", "series", "tag", "bible", "q"].filter((k) => f[k]);
   const clear = () => setF({ cat: f.cat, topic: "", series: "", tag: "", bible: "", q: "" });
 
@@ -129,7 +132,7 @@ export default function BlogBrowser({ posts }) {
       )}
 
       <div className="bviewbar">
-        <span className="bcount">{list.length}개의 글</span>
+        <span className="bcount">{view === "news" ? `카드뉴스 ${newsList.length}편` : `${list.length}개의 글`}</span>
         {view === "table" && (
           <select value={order} onChange={(e) => setOrder(e.target.value)} aria-label="정렬">
             <option value="new">최신순</option>
@@ -143,13 +146,29 @@ export default function BlogBrowser({ posts }) {
           <button className={view === "table" ? "on" : ""} onClick={() => pickView("table")} aria-pressed={view === "table"}>
             <svg viewBox="0 0 16 16" width="14" height="14" fill="currentColor"><rect x="1" y="2" width="14" height="2.2" rx="1"/><rect x="1" y="6.9" width="14" height="2.2" rx="1"/><rect x="1" y="11.8" width="14" height="2.2" rx="1"/></svg>표
           </button>
+          {decks.length > 0 && (
+            <button className={view === "news" ? "on" : ""} onClick={() => pickView("news")} aria-pressed={view === "news"}>
+              <svg viewBox="0 0 16 16" width="14" height="14" fill="currentColor"><rect x="4" y="1" width="9" height="11" rx="1.5"/><rect x="2" y="3.5" width="9" height="11" rx="1.5" opacity=".55"/></svg>카드뉴스
+            </button>
+          )}
         </div>
       </div>
 
       {f.cat === "recitation" && (
         <Link href="/blog/recitation" className="btn primary" style={{ marginBottom: 14, display: "inline-block" }}>새김D6 말씀 카드 전체 보기 →</Link>
       )}
-      {list.length === 0
+      {view === "news"
+        ? (newsList.length === 0
+            ? <div className="panel t-text"><h3>카드뉴스가 없습니다</h3><p className="muted">이 조건에 맞는 카드뉴스가 아직 없습니다.</p></div>
+            : <div className="cngrid">{newsList.map((x) => (
+                <button key={x.id} className="cncover" onClick={() => setViewer({ x, count: deckOf[x.id], i: 1 })}>
+                  <img src={`/api/card/${x.id}/1`} alt={x.title} loading="lazy" width={1080} height={1350} />
+                  <span className="cn-n">{deckOf[x.id]}장</span>
+                  <b>{x.title}</b>
+                  <i>{metaOf(x.slug).name} · {x.created.replaceAll("-", ".")}</i>
+                </button>
+              ))}</div>)
+        : list.length === 0
         ? <div className="panel t-text"><h3>{active.length ? "찾는 글이 없습니다" : "준비 중"}</h3><p className="muted">{active.length ? "다른 낱말이나 주제로 찾아보세요." : "아직 올라온 글이 없습니다."}</p></div>
         : view === "card"
           ? <div className="pgrid">{(f.series || f.q ? list.map((x) => ({ post: x })) : collapseSeries(list)).map((it) =>
@@ -195,6 +214,41 @@ export default function BlogBrowser({ posts }) {
                 </>
               );
             })()}
+      {viewer && <CardViewer v={viewer} setV={setViewer} />}
+    </div>
+  );
+}
+
+// 카드뉴스 넘겨 보기 (모아 보기 → 카드뉴스 탭)
+function CardViewer({ v, setV }) {
+  const { x, count, i } = v;
+  const go = (d) => setV((o) => ({ ...o, i: Math.min(count, Math.max(1, o.i + d)) }));
+  useEffect(() => {
+    const k = (e) => { if (e.key === "Escape") setV(null); if (e.key === "ArrowRight") go(1); if (e.key === "ArrowLeft") go(-1); };
+    window.addEventListener("keydown", k);
+    document.body.style.overflow = "hidden";
+    return () => { window.removeEventListener("keydown", k); document.body.style.overflow = ""; };
+  }, []); // eslint-disable-line react-hooks/exhaustive-deps
+  const [sx, setSx] = useState(null);
+  return (
+    <div className="cnview" role="dialog" aria-modal="true" aria-label={x.title} onClick={(e) => e.target === e.currentTarget && setV(null)}>
+      <div className="cnv-box">
+        <div className="cnv-top">
+          <span>{i} / {count}</span>
+          <button onClick={() => setV(null)} aria-label="닫기">×</button>
+        </div>
+        <div className="cnv-stage" onTouchStart={(e) => setSx(e.touches[0].clientX)} onTouchEnd={(e) => { if (sx == null) return; const d = e.changedTouches[0].clientX - sx; if (Math.abs(d) > 40) go(d < 0 ? 1 : -1); setSx(null); }}>
+          <button className="cnv-nav prev" onClick={() => go(-1)} disabled={i === 1} aria-label="이전 장">‹</button>
+          <img key={i} src={`/api/card/${x.id}/${i}`} alt={`${i} / ${count}`} width={1080} height={1350} />
+          <button className="cnv-nav next" onClick={() => go(1)} disabled={i === count} aria-label="다음 장">›</button>
+        </div>
+        <div className="cnv-dots">{Array.from({ length: count }, (_, k) => <button key={k} className={k + 1 === i ? "on" : ""} onClick={() => setV((o) => ({ ...o, i: k + 1 }))} aria-label={`${k + 1}장`} />)}</div>
+        <div className="cnv-foot">
+          <Link href={`/blog/p/${x.id}`} className="btn primary">본문 읽기 →</Link>
+          <a href={`/api/card/${x.id}/${i}?dl=1`}>이 장 저장</a>
+          <a href={`/api/card/${x.id}/zip`}>전체 ZIP</a>
+        </div>
+      </div>
     </div>
   );
 }

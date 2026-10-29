@@ -821,3 +821,28 @@ a.pt-card:hover{transform:translateY(-4px);box-shadow:var(--shadow-lg)}
 .cn-card figcaption a{color:var(--muted)}
 .cn-zip{display:inline-block;margin:4px 0 18px;font-size:14px;font-weight:600;padding:8px 14px;border:1px solid var(--line);border-radius:999px;color:var(--ink);text-decoration:none}
 .cn-zip:hover{border-color:var(--hue,#173b63);color:var(--hue,#173b63)}
+
+/* 모아 보기 → 카드뉴스 탭 */
+.cngrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:22px 18px}
+.cncover{all:unset;cursor:pointer;display:flex;flex-direction:column;gap:6px;position:relative}
+.cncover img{width:100%;height:auto;aspect-ratio:4/5;border-radius:12px;background:#f2e8da;box-shadow:6px 6px 0 -1px #fff,6px 6px 0 0 var(--line),0 4px 14px rgba(23,59,99,.10);transition:transform .2s,box-shadow .2s}
+.cncover:hover img,.cncover:focus-visible img{transform:translate(-3px,-3px);box-shadow:10px 10px 0 -1px #fff,10px 10px 0 0 var(--line),0 14px 28px rgba(23,59,99,.16)}
+.cncover:focus-visible{outline:2px solid var(--hue,#173b63);outline-offset:4px;border-radius:12px}
+.cncover b{font-size:15px;line-height:1.4;margin-top:6px}
+.cncover i{font-style:normal;font-size:12.5px;color:var(--muted)}
+.cn-n{position:absolute;top:10px;left:10px;font-size:12px;font-weight:700;padding:3px 9px;border-radius:999px;background:rgba(55,57,43,.78);color:#fff;font-family:var(--sans,inherit)}
+.cnview{position:fixed;inset:0;z-index:100;background:rgba(20,24,22,.78);display:flex;align-items:center;justify-content:center;padding:16px}
+.cnv-box{width:min(460px,100%);display:flex;flex-direction:column;gap:12px}
+.cnv-top{display:flex;justify-content:space-between;align-items:center;color:#fff;font-size:14px}
+.cnv-top button{all:unset;cursor:pointer;font-size:30px;line-height:1;color:#fff;padding:0 6px}
+.cnv-stage{position:relative}
+.cnv-stage img{display:block;width:100%;height:auto;max-height:72vh;object-fit:contain;border-radius:12px;background:#f2e8da}
+.cnv-nav{position:absolute;top:50%;transform:translateY(-50%);width:42px;height:42px;border-radius:50%;border:0;background:rgba(255,255,255,.9);font-size:26px;line-height:1;cursor:pointer;color:#37392b}
+.cnv-nav.prev{left:-14px}.cnv-nav.next{right:-14px}
+.cnv-nav:disabled{opacity:0;pointer-events:none}
+.cnv-dots{display:flex;justify-content:center;gap:7px}
+.cnv-dots button{width:7px;height:7px;border-radius:50%;border:0;padding:0;background:rgba(255,255,255,.4);cursor:pointer}
+.cnv-dots button.on{background:#fff;width:18px;border-radius:4px}
+.cnv-foot{display:flex;align-items:center;gap:16px;flex-wrap:wrap}
+.cnv-foot a:not(.btn){color:rgba(255,255,255,.85);font-size:14px}
+@media(max-width:700px){.cngrid{grid-template-columns:repeat(2,1fr);gap:18px 12px}.cnv-nav.prev{left:6px}.cnv-nav.next{right:6px}}
