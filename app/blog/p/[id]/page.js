@@ -22,23 +22,12 @@ export async function generateMetadata({ params }) {
 
 const NUM = ["", "①", "②", "③", "④", "⑤", "⑥", "⑦", "⑧", "⑨", "⑩"];
 
-function textOf(blocks = []) {
-  let n = 0;
-  for (const b of blocks) {
-    const d = b[b.type] || {};
-    n += (d.rich_text || []).reduce((a, x) => a + x.plain_text.length, 0);
-    if (b.kids) n += textOf(b.kids);
-  }
-  return n;
-}
-
 export default async function PostPage({ params }) {
   const { id } = await params;
   const [p, all, lib] = await Promise.all([getBlogPost(id), blogList(), libAll()]);
   if (!p) notFound();
   const m = metaOf(p.slug);
   const books = lib.filter((b) => p.books?.includes(b.id) || b.posts.includes(p.id));
-  const minutes = Math.max(1, Math.round(textOf(p.blocks) / 500));
   const series = p.series ? all.filter((x) => x.series === p.series).sort((a, b) => (a.part ?? 99) - (b.part ?? 99)) : [];
   const idx = series.findIndex((x) => x.id === p.id);
   const prev = idx > 0 ? series[idx - 1] : null;
@@ -62,7 +51,6 @@ export default async function PostPage({ params }) {
         {p.subtitle && <p className="post-sub">{p.subtitle}</p>}
         <div className="post-meta">
           <span>{p.created.replaceAll("-", ". ")}</span>
-          <span>약 {minutes}분 읽기</span>
           {p.author && <span>{p.author}</span>}
         </div>
         {p.topics?.length > 0 && (

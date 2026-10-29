@@ -6,7 +6,7 @@ import { allBooks } from "../lib/books";
 import { metaOf } from "../lib/blog";
 import { CATS, catOf } from "../lib/cats";
 import { thumbBg } from "../lib/thumb";
-import { bg } from "./BlogBrowser";
+import { Poster, bg } from "./BlogBrowser";
 import BookCover from "./BookCover";
 
 // 홈 포털: 최근 소식 한눈에
@@ -31,9 +31,7 @@ export default async function HomeLatest({ today }) {
           return (
             <Link href={`/blog/p/${lead.id}`} className="pt-lead" style={{ "--hue": m.hue, "--tint": m.tint }}>
               <div className={`pt-img${has ? "" : " none"}`} style={has ? { backgroundImage: bg(lead) } : undefined}>
-                {!has && (lead.series
-                  ? <span className="sthumb"><small>{lead.series}</small>{lead.part ? <b>{lead.part}</b> : null}</span>
-                  : <span className="pt-en">{m.en}</span>)}
+                {!has && <Poster x={lead} m={m} />}
                 <span className="pt-badge">블로그 · {m.name}</span>
               </div>
               <div className="pt-body">

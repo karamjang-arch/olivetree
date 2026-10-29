@@ -10,15 +10,30 @@ export function bg(x) {
   return l.join(", ");
 }
 
+// 커버가 없는 글: 글의 물음(부제)을 크게 담은 포스터
+export function Poster({ x, m }) {
+  const hook = x.subtitle || x.title;
+  return (
+    <span className="poster">
+      <span className="pk">{x.series || m.en}</span>
+      {x.series && x.part ? <span className="pn">{x.part}</span> : null}
+      <svg className="pleaf" viewBox="0 0 120 120" aria-hidden="true">
+        <path d="M10 110 C 40 80, 70 60, 112 14" />
+        <path d="M34 86 c -4 -14 2 -26 14 -30 c 2 14 -4 25 -14 30z M54 68 c 12 -6 25 -3 30 8 c -13 4 -24 1 -30 -8z M60 60 c -4 -14 2 -26 14 -30 c 2 14 -4 25 -14 30z M80 42 c 12 -6 25 -3 30 8 c -13 4 -24 1 -30 -8z" />
+      </svg>
+      <span className="ph">{hook}</span>
+      <span className="pf">{m.name}{x.series ? ` · ${x.part ? `${x.part}편` : ""}` : ""}</span>
+    </span>
+  );
+}
+
 export function PostCard({ x }) {
   const m = metaOf(x.slug);
   const has = x.cover || x.video;
   return (
     <Link href={`/blog/p/${x.id}`} className="card pcard" style={{ "--hue": m.hue, "--tint": m.tint }}>
       <div className={`pthumb${has ? "" : " none"}`} style={has ? { backgroundImage: bg(x) } : undefined}>
-        {!has && (x.series
-          ? <span className="sthumb"><small>{x.series}</small>{x.part ? <b>{x.part}</b> : null}</span>
-          : <span>{m.en}</span>)}
+        {!has && <Poster x={x} m={m} />}
       </div>
       <div className="pbody">
         <div className="ptag">{m.name}{x.series ? ` · ${x.series}${x.part ? ` ${x.part}편` : ""}` : ""}{x.author ? ` · ${x.author}` : ""}</div>
