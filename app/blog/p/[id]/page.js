@@ -18,7 +18,8 @@ export async function generateMetadata({ params }) {
   const p = await getBlogPost(id);
   if (!p) return { title: "블로그 · Olive Tree" };
   const t = p.series ? `${p.series} ${p.part ? `${p.part}편 ` : ""}· ${p.title}` : p.title;
-  return { title: `${t} · Olive Tree`, description: p.subtitle || p.summary, openGraph: { title: t, description: p.subtitle || p.summary } };
+  const og = cardsFromBlocks(p.blocks).length ? [{ url: `/api/card/${p.id}/1`, width: 1080, height: 1350 }] : undefined;
+  return { title: `${t} · Olive Tree`, description: p.subtitle || p.summary, openGraph: { title: t, description: p.subtitle || p.summary, ...(og && { images: og }) } };
 }
 
 const NUM = ["", "①", "②", "③", "④", "⑤", "⑥", "⑦", "⑧", "⑨", "⑩"];
@@ -65,22 +66,6 @@ export default async function PostPage({ params }) {
           <Blocks blocks={p.blocks} />
         </article>
 
-        {cards.length > 0 && (
-          <section className="cardnews">
-            <div className="cn-head">
-              <div><div className="label">Card news</div><h3>카드뉴스로 보기</h3></div>
-              <a className="cn-zip" href={`/api/card/${p.id}/zip`}>전체 내려받기</a>
-            </div>
-            <div className="cn-track">
-              {cards.map((c) => (
-                <figure key={c.n} className="cn-card">
-                  <img src={`/api/card/${p.id}/${c.n}`} alt={`${c.n} / ${cards.length} ${c.head || c.title || c.quote || ""}`} loading={c.n > 2 ? "lazy" : "eager"} width={1080} height={1350} />
-                  <figcaption><span>{c.n} / {cards.length}</span><a href={`/api/card/${p.id}/${c.n}?dl=1`}>이 장 저장</a></figcaption>
-                </figure>
-              ))}
-            </div>
-          </section>
-        )}
 
         {(p.tags.length > 0 || p.types.length > 0 || p.bibles?.length > 0) && (
           <div className="post-foot">
@@ -122,6 +107,24 @@ export default async function PostPage({ params }) {
               </div>
             )}
           </section>
+        )}
+
+        {cards.length > 0 && (
+          <details className="cardnews">
+            <summary>
+              <span className="cn-sum"><b>카드뉴스로 보기</b><i>{cards.length}장 · 인스타그램·카톡에 바로 나눌 수 있습니다</i></span>
+              <span className="cn-open">펼치기</span>
+            </summary>
+            <div className="cn-track">
+              {cards.map((c) => (
+                <figure key={c.n} className="cn-card">
+                  <img src={`/api/card/${p.id}/${c.n}`} alt={`${c.n} / ${cards.length} ${c.head || c.title || c.quote || ""}`} loading="lazy" width={1080} height={1350} />
+                  <figcaption><span>{c.n} / {cards.length}</span><a href={`/api/card/${p.id}/${c.n}?dl=1`}>이 장 저장</a></figcaption>
+                </figure>
+              ))}
+            </div>
+            <a className="cn-zip" href={`/api/card/${p.id}/zip`}>전체 내려받기 (ZIP)</a>
+          </details>
         )}
 
         <div className="panel t-comment">
