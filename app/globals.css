@@ -747,8 +747,8 @@ a.pt-card:hover{transform:translateY(-4px);box-shadow:var(--shadow-lg)}
 .post-cover{max-height:620px;object-fit:contain;background:var(--tint,#eef0e8)}
 
 /* 연재 묶음 카드: 겹쳐 놓은 종이 */
-.card.pcard.scardstack{overflow:visible;margin:0 16px 16px 0;box-shadow:8px 8px 0 -1px #fff,8px 8px 0 0 var(--line),16px 16px 0 -1px #f7f5ee,16px 16px 0 0 var(--line)}
-.card.pcard.scardstack:hover{box-shadow:10px 10px 0 -1px #fff,10px 10px 0 0 var(--line),20px 20px 0 -1px #f7f5ee,20px 20px 0 0 var(--line),var(--shadow-lg)}
+.card.pcard.scardstack{overflow:hidden;margin:0 16px 16px 0;box-shadow:8px 8px 0 -1px #fff,8px 8px 0 0 var(--line),16px 16px 0 -1px #f7f5ee,16px 16px 0 0 var(--line)}
+.card.pcard.scardstack:hover{transform:translate(-4px,-4px);box-shadow:12px 12px 0 -1px #fff,12px 12px 0 0 var(--line),24px 24px 0 -1px #f7f5ee,24px 24px 0 0 var(--line),0 22px 40px rgba(23,59,99,.16)}
 .scardstack .pthumb{position:relative;overflow:hidden;border-radius:16px 16px 0 0}
 .sbadge{font-family:"Pretendard Variable",Pretendard,sans-serif;z-index:2;position:absolute;right:12px;top:12px;background:rgba(255,255,255,.92);color:var(--hue);font-size:11.5px;font-weight:700;padding:4px 10px;border-radius:999px;letter-spacing:.02em}
 .sposter .ph{font-size:clamp(21px,2.4vw,26px)}
