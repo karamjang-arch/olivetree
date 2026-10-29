@@ -4,6 +4,7 @@ import Calendar from "../../components/Calendar";
 import BlogBrowser, { PostCard } from "../../components/BlogBrowser";
 import { LatestStack, collapseSeries } from "../../components/PostArt";
 import { metaOf } from "../../lib/blog";
+import { familyTrips } from "../../lib/trip";
 import { blogList, blogEvents, blogLinks, todayKey, cardDecks } from "../../lib/content";
 
 export const revalidate = 300;
@@ -32,7 +33,7 @@ export default async function BlogHome() {
         <section className="block" id="archive">
           <div className="label">Archive</div>
           <h2>모아 보기</h2>
-          <BlogBrowser posts={posts} decks={decks} />
+          <BlogBrowser posts={posts} decks={decks} trips={familyTrips(posts)} />
         </section>
 
         <section className="block" id="calendar">

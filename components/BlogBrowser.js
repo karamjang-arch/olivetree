@@ -3,6 +3,7 @@ import Link from "next/link";
 import { useEffect, useMemo, useState } from "react";
 import { BLOG, metaOf } from "../lib/blog";
 import { bg, Poster, SeriesCard, collapseSeries } from "./PostArt";
+import WorldTrips from "./WorldTrips";
 export { bg, Poster };
 
 
@@ -30,7 +31,7 @@ export function PostCard({ x }) {
 const norm = (s) => (s || "").toLowerCase().replace(/\s+/g, "");
 const KEYS = ["cat", "topic", "series", "tag", "bible", "q"];
 
-export default function BlogBrowser({ posts, decks = [] }) {
+export default function BlogBrowser({ posts, decks = [], trips = [] }) {
   const [f, setF] = useState({ cat: "all", topic: "", series: "", tag: "", bible: "", q: "" });
   const [more, setMore] = useState(false);
   const [view, setView] = useState("card"); // card | table
@@ -132,6 +133,13 @@ export default function BlogBrowser({ posts, decks = [] }) {
           {active.map((k) => <button key={k} onClick={() => setF((o) => ({ ...o, [k]: "" }))}>{k === "q" ? `"${f.q}"` : k === "tag" ? `#${f[k]}` : f[k]} ×</button>)}
           <button className="clear" onClick={clear}>모두 지우기</button>
         </div>
+      )}
+
+      {f.cat === "family" && trips.length > 0 && !active.length && (
+        <section className="wt-wrap">
+          <div className="wt-head"><b>여정 지도</b><span>우리 가족이 걸어 온 길</span></div>
+          <WorldTrips trips={trips} />
+        </section>
       )}
 
       <div className="bviewbar">
