@@ -163,9 +163,8 @@ export default function BlogBrowser({ posts, decks = [] }) {
             : <div className="cngrid">{newsList.map((x) => (
                 <button key={x.id} className="cncover" onClick={() => setViewer({ x, count: deckOf[x.id], i: 1 })}>
                   <img src={`/api/card/${x.id}/1`} alt={x.title} loading="lazy" width={1080} height={1350} />
-                  <span className="cn-n">{deckOf[x.id]}장</span>
                   <b>{x.title}</b>
-                  <i>{metaOf(x.slug).name} · {x.created.replaceAll("-", ".")}</i>
+                  <i>{metaOf(x.slug).name} · {x.created.replaceAll("-", ".")} · {deckOf[x.id]}장</i>
                 </button>
               ))}</div>)
         : list.length === 0
@@ -240,6 +239,7 @@ function CardViewer({ v, setV }) {
         <div className="cnv-stage" onTouchStart={(e) => setSx(e.touches[0].clientX)} onTouchEnd={(e) => { if (sx == null) return; const d = e.changedTouches[0].clientX - sx; if (Math.abs(d) > 40) go(d < 0 ? 1 : -1); setSx(null); }}>
           <button className="cnv-nav prev" onClick={() => go(-1)} disabled={i === 1} aria-label="이전 장">‹</button>
           <img key={i} src={`/api/card/${x.id}/${i}`} alt={`${i} / ${count}`} width={1080} height={1350} />
+          {i < count && <link rel="preload" as="image" href={`/api/card/${x.id}/${i + 1}`} />}
           <button className="cnv-nav next" onClick={() => go(1)} disabled={i === count} aria-label="다음 장">›</button>
         </div>
         <div className="cnv-dots">{Array.from({ length: count }, (_, k) => <button key={k} className={k + 1 === i ? "on" : ""} onClick={() => setV((o) => ({ ...o, i: k + 1 }))} aria-label={`${k + 1}장`} />)}</div>

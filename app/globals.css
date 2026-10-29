@@ -830,13 +830,12 @@ a.pt-card:hover{transform:translateY(-4px);box-shadow:var(--shadow-lg)}
 .cncover:focus-visible{outline:2px solid var(--hue,#173b63);outline-offset:4px;border-radius:12px}
 .cncover b{font-size:15px;line-height:1.4;margin-top:6px}
 .cncover i{font-style:normal;font-size:12.5px;color:var(--muted)}
-.cn-n{position:absolute;top:10px;left:10px;font-size:12px;font-weight:700;padding:3px 9px;border-radius:999px;background:rgba(55,57,43,.78);color:#fff;font-family:var(--sans,inherit)}
 .cnview{position:fixed;inset:0;z-index:100;background:rgba(20,24,22,.78);display:flex;align-items:center;justify-content:center;padding:16px}
 .cnv-box{width:min(460px,100%);display:flex;flex-direction:column;gap:12px}
 .cnv-top{display:flex;justify-content:space-between;align-items:center;color:#fff;font-size:14px}
 .cnv-top button{all:unset;cursor:pointer;font-size:30px;line-height:1;color:#fff;padding:0 6px}
 .cnv-stage{position:relative}
-.cnv-stage img{display:block;width:100%;height:auto;max-height:72vh;object-fit:contain;border-radius:12px;background:#f2e8da}
+.cnv-stage img{display:block;width:100%;height:auto;aspect-ratio:4/5;max-height:72vh;object-fit:contain;border-radius:12px;background:#f2e8da linear-gradient(90deg,#f2e8da 0,#f8f1e6 50%,#f2e8da 100%) 0 0/200% 100%;animation:cnload 1.2s linear infinite}@keyframes cnload{to{background-position:-200% 0}}
 .cnv-nav{position:absolute;top:50%;transform:translateY(-50%);width:42px;height:42px;border-radius:50%;border:0;background:rgba(255,255,255,.9);font-size:26px;line-height:1;cursor:pointer;color:#37392b}
 .cnv-nav.prev{left:-14px}.cnv-nav.next{right:-14px}
 .cnv-nav:disabled{opacity:0;pointer-events:none}
