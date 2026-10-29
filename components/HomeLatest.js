@@ -12,7 +12,8 @@ import BookCover from "./BookCover";
 // 홈 포털: 최근 소식 한눈에
 export default async function HomeLatest({ today }) {
   const [sermons, posts, lib, settle, decks] = await Promise.all([sermonMeta(), blogList(), libAll(), settleAll(), cardDecks()]);
-  const deck = decks[0] && { ...posts.find((p) => p.id === decks[0].id), count: decks[0].count }; // 가장 최근 카드뉴스
+  const deckList = decks.slice(0, 3).map((d) => ({ ...posts.find((p) => p.id === d.id), count: d.count })).filter((d) => d.id);
+  const [deck, ...otherDecks] = deckList; // 가장 최근 카드뉴스 + 그 옆에 두 편
   const recentSermons = sermons.filter((s) => s.date <= today).slice(0, 4);
   const [lead, ...morePosts] = posts;
   const book = lib.find((b) => b.kind !== "우리가 쓴 책") || lib[0];
@@ -86,11 +87,22 @@ export default async function HomeLatest({ today }) {
             <div className="pt-cap">카드뉴스<Link href="/blog?view=news#archive">전체 →</Link></div>
             <div className="pt-news-title">{deck.title}</div>
             {deck.subtitle && <div className="pt-sub">{deck.subtitle}</div>}
-            <div className="pt-news-strip">
-              {Array.from({ length: Math.min(deck.count - 1, 3) }, (_, k) => (
-                <Link key={k} href={`/blog?view=news&card=${deck.id}&i=${k + 2}#archive`}><img src={`/api/card/${deck.id}/${k + 2}`} alt={`${k + 2}장`} loading="lazy" width={1080} height={1350} /></Link>
-              ))}
-            </div>
+            {otherDecks.length > 0 ? (
+              <div className="pt-news-more">
+                {otherDecks.map((d) => (
+                  <Link key={d.id} href={`/blog?view=news&card=${d.id}#archive`} title={d.title}>
+                    <img src={`/api/card/${d.id}/1`} alt="" loading="lazy" width={1080} height={1350} />
+                    <span>{d.title}</span>
+                  </Link>
+                ))}
+              </div>
+            ) : (
+              <div className="pt-news-strip">
+                {Array.from({ length: Math.min(deck.count - 1, 3) }, (_, k) => (
+                  <Link key={k} href={`/blog?view=news&card=${deck.id}&i=${k + 2}#archive`}><img src={`/api/card/${deck.id}/${k + 2}`} alt={`${k + 2}장`} loading="lazy" width={1080} height={1350} /></Link>
+                ))}
+              </div>
+            )}
             <div className="pt-news-act">
               <Link href={`/blog?view=news&card=${deck.id}#archive`} className="btn primary">{deck.count}장 넘겨 보기</Link>
               <Link href={`/blog/p/${deck.id}`}>본문 읽기 →</Link>
