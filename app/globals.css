@@ -904,3 +904,5 @@ a.pt-card:hover{transform:translateY(-4px);box-shadow:var(--shadow-lg)}
 .wt-ctl button{border:0;background:#173b63;color:#fff;font:inherit;font-size:13px;font-weight:600;padding:7px 14px;border-radius:999px;cursor:pointer;white-space:nowrap}
 .wt-ctl b{font-size:15px;flex:1;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
 .wt-ctl a{font-size:13px;font-weight:600;color:#173b63;white-space:nowrap;text-decoration:none}
+.wtrips .tm-route{opacity:1}
+.wt-start{fill:#fff;stroke:#173b63;stroke-width:.35}

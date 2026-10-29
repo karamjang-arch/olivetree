@@ -137,6 +137,7 @@ export default function WorldTrips({ trips }) {
         {t && (
           <g style={{ opacity: zoomed ? 1 : 0, transition: "opacity .5s" }}>
             <path ref={route} d={routeD([t.map.start, ...t.map.stops].filter(Boolean))} className="tm-route" strokeWidth={u * 0.42} />
+            {t.map.start && <g><circle cx={t.map.start.x} cy={t.map.start.y} r={u * 0.9} className="wt-start" /><text x={t.map.start.x} y={t.map.start.y - u * 1.6} className="wt-geo" fontSize={u * 1.3}>{t.map.start.t}</text></g>}
             {t.map.labels.map((l) => <text key={l.t} x={l.x} y={l.y} className={`wt-geo ${l.k}`} fontSize={l.k === "sea" ? u * 1.7 : u * 2.6}>{l.t}</text>)}
             {t.map.stops.map((s, i) => {
               const r = u * (active === s.id ? 3.6 : 3);
