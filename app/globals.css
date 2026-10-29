@@ -325,7 +325,7 @@ header.top .brand .glow{stroke:#e8f3d0;stroke-width:60;stroke-dasharray:9 91;ani
 .pgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(290px,1fr));gap:18px}
 .card.pcard{display:flex;flex-direction:column;text-decoration:none;color:inherit;overflow:hidden;border-top:4px solid var(--hue);transition:transform .25s cubic-bezier(.2,.7,.2,1),box-shadow .25s}
 .card.pcard:hover{transform:translateY(-5px);box-shadow:var(--shadow-lg)}
-.pthumb{aspect-ratio:16/10;background:#d9e0d0 center 18%/cover no-repeat;transition:transform .5s}
+.pthumb{aspect-ratio:16/10;background:#d9e0d0 center 4%/cover no-repeat;transition:transform .5s}
 .pthumb.none{display:flex;align-items:center;justify-content:center;background:var(--tint);color:var(--hue);font-family:"Great Vibes",Fraunces,cursive;font-size:30px}
 .card.pcard:hover .pthumb{transform:scale(1.04)}
 .card.pcard{--clip:1}
@@ -609,7 +609,7 @@ header.top .brand:hover svg{transform:scale(1.08) rotate(-3deg)}
 .portal{display:grid;grid-template-columns:minmax(0,1.35fr) minmax(0,1fr);gap:22px}
 .pt-lead{display:flex;flex-direction:column;background:#fff;border-radius:22px;overflow:hidden;box-shadow:var(--shadow);text-decoration:none;color:inherit;border-top:4px solid var(--hue);transition:transform .25s,box-shadow .25s}
 .pt-lead:hover{transform:translateY(-4px);box-shadow:var(--shadow-lg)}
-.pt-img{position:relative;aspect-ratio:16/8;background:#d9e0d0 center 15%/cover no-repeat;display:flex;align-items:center;justify-content:center}
+.pt-img{position:relative;aspect-ratio:16/8;background:#d9e0d0 center 4%/cover no-repeat;display:flex;align-items:center;justify-content:center}
 .pt-img.none{background:linear-gradient(135deg,var(--tint),#fff);color:var(--hue)}
 .pt-img .sthumb small{font-size:20px}.pt-img .sthumb b{font-size:72px}
 .pt-en{font-family:"Great Vibes",cursive;font-size:46px}
@@ -741,7 +741,7 @@ a.pt-card:hover{transform:translateY(-4px);box-shadow:var(--shadow-lg)}
 .poster .pn{position:absolute;top:-8px;right:14px;font-family:Fraunces,serif;font-size:96px;font-weight:600;line-height:1;opacity:.16}
 .poster .pleaf{position:absolute;right:-6px;bottom:-6px;width:46%;max-width:150px;opacity:.13;fill:none;stroke:#fff;stroke-width:2.2}
 .poster .pleaf path+path{fill:#fff;stroke:none}
-.poster .ph{position:relative;font-family:Fraunces,"Noto Serif KR",serif;font-size:clamp(19px,2.2vw,24px);line-height:1.35;font-weight:600;letter-spacing:-.01em;max-width:88%;display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden}
+.poster .ph{position:relative;word-break:keep-all;font-family:Fraunces,"Noto Serif KR",serif;font-size:clamp(19px,2.2vw,24px);line-height:1.35;font-weight:600;letter-spacing:-.01em;max-width:88%;display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden}
 .poster .pf{position:relative;margin-top:10px;font-size:11.5px;letter-spacing:.1em;opacity:.75}
 .pt-img .poster{padding:30px 32px 28px}.pt-img .poster .ph{font-size:clamp(24px,3vw,34px)}.pt-img .poster .pn{font-size:150px}.pt-img .poster .pk{top:58px;left:32px}
 .post-cover{max-height:620px;object-fit:contain;background:var(--tint,#eef0e8)}
