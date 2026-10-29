@@ -2,7 +2,7 @@ import Header from "../../components/Header";
 import Footer from "../../components/Footer";
 import Calendar from "../../components/Calendar";
 import BlogBrowser, { PostCard } from "../../components/BlogBrowser";
-import { SeriesCard, groupSeries } from "../../components/PostArt";
+import { SeriesCard, LatestStack, groupSeries, collapseSeries } from "../../components/PostArt";
 import { metaOf } from "../../lib/blog";
 import { blogList, blogEvents, blogLinks, todayKey } from "../../lib/content";
 
@@ -11,7 +11,7 @@ export const metadata = { title: "블로그 · Olive Tree" };
 
 export default async function BlogHome() {
   const posts = await blogList();
-  const recent = posts.slice(0, 3);
+  const recent = collapseSeries(posts).slice(0, 3);
   const shelf = groupSeries(posts).filter((s) => s.parts.length > 1 || s.intro);
   return (
     <>
@@ -26,7 +26,7 @@ export default async function BlogHome() {
           <section className="block">
             <div className="label">Latest</div>
             <h2>최근 올린 글</h2>
-            <div className="pgrid">{recent.map((x) => <PostCard key={x.id} x={x} />)}</div>
+            <div className="pgrid">{recent.map((it) => it.post ? <PostCard key={it.post.id} x={it.post} /> : <LatestStack key={it.series.name} s={it.series} m={metaOf(it.series.slug)} />)}</div>
           </section>
         )}
 

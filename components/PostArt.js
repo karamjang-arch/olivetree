@@ -75,6 +75,29 @@ export function SeriesPoster({ s, m }) {
   );
 }
 
+// 최근 글 자리: 연재의 가장 최근 편을 맨 위에 얹은 스택
+export function LatestStack({ s, m }) {
+  const top = [...s.parts].sort((a, b) => b.created.localeCompare(a.created) || (b.part ?? 0) - (a.part ?? 0))[0];
+  const has = top.cover || top.video;
+  return (
+    <a href={`/blog/p/${top.id}`} className="card pcard scardstack" style={{ "--hue": m.hue, "--tint": m.tint }}>
+      <div className={`pthumb${has ? "" : " none"}`} style={has ? { backgroundImage: bg(top) } : undefined}>
+        {!has && <Poster x={top} m={m} />}
+        <span className="sbadge">새 글 · {top.part} / {s.parts.length}</span>
+      </div>
+      <div className="pbody">
+        <div className="ptag">{m.name} · {s.name}</div>
+        <div className="ptitle">{top.title}</div>
+        {top.subtitle && <div className="psub">{top.subtitle}</div>}
+        <ol className="slist">
+          {s.parts.map((x) => <li key={x.id} className={x.id === top.id ? "on" : ""}><b>{x.part}</b>{x.title}</li>)}
+        </ol>
+        <div className="pdate">{top.created}</div>
+      </div>
+    </a>
+  );
+}
+
 export function SeriesCard({ s, m }) {
   const show = s.parts.slice(0, 4);
   return (
