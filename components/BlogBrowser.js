@@ -43,6 +43,9 @@ export default function BlogBrowser({ posts, decks = [] }) {
     let v = sp.get("view");
     if (!v) { try { v = localStorage.getItem("blogView"); } catch {} }
     if (v === "table" || v === "card" || (v === "news" && decks.length)) setView(v);
+    // 홈에서 ?card=<id>&i=<장>으로 들어오면 그 카드뉴스를 바로 연다
+    const cid = sp.get("card"), d = decks.find((x) => x.id === cid), x = posts.find((y) => y.id === cid);
+    if (d && x) { setView("news"); setViewer({ x, count: d.count, i: Math.min(d.count, Math.max(1, Number(sp.get("i")) || 1)) }); }
   }, []);
   const pickView = (v) => { setView(v); try { localStorage.setItem("blogView", v); } catch {} };
   useEffect(() => setPage(1), [f, order, view]);

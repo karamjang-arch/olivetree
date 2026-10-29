@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { sermonMeta, blogList, fmtDate } from "../lib/content";
+import { sermonMeta, blogList, fmtDate, cardDecks } from "../lib/content";
 import { libAll } from "../lib/library";
 import { settleAll, settleCat } from "../lib/settle";
 import { allBooks } from "../lib/books";
@@ -11,7 +11,8 @@ import BookCover from "./BookCover";
 
 // 홈 포털: 최근 소식 한눈에
 export default async function HomeLatest({ today }) {
-  const [sermons, posts, lib, settle] = await Promise.all([sermonMeta(), blogList(), libAll(), settleAll()]);
+  const [sermons, posts, lib, settle, decks] = await Promise.all([sermonMeta(), blogList(), libAll(), settleAll(), cardDecks()]);
+  const deck = decks[0] && { ...posts.find((p) => p.id === decks[0].id), count: decks[0].count }; // 가장 최근 카드뉴스
   const recentSermons = sermons.filter((s) => s.date <= today).slice(0, 4);
   const [lead, ...morePosts] = posts;
   const book = lib.find((b) => b.kind !== "우리가 쓴 책") || lib[0];
@@ -75,6 +76,28 @@ export default async function HomeLatest({ today }) {
           )}
         </div>
       </div>
+
+      {deck?.id && (
+        <div className="pt-news" style={{ "--hue": metaOf(deck.slug).hue }}>
+          <Link href={`/blog?view=news&card=${deck.id}#archive`} className="pt-news-cover" aria-label={`카드뉴스 ${deck.title} 넘겨 보기`}>
+            <img src={`/api/card/${deck.id}/1`} alt="" width={1080} height={1350} />
+          </Link>
+          <div className="pt-news-body">
+            <div className="pt-cap">카드뉴스<Link href="/blog?view=news#archive">전체 →</Link></div>
+            <div className="pt-news-title">{deck.title}</div>
+            {deck.subtitle && <div className="pt-sub">{deck.subtitle}</div>}
+            <div className="pt-news-strip">
+              {Array.from({ length: Math.min(deck.count - 1, 3) }, (_, k) => (
+                <Link key={k} href={`/blog?view=news&card=${deck.id}&i=${k + 2}#archive`}><img src={`/api/card/${deck.id}/${k + 2}`} alt={`${k + 2}장`} loading="lazy" width={1080} height={1350} /></Link>
+              ))}
+            </div>
+            <div className="pt-news-act">
+              <Link href={`/blog?view=news&card=${deck.id}#archive`} className="btn primary">{deck.count}장 넘겨 보기</Link>
+              <Link href={`/blog/p/${deck.id}`}>본문 읽기 →</Link>
+            </div>
+          </div>
+        </div>
+      )}
 
       <div className="portal3">
         {book && (

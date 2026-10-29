@@ -845,3 +845,17 @@ a.pt-card:hover{transform:translateY(-4px);box-shadow:var(--shadow-lg)}
 .cnv-foot{display:flex;align-items:center;gap:16px;flex-wrap:wrap}
 .cnv-foot a:not(.btn){color:rgba(255,255,255,.85);font-size:14px}
 @media(max-width:700px){.cngrid{grid-template-columns:repeat(2,1fr);gap:18px 12px}.cnv-nav.prev{left:6px}.cnv-nav.next{right:6px}}
+
+/* 홈: 가장 최근 카드뉴스 */
+.pt-news{display:grid;grid-template-columns:minmax(0,260px) minmax(0,1fr);gap:28px;align-items:center;margin-top:22px;background:#fff;border-radius:22px;padding:22px;box-shadow:var(--shadow)}
+.pt-news-cover img{display:block;width:100%;height:auto;aspect-ratio:4/5;border-radius:14px;background:#f2e8da;box-shadow:8px 8px 0 -1px #fff,8px 8px 0 0 var(--line);transition:transform .25s}
+.pt-news-cover:hover img{transform:translate(-3px,-3px)}
+.pt-news-title{font-family:var(--serif,serif);font-size:24px;font-weight:700;line-height:1.35;margin:4px 0 4px}
+.pt-news-strip{display:flex;gap:10px;margin:16px 0 18px}
+.pt-news-strip a{flex:0 0 92px}
+.pt-news-strip img{display:block;width:100%;height:auto;aspect-ratio:4/5;border-radius:8px;background:#f2e8da;transition:transform .2s}
+.pt-news-strip a:hover img{transform:translateY(-3px)}
+.pt-news-act{display:flex;align-items:center;gap:18px;flex-wrap:wrap}
+.pt-news-act a:not(.btn){color:var(--muted);font-weight:600;text-decoration:none}
+.pt-news-act a:not(.btn):hover{color:var(--ink)}
+@media(max-width:700px){.pt-news{grid-template-columns:120px minmax(0,1fr);gap:16px;padding:16px}.pt-news-title{font-size:18px}.pt-news-strip{display:none}.pt-news-act{gap:12px}.pt-news-act .btn{padding:8px 14px;font-size:14px}}
