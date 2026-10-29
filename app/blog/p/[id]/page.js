@@ -45,7 +45,7 @@ export default async function PostPage({ params }) {
         <Link href="/blog" className="back">← 블로그</Link>
         <div className="eyebrow">
           <Link href={`/blog?cat=${p.slug}`}>{m.name}</Link>
-          {p.series && <><span className="sep">/</span><Link href={`/blog/s/${encodeURIComponent(p.series)}`}>{p.series}</Link>{p.part ? <span className="partno">{p.part}편</span> : null}</>}
+          {p.series && <><span className="sep">/</span><Link href={`/blog/s/${encodeURIComponent(p.series)}`}>{p.series}</Link>{p.part ? <span className="partno">{p.part} / {series.filter((x) => x.part !== 0).length}</span> : p.part === 0 ? <span className="partno">대문</span> : null}</>}
         </div>
         <h1 className="serif post-title">{p.title}</h1>
         {p.subtitle && <p className="post-sub">{p.subtitle}</p>}

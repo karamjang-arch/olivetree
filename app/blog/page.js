@@ -2,6 +2,8 @@ import Header from "../../components/Header";
 import Footer from "../../components/Footer";
 import Calendar from "../../components/Calendar";
 import BlogBrowser, { PostCard } from "../../components/BlogBrowser";
+import { SeriesCard, groupSeries } from "../../components/PostArt";
+import { metaOf } from "../../lib/blog";
 import { blogList, blogEvents, blogLinks, todayKey } from "../../lib/content";
 
 export const revalidate = 300;
@@ -10,6 +12,7 @@ export const metadata = { title: "블로그 · Olive Tree" };
 export default async function BlogHome() {
   const posts = await blogList();
   const recent = posts.slice(0, 3);
+  const shelf = groupSeries(posts).filter((s) => s.parts.length > 1 || s.intro);
   return (
     <>
       <Header />
@@ -24,6 +27,15 @@ export default async function BlogHome() {
             <div className="label">Latest</div>
             <h2>최근 올린 글</h2>
             <div className="pgrid">{recent.map((x) => <PostCard key={x.id} x={x} />)}</div>
+          </section>
+        )}
+
+        {shelf.length > 0 && (
+          <section className="block">
+            <div className="label">Series</div>
+            <h2>연재</h2>
+            <p className="muted">한 주제를 여러 편에 걸쳐 풀어 쓴 글입니다. 처음부터 차례로 읽으면 좋습니다.</p>
+            <div className="pgrid">{shelf.map((s) => <SeriesCard key={s.name} s={s} m={metaOf(s.slug)} />)}</div>
           </section>
         )}
 

@@ -2,7 +2,7 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import Header from "../../../../components/Header";
 import Footer from "../../../../components/Footer";
-import { PostCard } from "../../../../components/BlogBrowser";
+import { SeriesPoster, groupSeries, bg } from "../../../../components/PostArt";
 import TripSeries from "../../../../components/TripSeries";
 import { blogList } from "../../../../lib/content";
 import { metaOf } from "../../../../lib/blog";
@@ -23,17 +23,27 @@ export default async function SeriesPage({ params }) {
   const parts = posts.filter((p) => p !== intro);
   const map = tripMap(posts);
   const m = metaOf(posts[0].slug);
+  const s = groupSeries(posts)[0];
+  const first = parts[0];
 
   return (
     <>
       <Header />
       <main className="wrap series-page" style={{ "--hue": m.hue, "--tint": m.tint }}>
         <Link href="/blog" className="back">← 블로그</Link>
-        <header className="sp-head">
-          <div className="eyebrow"><Link href={`/blog?cat=${posts[0].slug}`}>{m.name}</Link><span className="sep">/</span><span>{map ? "여행 시리즈" : "연재"}</span></div>
-          <h1 className="serif post-title">{name}</h1>
-          {intro?.subtitle && <p className="post-sub">{intro.subtitle}</p>}
-          <p className="sp-meta">{parts.length}편{map ? ` · ${map.stops.map((s) => s.place).filter((v, i, a) => v && a.indexOf(v) === i).length}곳` : ""}</p>
+        <header className={`sp-head${map ? "" : " sp-hero"}`}>
+          {!map && (
+            <div className={`sp-cover pthumb${s.face ? "" : " none"}`} style={s.face ? { backgroundImage: bg(s.face) } : undefined}>
+              {!s.face && <SeriesPoster s={s} m={m} />}
+            </div>
+          )}
+          <div className="sp-headtx">
+            <div className="eyebrow"><Link href={`/blog?cat=${posts[0].slug}`}>{m.name}</Link><span className="sep">/</span><span>{map ? "여행 시리즈" : "연재"}</span></div>
+            <h1 className="serif post-title">{name}</h1>
+            {intro?.subtitle && <p className="post-sub">{intro.subtitle}</p>}
+            <p className="sp-meta">{parts.length}편{map ? ` · ${map.stops.map((x) => x.place).filter((v, i, a) => v && a.indexOf(v) === i).length}곳` : first ? ` · ${first.created.replaceAll("-", ". ")}부터` : ""}</p>
+            {first && <Link href={`/blog/p/${first.id}`} className="btn primary sp-start">처음부터 읽기 →</Link>}
+          </div>
         </header>
 
         {intro && (intro.video || intro.cover) && (
@@ -59,7 +69,23 @@ export default async function SeriesPage({ params }) {
           </section>
         ) : (
           <section className="block">
-            <div className="pgrid">{parts.map((x) => <PostCard key={x.id} x={x} />)}</div>
+            <div className="label">Reading order</div>
+            <h2>읽는 순서</h2>
+            <ol className="sp-order">
+              {parts.map((x) => (
+                <li key={x.id}>
+                  <Link href={`/blog/p/${x.id}`}>
+                    <span className="n">{x.part}</span>
+                    <span className="tx">
+                      <b>{x.title}</b>
+                      {x.subtitle && <i>{x.subtitle}</i>}
+                      {x.summary && <span className="sum">{x.summary}</span>}
+                    </span>
+                    <span className="go">읽기 →</span>
+                  </Link>
+                </li>
+              ))}
+            </ol>
           </section>
         )}
         <Footer />

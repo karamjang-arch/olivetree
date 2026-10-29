@@ -2,7 +2,7 @@
 import Link from "next/link";
 import { useEffect, useState } from "react";
 
-const HUE = { 설교: "#c08a3e", 통독: "#6f9a6a", 암송: "#b5524a", 특강: "#2c4f7a", "올리브 가족": "#4f9a6a", 도서: "#6a5a9a", 저널: "#a8893a", 가스펠: "#173b63", 정착: "#3f7f5a" };
+const HUE = { 설교: "#c08a3e", 통독: "#6f9a6a", 암송: "#b5524a", 특강: "#2c4f7a", 강의: "#2c4f7a", 배움: "#2f7a78", "올리브 가족": "#4f9a6a", 도서: "#6a5a9a", 저널: "#a8893a", 가스펠: "#173b63", 정착: "#3f7f5a" };
 
 export default function SearchBox({ initial = "" }) {
   const [q, setQ] = useState(initial);

@@ -745,3 +745,32 @@ a.pt-card:hover{transform:translateY(-4px);box-shadow:var(--shadow-lg)}
 .poster .pf{position:relative;margin-top:10px;font-size:11.5px;letter-spacing:.1em;opacity:.75}
 .pt-img .poster{padding:30px 32px 28px}.pt-img .poster .ph{font-size:clamp(24px,3vw,34px)}.pt-img .poster .pn{font-size:150px}.pt-img .poster .pk{top:58px;left:32px}
 .post-cover{max-height:620px;object-fit:contain;background:var(--tint,#eef0e8)}
+
+/* 연재 묶음 카드: 겹쳐 놓은 종이 */
+.card.pcard.scardstack{overflow:visible;margin-bottom:12px;box-shadow:0 7px 0 -3px #fff,0 7px 0 -2px var(--line),0 14px 0 -6px #fbfaf6,0 14px 0 -5px var(--line)}
+.card.pcard.scardstack:hover{box-shadow:0 7px 0 -3px #fff,0 7px 0 -2px var(--line),0 14px 0 -6px #fbfaf6,0 14px 0 -5px var(--line),var(--shadow-lg)}
+.scardstack .pthumb{position:relative;overflow:hidden;border-radius:16px 16px 0 0}
+.sbadge{position:absolute;right:12px;top:12px;background:rgba(255,255,255,.92);color:var(--hue);font-size:11.5px;font-weight:700;padding:4px 10px;border-radius:999px;letter-spacing:.02em}
+.sposter .ph{font-size:clamp(21px,2.4vw,26px)}
+.slist{list-style:none;padding:0;margin:8px 0 10px;display:flex;flex-direction:column;gap:5px}
+.slist li{display:flex;gap:9px;align-items:baseline;font-size:14px;color:var(--ink);line-height:1.45}
+.slist li b{flex:none;width:20px;height:20px;border-radius:50%;background:var(--tint);color:var(--hue);font-size:11.5px;display:grid;place-items:center}
+.slist li.more{color:var(--muted);padding-left:29px}
+.scardstack .pdate{color:var(--hue);font-weight:600}
+
+/* 연재 페이지 */
+.sp-hero{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.15fr);gap:34px;align-items:center;max-width:none}
+.sp-cover{border-radius:20px;overflow:hidden;box-shadow:var(--shadow-lg,0 18px 40px rgba(0,0,0,.12));position:relative}
+.sp-start{display:inline-block;margin-top:16px}
+@media(max-width:760px){.sp-hero{grid-template-columns:1fr;gap:18px}}
+.sp-order{list-style:none;padding:0;margin:14px 0 0;border-top:1px solid var(--line)}
+.sp-order li{border-bottom:1px solid var(--line)}
+.sp-order a{display:flex;gap:20px;align-items:center;padding:20px 6px;text-decoration:none;color:inherit;transition:background .2s}
+.sp-order a:hover{background:var(--tint)}
+.sp-order .n{flex:none;font-family:Fraunces,serif;font-size:40px;font-weight:600;color:var(--hue);width:46px;text-align:center;line-height:1}
+.sp-order .tx{display:flex;flex-direction:column;gap:2px;flex:1;min-width:0}
+.sp-order b{font-size:18px}
+.sp-order i{font-style:normal;color:var(--hue);font-size:14.5px}
+.sp-order .sum{color:var(--muted);font-size:14px}
+.sp-order .go{flex:none;color:var(--hue);font-weight:600;font-size:14px}
+@media(max-width:560px){.sp-order .go{display:none}.sp-order .n{font-size:30px;width:32px}}

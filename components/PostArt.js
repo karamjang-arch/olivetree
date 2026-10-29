@@ -22,3 +22,76 @@ export function Poster({ x, m }) {
     </span>
   );
 }
+
+// ───────── 연재(시리즈) 묶음 ─────────
+const LEAF = (
+  <svg className="pleaf" viewBox="0 0 120 120" aria-hidden="true">
+    <path d="M10 110 C 40 80, 70 60, 112 14" />
+    <path d="M34 86 c -4 -14 2 -26 14 -30 c 2 14 -4 25 -14 30z M54 68 c 12 -6 25 -3 30 8 c -13 4 -24 1 -30 -8z M60 60 c -4 -14 2 -26 14 -30 c 2 14 -4 25 -14 30z M80 42 c 12 -6 25 -3 30 8 c -13 4 -24 1 -30 -8z" />
+  </svg>
+);
+
+// 글 목록 → 연재별 묶음 (편 순서대로, 0편은 대문)
+export function groupSeries(posts) {
+  const map = new Map();
+  for (const p of posts) {
+    if (!p.series) continue;
+    if (!map.has(p.series)) map.set(p.series, []);
+    map.get(p.series).push(p);
+  }
+  return [...map.entries()].map(([name, list]) => {
+    const all = [...list].sort((a, b) => (a.part ?? 99) - (b.part ?? 99));
+    const parts = all.filter((x) => x.part !== 0);
+    const intro = all.find((x) => x.part === 0) || null;
+    const face = [intro, ...parts].find((x) => x && (x.cover || x.video)) || null;
+    const latest = all.reduce((m, x) => (x.created > m ? x.created : m), "");
+    return { name, all, parts, intro, face, latest, slug: all[0].slug, href: `/blog/s/${encodeURIComponent(name)}` };
+  }).sort((a, b) => b.latest.localeCompare(a.latest));
+}
+
+// 목록에서 같은 연재 글을 한 자리(가장 최근 글 자리)로 접기
+export function collapseSeries(list) {
+  const groups = new Map(groupSeries(list).map((g) => [g.name, g]));
+  const seen = new Set();
+  const out = [];
+  for (const x of list) {
+    if (!x.series || groups.get(x.series).all.length < 2) { out.push({ post: x }); continue; }
+    if (seen.has(x.series)) continue;
+    seen.add(x.series);
+    out.push({ series: groups.get(x.series) });
+  }
+  return out;
+}
+
+export function SeriesPoster({ s, m }) {
+  return (
+    <span className="poster sposter">
+      <span className="pk">연재</span>
+      <span className="pn">{s.parts.length}</span>
+      {LEAF}
+      <span className="ph">{s.name}</span>
+      <span className="pf">{m.name} · {s.parts.length}편</span>
+    </span>
+  );
+}
+
+export function SeriesCard({ s, m }) {
+  const show = s.parts.slice(0, 4);
+  return (
+    <a href={s.href} className="card pcard scardstack" style={{ "--hue": m.hue, "--tint": m.tint }}>
+      <div className={`pthumb${s.face ? "" : " none"}`} style={s.face ? { backgroundImage: bg(s.face) } : undefined}>
+        {!s.face && <SeriesPoster s={s} m={m} />}
+        {s.face && <span className="sbadge">연재 · {s.parts.length}편</span>}
+      </div>
+      <div className="pbody">
+        <div className="ptag">{m.name} · 연재</div>
+        <div className="ptitle">{s.name}</div>
+        <ol className="slist">
+          {show.map((x) => <li key={x.id}><b>{x.part}</b>{x.title}</li>)}
+          {s.parts.length > show.length && <li className="more">외 {s.parts.length - show.length}편</li>}
+        </ol>
+        <div className="pdate">처음부터 읽기 →</div>
+      </div>
+    </a>
+  );
+}

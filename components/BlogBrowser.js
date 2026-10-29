@@ -2,7 +2,7 @@
 import Link from "next/link";
 import { useEffect, useMemo, useState } from "react";
 import { BLOG, metaOf } from "../lib/blog";
-import { bg, Poster } from "./PostArt";
+import { bg, Poster, SeriesCard, collapseSeries } from "./PostArt";
 export { bg, Poster };
 
 
@@ -121,7 +121,8 @@ export default function BlogBrowser({ posts }) {
       )}
       {list.length === 0
         ? <div className="panel t-text"><h3>{active.length ? "찾는 글이 없습니다" : "준비 중"}</h3><p className="muted">{active.length ? "다른 낱말이나 주제로 찾아보세요." : "아직 올라온 글이 없습니다."}</p></div>
-        : <div className="pgrid">{list.map((x) => <PostCard key={x.id} x={x} />)}</div>}
+        : <div className="pgrid">{(f.series || f.q ? list.map((x) => ({ post: x })) : collapseSeries(list)).map((it) =>
+            it.post ? <PostCard key={it.post.id} x={it.post} /> : <SeriesCard key={it.series.name} s={it.series} m={metaOf(it.series.slug)} />)}</div>}
     </div>
   );
 }
