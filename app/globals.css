@@ -775,3 +775,32 @@ a.pt-card:hover{transform:translateY(-4px);box-shadow:var(--shadow-lg)}
 .sp-order .go{flex:none;color:var(--hue);font-weight:600;font-size:14px}
 @media(max-width:560px){.sp-order .go{display:none}.sp-order .n{font-size:30px;width:32px}}
 .slist li.on{font-weight:700;color:var(--hue)}.slist li.on b{background:var(--hue);color:#fff}
+
+/* 블로그 보기 전환 + 표 보기 */
+.bviewbar{display:flex;align-items:center;gap:10px;margin:2px 0 14px}
+.bviewbar .bcount{font-size:13.5px;color:var(--muted);margin-right:auto}
+.bviewbar select{font:inherit;font-size:13px;padding:6px 10px;border:1px solid var(--line);border-radius:10px;background:#fff;color:var(--ink)}
+.bseg{display:inline-flex;background:#fff;border:1px solid var(--line);border-radius:12px;padding:3px}
+.bseg button{display:inline-flex;align-items:center;gap:6px;font:inherit;font-size:13px;border:0;background:none;padding:6px 12px;border-radius:9px;color:var(--muted);cursor:pointer}
+.bseg button.on{background:var(--navy);color:#fff}
+.btable{width:100%;border-collapse:collapse;background:#fff;border:1px solid var(--line);border-radius:14px;overflow:hidden;font-size:14.5px}
+.btable thead th{background:#f3f1e8;color:var(--muted);font-weight:600;font-size:13px;text-align:left;padding:11px 14px;border-bottom:2px solid var(--navy)}
+.btable td{padding:13px 14px;border-bottom:1px solid var(--line);vertical-align:middle}
+.btable tbody tr:hover{background:#faf8f1}
+.btable .c-no{width:56px;text-align:center;color:var(--muted);font-size:13px}
+.btable th.c-no{text-align:center}
+.btable .c-cat{width:84px}
+.btable .c-cat button{font:inherit;font-size:12px;font-weight:700;border:0;border-radius:999px;padding:3px 10px;background:var(--tint);color:var(--hue);cursor:pointer;white-space:nowrap}
+.btable .c-title a{color:var(--ink);text-decoration:none}
+.btable .c-title a:hover b{text-decoration:underline;text-underline-offset:3px}
+.btable .c-title b{font-weight:600}
+.btable .tser{display:inline-block;font-size:11.5px;font-weight:700;color:var(--navy);border:1px solid #c9d3e2;border-radius:6px;padding:0 6px;margin-right:6px;vertical-align:1px}
+.btable .tsub{display:block;font-size:12.5px;color:var(--muted);margin-top:2px}
+.btable .tmeta{display:none}
+.btable .c-src{width:230px;font-size:13px;color:var(--muted)}
+.btable .c-date{width:96px;font-size:13px;color:var(--muted);white-space:nowrap}
+.bpager{display:flex;justify-content:center;gap:4px;margin:16px 0 0}
+.bpager button{font:inherit;font-size:13.5px;min-width:34px;height:34px;border:1px solid var(--line);background:#fff;border-radius:9px;cursor:pointer;color:var(--ink)}
+.bpager button.on{background:var(--navy);color:#fff;border-color:var(--navy)}
+.bpager button:disabled{opacity:.4;cursor:default}
+@media(max-width:700px){.btable .c-no,.btable .c-src,.btable .c-date{display:none}.btable .c-cat{width:auto}.btable .tmeta{display:block;font-size:12px;color:var(--muted);margin-top:3px}.btable td{padding:11px 10px}}

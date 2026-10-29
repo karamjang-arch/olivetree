@@ -33,6 +33,18 @@ const KEYS = ["cat", "topic", "series", "tag", "bible", "q"];
 export default function BlogBrowser({ posts }) {
   const [f, setF] = useState({ cat: "all", topic: "", series: "", tag: "", bible: "", q: "" });
   const [more, setMore] = useState(false);
+  const [view, setView] = useState("card"); // card | table
+  const [order, setOrder] = useState("new");
+  const [page, setPage] = useState(1);
+  const PER = 15;
+  useEffect(() => {
+    const sp = new URLSearchParams(window.location.search);
+    let v = sp.get("view");
+    if (!v) { try { v = localStorage.getItem("blogView"); } catch {} }
+    if (v === "table" || v === "card") setView(v);
+  }, []);
+  const pickView = (v) => { setView(v); try { localStorage.setItem("blogView", v); } catch {} };
+  useEffect(() => setPage(1), [f, order, view]);
 
   // 주소의 ?topic= 등으로 바로 들어올 수 있게
   useEffect(() => {
@@ -116,13 +128,73 @@ export default function BlogBrowser({ posts }) {
         </div>
       )}
 
+      <div className="bviewbar">
+        <span className="bcount">{list.length}개의 글</span>
+        {view === "table" && (
+          <select value={order} onChange={(e) => setOrder(e.target.value)} aria-label="정렬">
+            <option value="new">최신순</option>
+            <option value="old">오래된순</option>
+          </select>
+        )}
+        <div className="bseg" role="tablist" aria-label="보기 방식">
+          <button className={view === "card" ? "on" : ""} onClick={() => pickView("card")} aria-pressed={view === "card"}>
+            <svg viewBox="0 0 16 16" width="14" height="14" fill="currentColor"><rect x="1" y="1" width="6" height="6" rx="1.5"/><rect x="9" y="1" width="6" height="6" rx="1.5"/><rect x="1" y="9" width="6" height="6" rx="1.5"/><rect x="9" y="9" width="6" height="6" rx="1.5"/></svg>카드
+          </button>
+          <button className={view === "table" ? "on" : ""} onClick={() => pickView("table")} aria-pressed={view === "table"}>
+            <svg viewBox="0 0 16 16" width="14" height="14" fill="currentColor"><rect x="1" y="2" width="14" height="2.2" rx="1"/><rect x="1" y="6.9" width="14" height="2.2" rx="1"/><rect x="1" y="11.8" width="14" height="2.2" rx="1"/></svg>표
+          </button>
+        </div>
+      </div>
+
       {f.cat === "recitation" && (
         <Link href="/blog/recitation" className="btn primary" style={{ marginBottom: 14, display: "inline-block" }}>새김D6 말씀 카드 전체 보기 →</Link>
       )}
       {list.length === 0
         ? <div className="panel t-text"><h3>{active.length ? "찾는 글이 없습니다" : "준비 중"}</h3><p className="muted">{active.length ? "다른 낱말이나 주제로 찾아보세요." : "아직 올라온 글이 없습니다."}</p></div>
-        : <div className="pgrid">{(f.series || f.q ? list.map((x) => ({ post: x })) : collapseSeries(list)).map((it) =>
-            it.post ? <PostCard key={it.post.id} x={it.post} /> : <SeriesCard key={it.series.name} s={it.series} m={metaOf(it.series.slug)} />)}</div>}
+        : view === "card"
+          ? <div className="pgrid">{(f.series || f.q ? list.map((x) => ({ post: x })) : collapseSeries(list)).map((it) =>
+              it.post ? <PostCard key={it.post.id} x={it.post} /> : <SeriesCard key={it.series.name} s={it.series} m={metaOf(it.series.slug)} />)}</div>
+          : (() => {
+              const rows = order === "new" ? list : [...list].reverse();
+              const pages = Math.max(1, Math.ceil(rows.length / PER));
+              const cur = rows.slice((page - 1) * PER, page * PER);
+              return (
+                <>
+                  <table className="btable">
+                    <thead><tr><th className="c-no">번호</th><th className="c-cat">분류</th><th>제목</th><th className="c-src">출처</th><th className="c-date">날짜</th></tr></thead>
+                    <tbody>
+                      {cur.map((x, i) => {
+                        const m = metaOf(x.slug);
+                        const no = order === "new" ? list.length - ((page - 1) * PER + i) : (page - 1) * PER + i + 1;
+                        return (
+                          <tr key={x.id}>
+                            <td className="c-no">{no}</td>
+                            <td className="c-cat"><button style={{ "--hue": m.hue, "--tint": m.tint }} onClick={() => setF((o) => ({ ...o, cat: x.slug }))}>{m.name}</button></td>
+                            <td className="c-title">
+                              <Link href={`/blog/p/${x.id}`}>
+                                {x.series && <span className="tser">{x.series}{x.part ? ` ${x.part}` : ""}</span>}
+                                <b>{x.title}</b>
+                              </Link>
+                              {x.subtitle && <span className="tsub">{x.subtitle}</span>}
+                              <span className="tmeta">{x.author ? `${x.author} · ` : ""}{x.created.replaceAll("-", ".")}</span>
+                            </td>
+                            <td className="c-src">{x.author || "—"}</td>
+                            <td className="c-date">{x.created.replaceAll("-", ".")}</td>
+                          </tr>
+                        );
+                      })}
+                    </tbody>
+                  </table>
+                  {pages > 1 && (
+                    <div className="bpager">
+                      <button disabled={page === 1} onClick={() => setPage(page - 1)}>‹</button>
+                      {Array.from({ length: pages }, (_, k) => k + 1).map((n) => <button key={n} className={n === page ? "on" : ""} onClick={() => setPage(n)}>{n}</button>)}
+                      <button disabled={page === pages} onClick={() => setPage(page + 1)}>›</button>
+                    </div>
+                  )}
+                </>
+              );
+            })()}
     </div>
   );
 }
