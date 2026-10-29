@@ -1,4 +1,30 @@
+import Link from "next/link";
 import { youtubeId } from "../lib/notion";
+import { getSermon, fmtDate } from "../lib/content";
+import { thumbBg } from "../lib/thumb";
+import { CATS, catOf } from "../lib/cats";
+
+// 설교 링크(/sermon/<id>)만 담은 줄은 썸네일 카드로 보여 준다
+const sermonIdOf = (rt = []) => {
+  const hit = rt.map((x) => (x.href || "").match(/\/sermon\/([0-9a-f]{32})/)).find(Boolean);
+  const len = rt.reduce((a, x) => a + x.plain_text.length, 0);
+  return hit && len < 140 ? hit[1] : null;
+};
+
+async function SermonCard({ id, rt = [] }) {
+  const s = (await getSermon(id)) || { title: rt.map((x) => x.plain_text).join("").trim(), kind: "설교" };
+  const c = CATS[catOf(s.kind)] || {};
+  return (
+    <Link href={`/sermon/${id}`} className="scard">
+      <span className="scard-th" style={{ backgroundImage: thumbBg({ ...s, id }) }}><i>▶</i></span>
+      <span className="scard-tx">
+        <span className="scard-k" style={{ color: c.color }}>{s.kind}</span>
+        <b>{s.title}</b>
+        <span className="scard-d">{s.date ? `${s.date.slice(0, 4)}년 ${fmtDate(s.date)}` : ""}{s.passage ? ` · ${s.passage}` : ""}</span>
+      </span>
+    </Link>
+  );
+}
 
 export const RT = ({ t = [] }) =>
   t.map((x, i) => {
@@ -18,7 +44,8 @@ export const RT = ({ t = [] }) =>
 function One({ b, anchors }) {
   const d = b[b.type];
   switch (b.type) {
-    case "paragraph": return d.rich_text.length ? <p><RT t={d.rich_text} /></p> : <div className="gap" />;
+    case "paragraph": if (sermonIdOf(d.rich_text)) return <div className="scards"><SermonCard id={sermonIdOf(d.rich_text)} rt={d.rich_text} /></div>;
+      return d.rich_text.length ? <p><RT t={d.rich_text} /></p> : <div className="gap" />;
     case "heading_1": case "heading_2": {
       const id = anchors ? encodeURIComponent(d.rich_text.map((x) => x.plain_text).join("")) : undefined;
       return <h2 className="bh" id={id}><RT t={d.rich_text} /></h2>;
@@ -80,6 +107,10 @@ export default function Blocks({ blocks, anchors }) {
       const items = [];
       while (i < blocks.length && blocks[i].type === type) { items.push(blocks[i]); i++; }
       i--;
+      if (items.every((x) => sermonIdOf(x[type].rich_text))) {
+        out.push(<div key={b.id} className="scards">{items.map((x) => <SermonCard key={x.id} id={sermonIdOf(x[type].rich_text)} rt={x[type].rich_text} />)}</div>);
+        continue;
+      }
       const Tag = type === "bulleted_list_item" ? "ul" : "ol";
       out.push(<Tag key={b.id}>{items.map((x) => <li key={x.id}><RT t={x[type].rich_text} />{x.kids && <Blocks blocks={x.kids} />}</li>)}</Tag>);
     } else out.push(<One key={b.id} b={b} anchors={anchors} />);

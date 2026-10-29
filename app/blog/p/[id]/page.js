@@ -56,7 +56,7 @@ export default async function PostPage({ params }) {
         <Link href="/blog" className="back">← 블로그</Link>
         <div className="eyebrow">
           <Link href={`/blog?cat=${p.slug}`}>{m.name}</Link>
-          {p.series && <><span className="sep">/</span><Link href={`/blog?series=${encodeURIComponent(p.series)}`}>{p.series}</Link>{p.part ? <span className="partno">{p.part}편</span> : null}</>}
+          {p.series && <><span className="sep">/</span><Link href={`/blog/s/${encodeURIComponent(p.series)}`}>{p.series}</Link>{p.part ? <span className="partno">{p.part}편</span> : null}</>}
         </div>
         <h1 className="serif post-title">{p.title}</h1>
         {p.subtitle && <p className="post-sub">{p.subtitle}</p>}
@@ -97,11 +97,12 @@ export default async function PostPage({ params }) {
         {p.series && (
           <section className="seriesbox">
             <div className="label">Series</div>
-            <h3>{p.series}</h3>
+            <h3><Link href={`/blog/s/${encodeURIComponent(p.series)}`}>{p.series}</Link></h3>
+            {series.some((x) => x.lat != null) && <Link className="seriesmap" href={`/blog/s/${encodeURIComponent(p.series)}`}>여정 지도로 보기 →</Link>}
             <ol>
               {series.map((x) => (
                 <li key={x.id} className={x.id === p.id ? "on" : ""}>
-                  <span className="n">{NUM[x.part] || x.part || "·"}</span>
+                  <span className="n">{x.part === 0 ? "◦" : NUM[x.part] || x.part || "·"}</span>
                   {x.id === p.id ? <span>{x.title}</span> : <Link href={`/blog/p/${x.id}`}>{x.title}</Link>}
                 </li>
               ))}
