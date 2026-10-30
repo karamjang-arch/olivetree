@@ -190,14 +190,14 @@ function TravelCover({ c, img, A }) {
           <img src={img} width={960} height={540} style={{ objectFit: "cover" }} />
         </div>
       )}
-      <div style={{ position: "absolute", right: -230, bottom: -230, width: 640, height: 640, borderRadius: 320, background: A.terra, display: "flex" }} />
+      <div style={{ position: "absolute", left: 670, top: 940, width: 640, height: 640, borderRadius: 320, background: A.terra, display: "flex" }} />
       <div style={{ position: "absolute", left: 80, top: 668, width: 760, display: "flex", flexDirection: "column" }}>
         {c.label && <div style={{ display: "flex", fontFamily: SANS, fontWeight: 700, fontSize: 30, color: A.body, marginBottom: 22, letterSpacing: 1 }}>{c.label}</div>}
         <Lines text={c.title} style={{ fontFamily: SERIF, fontWeight: 700, fontSize: 92, lineHeight: 1.12, color: A.ink, letterSpacing: -2 }} />
         <div style={{ display: "flex", width: 66, height: 4, background: A.terra, margin: "36px 0 26px" }} />
         {c.sub && <Lines text={c.sub} style={{ fontFamily: SANS, fontWeight: 500, fontSize: 30, lineHeight: 1.6, color: A.ink, letterSpacing: 1 }} />}
       </div>
-      <div style={{ position: "absolute", right: 70, bottom: 60, display: "flex" }}><LineLeaf size={210} /></div>
+      <div style={{ position: "absolute", left: 800, top: 1080, display: "flex" }}><LineLeaf size={210} /></div>
       <div style={{ position: "absolute", left: 80, bottom: 64, display: "flex", fontFamily: SERIF, fontWeight: 700, fontSize: 32, color: A.ink }}>Olive Tree</div>
     </>
   );
