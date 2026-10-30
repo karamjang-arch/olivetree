@@ -7,7 +7,7 @@ import { Card } from "../../../../../components/CardArt";
 
 // /api/card/<글 id>/<장 번호>  → 1080×1350 PNG  (?dl 붙이면 내려받기)
 // /api/card/<글 id>/zip        → 전체 장 ZIP
-async function render(c, total, base) {
+async function render(c, total, base, cat) {
   let img = null;
   if (c.img) {
     try {
@@ -16,7 +16,7 @@ async function render(c, total, base) {
     } catch {}
   }
   const text = Object.values(c).filter((v) => typeof v === "string").join("");
-  return new ImageResponse(<Card c={c} total={total} img={img} />, { width: CARD_W, height: CARD_H, fonts: await cardFonts(text) });
+  return new ImageResponse(<Card c={c} total={total} img={img} cat={cat} />, { width: CARD_W, height: CARD_H, fonts: await cardFonts(text) });
 }
 
 export async function GET(req, { params }) {
@@ -29,12 +29,12 @@ export async function GET(req, { params }) {
   if (n === "zip") {
     if (!cards.length) return new Response(null, { status: 404 });
     const files = [];
-    for (const c of cards) files.push({ name: `${day}_카드뉴스_${String(c.n).padStart(2, "0")}.png`, data: Buffer.from(await (await render(c, cards.length, req.url)).arrayBuffer()) });
+    for (const c of cards) files.push({ name: `${day}_카드뉴스_${String(c.n).padStart(2, "0")}.png`, data: Buffer.from(await (await render(c, cards.length, req.url, p?.slug)).arrayBuffer()) });
     return new Response(makeZip(files), { headers: { "Content-Type": "application/zip", "Content-Disposition": `attachment; filename*=UTF-8''${encodeURIComponent(`${day}_카드뉴스.zip`)}`, "Cache-Control": cache } });
   }
   const c = cards[Number(n) - 1];
   if (!c) return new Response(null, { status: 404 });
-  const res = await render(c, cards.length, req.url);
+  const res = await render(c, cards.length, req.url, p?.slug);
   res.headers.set("Cache-Control", cache);
   if (new URL(req.url).searchParams.has("dl")) res.headers.set("Content-Disposition", `attachment; filename*=UTF-8''${encodeURIComponent(`${day}_카드뉴스_${String(n).padStart(2, "0")}.png`)}`);
   return res;

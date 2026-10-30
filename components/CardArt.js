@@ -114,7 +114,7 @@ function Verse({ c, img, total }) {
 }
 
 // ───────── 아치 판형 (에디토리얼: 큰 명조 제목 · 테라코타 아치 · 짙은 초록 사분원) ─────────
-const A = { paper: "#F2E8DA", ink: "#37392B", body: "#5E5A4E", terra: "#D58A60", green: "#3F4A36", cream: "#F7F0E4" };
+const ARCH = { paper: "#F2E8DA", ink: "#37392B", body: "#5E5A4E", terra: "#D58A60", green: "#3F4A36", cream: "#F7F0E4" };
 
 function LineLeaf({ size = 260, color = "rgba(247,240,228,.85)" }) {
   return (
@@ -130,11 +130,11 @@ function LineLeaf({ size = 260, color = "rgba(247,240,228,.85)" }) {
   );
 }
 
-function ArchFooter({ c, total, dark }) {
+function ArchFooter({ c, total, dark, A }) {
   const fg = dark ? "rgba(247,240,228,.75)" : A.body;
   return (
     <div style={{ position: "absolute", left: 80, bottom: 56, width: 920, display: "flex", flexDirection: "column" }}>
-      <div style={{ display: "flex", height: 2, background: dark ? "rgba(213,138,96,.6)" : "rgba(213,138,96,.45)", marginBottom: 20 }} />
+      <div style={{ display: "flex", height: 2, background: A.terra, opacity: dark ? 0.6 : 0.45, marginBottom: 20 }} />
       <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between" }}>
         <div style={{ display: "flex", fontFamily: SANS, fontSize: 26, color: fg }}>{c.ref || ""}</div>
         <div style={{ display: "flex", alignItems: "center", fontFamily: SANS }}>
@@ -147,7 +147,7 @@ function ArchFooter({ c, total, dark }) {
   );
 }
 
-function ArchCover({ c, img }) {
+function ArchCover({ c, img, A }) {
   return (
     <>
       <div style={{ position: "absolute", left: 500, top: 130, width: 780, height: 1400, borderRadius: 390, background: A.terra, display: "flex" }} />
@@ -166,7 +166,7 @@ function ArchCover({ c, img }) {
   );
 }
 
-function ArchSection({ c, img, total }) {
+function ArchSection({ c, img, total, A }) {
   return (
     <>
       {img && (
@@ -183,12 +183,12 @@ function ArchSection({ c, img, total }) {
         {c.body && <Lines text={c.body} style={{ fontFamily: SANS, fontSize: 38, lineHeight: 1.7, color: A.body }} />}
         {c.note && <div style={{ display: "flex", marginTop: 28, paddingTop: 20, borderTop: "2px solid rgba(94,90,78,.18)" }}><Lines text={c.note} style={{ fontFamily: SANS, fontSize: 28, lineHeight: 1.6, color: A.body }} /></div>}
       </div>
-      <ArchFooter c={c} total={total} />
+      <ArchFooter c={c} total={total} A={A} />
     </>
   );
 }
 
-function ArchVerse({ c, total }) {
+function ArchVerse({ c, total, A }) {
   return (
     <>
       <div style={{ position: "absolute", left: 0, top: 0, width: 1080, height: 1350, background: A.green, display: "flex" }} />
@@ -197,18 +197,30 @@ function ArchVerse({ c, total }) {
       <div style={{ position: "absolute", left: 90, top: 0, width: 900, height: 1200, display: "flex", flexDirection: "column", justifyContent: "center" }}>
         <div style={{ display: "flex", fontFamily: SERIF, fontWeight: 700, fontSize: 150, lineHeight: 0.8, color: A.terra, height: 90 }}>“</div>
         <Lines text={c.quote} style={{ fontFamily: SERIF, fontWeight: 700, fontSize: 52, lineHeight: 1.6, color: A.cream }} />
-        {c.ref && <div style={{ display: "flex", alignItems: "center", marginTop: 36, fontFamily: SANS, fontWeight: 700, fontSize: 32, color: "#E9B08F" }}><span style={{ width: 40, height: 3, background: A.terra, marginRight: 16 }} />{c.ref}</div>}
+        {c.ref && <div style={{ display: "flex", alignItems: "center", marginTop: 36, fontFamily: SANS, fontWeight: 700, fontSize: 32, color: A.soft }}><span style={{ width: 40, height: 3, background: A.terra, marginRight: 16 }} />{c.ref}</div>}
       </div>
-      <ArchFooter c={{ ...c, ref: "" }} total={total} dark />
+      <ArchFooter c={{ ...c, ref: "" }} total={total} dark A={A} />
     </>
   );
 }
 
-export function Card({ c, total, img }) {
+// 아치 판형의 강조색: 블로그 분류마다 하나씩 (종이·잉크·초록은 공통)
+export const ARCH_ACCENT = {
+  recitation: ["#D58A60", "#E9B08F"], // 암송: 테라코타
+  lecture: ["#6F8DB0", "#A9C0DA"],    // 강의: 먼지 낀 파랑
+  notes: ["#5E9C97", "#9CCBC6"],      // 배움: 청록
+  family: ["#8FA86F", "#C3D6A6"],     // 올리브 가족: 세이지
+  book: ["#9488B8", "#C6BEDD"],       // 도서: 라벤더
+  journal: ["#C79A4E", "#E3C48C"],    // 저널: 황토
+};
+
+export function Card({ c, total, img, cat }) {
   if (c.style === "arch") {
+    const [terra, soft] = ARCH_ACCENT[cat] || ARCH_ACCENT.recitation;
+    const A = { ...ARCH, terra, soft };
     return (
-      <div style={{ width: 1080, height: 1350, display: "flex", position: "relative", background: A.paper, fontFamily: SANS, overflow: "hidden" }}>
-        {c.type === "cover" ? <ArchCover c={c} img={img} /> : c.type === "verse" ? <ArchVerse c={c} total={total} /> : <ArchSection c={c} img={img} total={total} />}
+      <div style={{ width: 1080, height: 1350, display: "flex", position: "relative", background: ARCH.paper, fontFamily: SANS, overflow: "hidden" }}>
+        {c.type === "cover" ? <ArchCover c={c} img={img} A={A} /> : c.type === "verse" ? <ArchVerse c={c} total={total} A={A} /> : <ArchSection c={c} img={img} total={total} A={A} />}
       </div>
     );
   }
