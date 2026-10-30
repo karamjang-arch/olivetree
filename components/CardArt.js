@@ -181,6 +181,28 @@ function ArchCover({ c, img, A }) {
   );
 }
 
+// 여행 판형 표지: 영상 썸네일을 위에 크게, 그 아래 제목 (본문 장은 아치와 같음)
+function TravelCover({ c, img, A }) {
+  return (
+    <>
+      {img && (
+        <div style={{ position: "absolute", left: 60, top: 60, width: 960, height: 540, borderRadius: 28, overflow: "hidden", display: "flex", background: A.terra }}>
+          <img src={img} width={960} height={540} style={{ objectFit: "cover" }} />
+        </div>
+      )}
+      <div style={{ position: "absolute", right: -230, bottom: -230, width: 640, height: 640, borderRadius: 320, background: A.terra, display: "flex" }} />
+      <div style={{ position: "absolute", left: 80, top: 668, width: 760, display: "flex", flexDirection: "column" }}>
+        {c.label && <div style={{ display: "flex", fontFamily: SANS, fontWeight: 700, fontSize: 30, color: A.body, marginBottom: 22, letterSpacing: 1 }}>{c.label}</div>}
+        <Lines text={c.title} style={{ fontFamily: SERIF, fontWeight: 700, fontSize: 92, lineHeight: 1.12, color: A.ink, letterSpacing: -2 }} />
+        <div style={{ display: "flex", width: 66, height: 4, background: A.terra, margin: "36px 0 26px" }} />
+        {c.sub && <Lines text={c.sub} style={{ fontFamily: SANS, fontWeight: 500, fontSize: 30, lineHeight: 1.6, color: A.ink, letterSpacing: 1 }} />}
+      </div>
+      <div style={{ position: "absolute", right: 70, bottom: 60, display: "flex" }}><LineLeaf size={210} /></div>
+      <div style={{ position: "absolute", left: 80, bottom: 64, display: "flex", fontFamily: SERIF, fontWeight: 700, fontSize: 32, color: A.ink }}>Olive Tree</div>
+    </>
+  );
+}
+
 function ArchSection({ c, img, total, A }) {
   return (
     <>
@@ -235,7 +257,7 @@ export function Card({ c, total, img, cat }) {
     const A = { ...ARCH, terra, soft };
     return (
       <div style={{ width: 1080, height: 1350, display: "flex", position: "relative", background: ARCH.paper, fontFamily: SANS, overflow: "hidden" }}>
-        {c.type === "cover" ? <ArchCover c={c} img={img} A={A} /> : c.type === "verse" ? <ArchVerse c={c} total={total} A={A} /> : <ArchSection c={c} img={img} total={total} A={A} />}
+        {c.type === "cover" ? (c.travel ? <TravelCover c={c} img={img} A={A} /> : <ArchCover c={c} img={img} A={A} />) : c.type === "verse" ? <ArchVerse c={c} total={total} A={A} /> : <ArchSection c={c} img={img} total={total} A={A} />}
       </div>
     );
   }
