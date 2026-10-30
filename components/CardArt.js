@@ -81,6 +81,21 @@ function Cover({ c, img }) {
 
 function Section({ c, img, total }) {
   const top = img ? 590 : 200;
+  if (!img) {
+    // 그림 없는 장: 가운데 정렬, 잎 하나와 조금 큰 소제목으로 여백을 살린다
+    return (
+      <>
+        <div style={{ position: "absolute", left: X, top: 0, width: W, height: 1200, display: "flex", flexDirection: "column", justifyContent: "center" }}>
+          <div style={{ display: "flex", marginBottom: 34 }}><Leaf size={64} /></div>
+          {c.head && <div style={{ display: "flex", marginBottom: 34 }}><Lines text={c.head} style={{ fontFamily: SANS, fontWeight: 800, fontSize: 62, lineHeight: 1.3, color: K.ink, letterSpacing: -0.5 }} /></div>}
+          <div style={{ display: "flex", width: 66, height: 4, background: K.gold, marginBottom: 34 }} />
+          {c.body && <Lines text={c.body} style={{ fontFamily: SANS, fontSize: 40, lineHeight: 1.75, color: K.body }} />}
+          {c.note && <div style={{ display: "flex", marginTop: 30, paddingTop: 22, borderTop: `2px solid rgba(91,98,95,.18)` }}><Lines text={c.note} style={{ fontFamily: SANS, fontSize: 28, lineHeight: 1.6, color: K.body }} /></div>}
+        </div>
+        <Footer c={c} total={total} />
+      </>
+    );
+  }
   return (
     <>
       <Picture img={img} h={540} fade={200} />
