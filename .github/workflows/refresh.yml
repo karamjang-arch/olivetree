@@ -16,7 +16,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: 새로 그리기 요청
-        run: curl -fsS https://o-live-tree.vercel.app/api/revalidate
+        run: curl -sS https://o-live-tree.vercel.app/api/revalidate
       - name: 첫 화면 미리 데우기
         run: |
           sleep 5
