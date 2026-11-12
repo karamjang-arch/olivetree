@@ -5,12 +5,12 @@
     "kind": "책",
     "ko": {
       "title": "레미제라블에서 읽는 가스펠 스토리",
-      "version": "v3.9",
+      "version": "v4.0",
       "file": "/books/lesmis-ko.html"
     },
     "en": {
       "title": "The Gospel Story in Les Misérables",
-      "version": "v1.3",
+      "version": "v2.0",
       "file": "/books/lesmis-en.html"
     },
     "blurb": "은촛대에서 24601까지, 한 사람의 이야기에서 시작해 하나님의 이야기로 이어지는 가스펠 스토리."
@@ -21,12 +21,12 @@
     "kind": "교재",
     "ko": {
       "title": "가스펠 스토리: 네 편의 이야기",
-      "version": "v3.9",
+      "version": "v4.0",
       "file": "/books/four-ko.html"
     },
     "en": {
       "title": "Gospel Story: Four Stories",
-      "version": "v1.3",
+      "version": "v2.0",
       "file": "/books/four-en.html"
     },
     "blurb": "하나님 말씀 · 나의 이야기 · 한 사람의 이야기 · 그분의 이야기 · 우리의 이야기를 따라 함께 읽는 교재."
