@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { isMain, partName } from "../../../../lib/part";
 import { notFound } from "next/navigation";
 import Header from "../../../../components/Header";
 import Comments from "../../../../components/Comments";
@@ -17,7 +18,7 @@ export async function generateMetadata({ params }) {
   const { id } = await params;
   const p = await getBlogPost(id);
   if (!p) return { title: "블로그 · Olive Tree" };
-  const t = p.series ? `${p.series} ${p.part ? `${p.part}편 ` : ""}· ${p.title}` : p.title;
+  const t = p.series ? `${p.series} ${partName(p) ? `${partName(p)} ` : ""}· ${p.title}` : p.title;
   const og = cardsFromBlocks(p.blocks).length ? [{ url: `/api/card/${p.id}/1`, width: 1080, height: 1350 }] : undefined;
   return { title: `${t} · Olive Tree`, description: p.subtitle || p.summary, openGraph: { title: t, description: p.subtitle || p.summary, ...(og && { images: og }) } };
 }
@@ -48,7 +49,7 @@ export default async function PostPage({ params }) {
         <Link href="/blog" className="back">← 블로그</Link>
         <div className="eyebrow">
           <Link href={`/blog?cat=${p.slug}`}>{m.name}</Link>
-          {p.series && <><span className="sep">/</span><Link href={`/blog/s/${encodeURIComponent(p.series)}`}>{p.series}</Link>{p.part ? <span className="partno">{p.part} / {series.filter((x) => x.part !== 0).length}</span> : p.part === 0 ? <span className="partno">대문</span> : null}</>}
+          {p.series && <><span className="sep">/</span><Link href={`/blog/s/${encodeURIComponent(p.series)}`}>{p.series}</Link>{p.partLabel ? <span className="partno">{p.partLabel}</span> : p.part ? <span className="partno">{p.part} / {series.filter(isMain).length}</span> : p.part === 0 ? <span className="partno">대문</span> : null}</>}
         </div>
         <h1 className="serif post-title">{p.title}</h1>
         {p.subtitle && <p className="post-sub">{p.subtitle}</p>}
@@ -94,11 +95,11 @@ export default async function PostPage({ params }) {
             <ol>
               {series.map((x) => (
                 <li key={x.id} className={x.id === p.id ? "on" : ""}>
-                  <span className="n">{x.part === 0 ? "◦" : NUM[x.part] || x.part || "·"}</span>
+                  <span className="n">{x.part === 0 ? "◦" : x.partLabel ? "·" : NUM[x.part] || x.part || "·"}</span>
                   {x.id === p.id ? <span>{x.title}</span> : <Link href={`/blog/p/${x.id}`}>{x.title}</Link>}
                 </li>
               ))}
-              {!next && <li className="soon"><span className="n">{NUM[(p.part || series.length) + 1] || "·"}</span><span>다음 편을 준비하고 있습니다</span></li>}
+              {!next && !series.at(-1)?.partLabel && <li className="soon"><span className="n">{NUM[(p.part || series.length) + 1] || "·"}</span><span>다음 편을 준비하고 있습니다</span></li>}
             </ol>
             {(prev || next) && (
               <div className="pn">

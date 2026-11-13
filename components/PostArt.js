@@ -1,3 +1,4 @@
+import { isMain, partName, partMark, mainCount } from "../lib/part";
 // 서버·클라이언트 양쪽에서 쓰는 글 카드 그림 (훅 없음)
 export function bg(x) {
   const l = [];
@@ -12,13 +13,13 @@ export function Poster({ x, m }) {
   return (
     <span className="poster">
       <span className="pk">{x.series || m.en}</span>
-      {x.series && x.part ? <span className="pn">{x.part}</span> : null}
+      {x.series && isMain(x) ? <span className="pn">{x.part}</span> : null}
       <svg className="pleaf" viewBox="0 0 120 120" aria-hidden="true">
         <path d="M10 110 C 40 80, 70 60, 112 14" />
         <path d="M34 86 c -4 -14 2 -26 14 -30 c 2 14 -4 25 -14 30z M54 68 c 12 -6 25 -3 30 8 c -13 4 -24 1 -30 -8z M60 60 c -4 -14 2 -26 14 -30 c 2 14 -4 25 -14 30z M80 42 c 12 -6 25 -3 30 8 c -13 4 -24 1 -30 -8z" />
       </svg>
       <span className="ph">{hook}</span>
-      <span className="pf">{m.name}{x.series ? ` · ${x.part ? `${x.part}편` : ""}` : ""}</span>
+      <span className="pf">{m.name}{x.series ? ` · ${partName(x)}` : ""}</span>
     </span>
   );
 }
@@ -67,10 +68,10 @@ export function SeriesPoster({ s, m }) {
   return (
     <span className="poster sposter">
       <span className="pk">연재</span>
-      <span className="pn">{s.parts.length}</span>
+      <span className="pn">{mainCount(s.parts)}</span>
       {LEAF}
       <span className="ph">{s.name}</span>
-      <span className="pf">{m.name} · {s.parts.length}편</span>
+      <span className="pf">{m.name} · {mainCount(s.parts)}편</span>
     </span>
   );
 }
@@ -83,14 +84,14 @@ export function LatestStack({ s, m }) {
     <a href={`/blog/p/${top.id}`} className="card pcard scardstack" style={{ "--hue": m.hue, "--tint": m.tint }}>
       <div className={`pthumb${has ? "" : " none"}`} style={has ? { backgroundImage: bg(top) } : undefined}>
         {!has && <Poster x={top} m={m} />}
-        <span className="sbadge">새 글 · {top.part} / {s.parts.length}</span>
+        <span className="sbadge">새 글 · {top.partLabel || `${top.part} / ${mainCount(s.parts)}`}</span>
       </div>
       <div className="pbody">
         <div className="ptag">{m.name} · {s.name}</div>
         <div className="ptitle">{top.title}</div>
         {top.subtitle && <div className="psub">{top.subtitle}</div>}
         <ol className="slist">
-          {s.parts.map((x) => <li key={x.id} className={x.id === top.id ? "on" : ""}><b>{x.part}</b>{x.title}</li>)}
+          {s.parts.map((x) => <li key={x.id} className={x.id === top.id ? "on" : ""}><b>{partMark(x)}</b>{x.title}</li>)}
         </ol>
         <div className="pdate">{top.created}</div>
       </div>
@@ -104,13 +105,13 @@ export function SeriesCard({ s, m }) {
     <a href={s.href} className="card pcard scardstack" style={{ "--hue": m.hue, "--tint": m.tint }}>
       <div className={`pthumb${s.face ? "" : " none"}`} style={s.face ? { backgroundImage: bg(s.face) } : undefined}>
         {!s.face && <SeriesPoster s={s} m={m} />}
-        {s.face && <span className="sbadge">연재 · {s.parts.length}편</span>}
+        {s.face && <span className="sbadge">연재 · {mainCount(s.parts)}편</span>}
       </div>
       <div className="pbody">
         <div className="ptag">{m.name} · 연재</div>
         <div className="ptitle">{s.name}</div>
         <ol className="slist">
-          {show.map((x) => <li key={x.id}><b>{x.part}</b>{x.title}</li>)}
+          {show.map((x) => <li key={x.id}><b>{partMark(x)}</b>{x.title}</li>)}
           {s.parts.length > show.length && <li className="more">외 {s.parts.length - show.length}편</li>}
         </ol>
         <div className="pdate">처음부터 읽기 →</div>

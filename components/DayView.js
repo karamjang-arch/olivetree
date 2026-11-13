@@ -1,3 +1,4 @@
+import { partName } from "../lib/part";
 import Link from "next/link";
 import Hero from "./Hero";
 import Header from "./Header";
@@ -63,7 +64,7 @@ export default async function DayView({ date, home = false }) {
               const m = metaOf(p.slug);
               return (
                 <Link key={p.id} href={`/blog/p/${p.id}`} className="card daypost tband" style={{ "--hue": m.hue, "--tint": m.tint }}>
-                  <h3 className="bandh">블로그 · {m.name}{p.series ? ` · ${p.series}${p.part ? ` ${p.part}편` : ""}` : ""}</h3>
+                  <h3 className="bandh">블로그 · {m.name}{p.series ? ` · ${p.series}${partName(p) ? ` ${partName(p)}` : ""}` : ""}</h3>
                   <div className="body">
                     <div className="ctitle">{p.title}</div>
                     {p.subtitle && <div className="cmeta">{p.subtitle}</div>}

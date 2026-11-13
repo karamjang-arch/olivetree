@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { mainCount, partMark } from "../../../../lib/part";
 import { notFound } from "next/navigation";
 import Header from "../../../../components/Header";
 import Footer from "../../../../components/Footer";
@@ -41,7 +42,7 @@ export default async function SeriesPage({ params }) {
             <div className="eyebrow"><Link href={`/blog?cat=${posts[0].slug}`}>{m.name}</Link><span className="sep">/</span><span>{map ? "여행 시리즈" : "연재"}</span></div>
             <h1 className="serif post-title">{name}</h1>
             {intro?.subtitle && <p className="post-sub">{intro.subtitle}</p>}
-            <p className="sp-meta">{parts.length}편{map ? ` · ${map.stops.map((x) => x.place).filter((v, i, a) => v && a.indexOf(v) === i).length}곳` : first ? ` · ${first.created.replaceAll("-", ". ")}부터` : ""}</p>
+            <p className="sp-meta">{mainCount(parts)}편{map ? ` · ${map.stops.map((x) => x.place).filter((v, i, a) => v && a.indexOf(v) === i).length}곳` : first ? ` · ${first.created.replaceAll("-", ". ")}부터` : ""}</p>
             {first && <Link href={`/blog/p/${first.id}`} className="btn primary sp-start">처음부터 읽기 →</Link>}
           </div>
         </header>
@@ -75,7 +76,7 @@ export default async function SeriesPage({ params }) {
               {parts.map((x) => (
                 <li key={x.id}>
                   <Link href={`/blog/p/${x.id}`}>
-                    <span className="n">{x.part}</span>
+                    <span className="n">{partMark(x)}</span>
                     <span className="tx">
                       <b>{x.title}</b>
                       {x.subtitle && <i>{x.subtitle}</i>}

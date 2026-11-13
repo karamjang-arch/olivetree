@@ -1,5 +1,6 @@
 "use client";
 import Link from "next/link";
+import { partName } from "../lib/part";
 import { useEffect, useMemo, useState } from "react";
 import { BLOG, metaOf } from "../lib/blog";
 import { bg, Poster, SeriesCard, collapseSeries } from "./PostArt";
@@ -17,7 +18,7 @@ export function PostCard({ x }) {
         {!has && <Poster x={x} m={m} />}
       </div>
       <div className="pbody">
-        <div className="ptag">{m.name}{x.series ? ` · ${x.series}${x.part ? ` ${x.part}편` : ""}` : ""}{x.author ? ` · ${x.author}` : ""}</div>
+        <div className="ptag">{m.name}{x.series ? ` · ${x.series}${partName(x) ? ` ${partName(x)}` : ""}` : ""}{x.author ? ` · ${x.author}` : ""}</div>
         <div className="ptitle">{x.title}</div>
         {x.subtitle && <div className="psub">{x.subtitle}</div>}
         {x.summary && <p className="psum">{x.summary}</p>}
@@ -201,7 +202,7 @@ export default function BlogBrowser({ posts, decks = [], trips = [] }) {
                             <td className="c-cat"><button style={{ "--hue": m.hue, "--tint": m.tint }} onClick={() => setF((o) => ({ ...o, cat: x.slug }))}>{m.name}</button></td>
                             <td className="c-title">
                               <Link href={`/blog/p/${x.id}`}>
-                                {x.series && <span className="tser">{x.series}{x.part ? ` ${x.part}` : ""}</span>}
+                                {x.series && <span className="tser">{x.series}{x.partLabel ? ` ${x.partLabel}` : x.part ? ` ${x.part}` : ""}</span>}
                                 <b>{x.title}</b>
                               </Link>
                               {x.subtitle && <span className="tsub">{x.subtitle}</span>}
