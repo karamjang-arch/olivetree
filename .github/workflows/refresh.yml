@@ -17,9 +17,11 @@ jobs:
     steps:
       - name: 새로 그리기 요청
         run: curl -sS https://o-live-tree.vercel.app/api/revalidate
-      - name: 첫 화면 미리 데우기
+      - name: 주요 화면 미리 데우기 (첫 방문자가 기다리지 않게)
+        env:
+          PAGES: "/ /blog /sermon /honey /gospel /library /settle /search"
         run: |
           sleep 5
-          for p in / /blog /sermon; do curl -fsS -o /dev/null "https://o-live-tree.vercel.app$p"; done
+          for p in $PAGES; do curl -fsS -o /dev/null "https://o-live-tree.vercel.app$p"; done
           sleep 10
-          for p in / /blog /sermon; do curl -fsS -o /dev/null "https://o-live-tree.vercel.app$p"; done
+          for p in $PAGES; do curl -fsS -o /dev/null "https://o-live-tree.vercel.app$p"; done
