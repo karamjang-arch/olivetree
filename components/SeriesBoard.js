@@ -59,6 +59,7 @@ function Board({ s, m, covers, topId, from, closing, onClose }) {
     const grid = gridRef.current, src = from.current;
     if (!grid || !src) { setReady(true); return; }
     const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    grid.classList.add("sb-prep");
     const r = src.getBoundingClientRect();
     const cx = r.left + r.width / 2, cy = r.top + Math.min(r.height, 420) / 2;
     grid.querySelectorAll(".sb-card").forEach((el, i) => {
@@ -70,6 +71,8 @@ function Board({ s, m, covers, topId, from, closing, onClose }) {
       el.style.setProperty("--d", `${Math.min(i, 18) * 32}ms`);
       el.style.setProperty("--r", `${((i % 5) - 2) * 2.5}deg`);
     });
+    void grid.offsetWidth; // 출발 위치를 먼저 확정한 뒤 움직임을 켠다
+    grid.classList.remove("sb-prep");
     requestAnimationFrame(() => requestAnimationFrame(() => setReady(true)));
   }, [from]);
 

@@ -972,3 +972,4 @@ header.top nav .sicon{margin-left:0;padding:0 10px}
 @media (prefers-reduced-motion:reduce){
   .sb-card,.sb-panel,.sboard{transition:none!important}
 }
+.sb-prep .sb-card{transition:none!important}
