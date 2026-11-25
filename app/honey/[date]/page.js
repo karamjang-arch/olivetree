@@ -20,8 +20,8 @@ export default async function HoneyPage({ params }) {
   const { date } = await params;
   const day = await getHoneyDay(date);
   if (!day) notFound();
-  const [audio, cards, events] = await Promise.all([honeyAudio(date), honeyMemoryCards(date, day.memory), calendarEvents()]);
-  const { prev, next } = honeyNeighbors(date);
+  const [audio, cards, events, links] = await Promise.all([honeyAudio(date), honeyMemoryCards(date, day.memory), calendarEvents(), honeyCalendarLinks()]);
+  const { prev, next } = await honeyNeighbors(date);
   const chapters = chaptersFor(day.passage);
 
   return (
@@ -82,7 +82,7 @@ export default async function HoneyPage({ params }) {
         <section className="block" id="calendar">
           <div className="label">Calendar</div>
           <h2>통독 달력</h2>
-          <Calendar events={events} today={todayKey()} selected={date} mode="honey" links={honeyCalendarLinks()} />
+          <Calendar events={events} today={todayKey()} selected={date} mode="honey" links={links} />
         </section>
         <Footer />
       </main>
